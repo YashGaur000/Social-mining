@@ -8,6 +8,7 @@ export const Card = styled.div<{
   tag?: string;
   margin?: string;
   Radius?: string;
+  Boxshadow?: string;
 }>`
   display: flex;
   flex-direction: column;
@@ -21,7 +22,8 @@ export const Card = styled.div<{
   height: ${({ height }) => (height ? height : '')};
   text-align: center;
   color: ${({ theme }) => theme.colors.text};
-  box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
+  // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
+  box-shadow: ${({ Boxshadow }) => Boxshadow};
 
   @media (max-width: 1024px) {
     width: 350px;

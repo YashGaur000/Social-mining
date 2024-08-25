@@ -65,11 +65,15 @@ export const TitleBox = styled.div<{ theme: DefaultTheme}>`
 `;
 
 export const SocialLogo = styled.img<{ 
+  Position?: string;
   theme: DefaultTheme;
   margin?: string;
   width?: string;
   height?: string;
+  Zindex?: string;
 }>`
+  z-index: ${({ Zindex }) => Zindex};
+  positon: ${({ Position }) => Position};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   margin: ${({ margin }) => (margin ? margin : '0px')};

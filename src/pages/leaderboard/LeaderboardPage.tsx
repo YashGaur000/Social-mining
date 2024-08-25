@@ -1,6 +1,7 @@
 import React from 'react';
 import { DefaultTheme } from '../../styles/Theme';
 import styled from 'styled-components';
+import Leaderboard from '../../components/Leaderboard/modules/Leaderboard';
 
 
 const LeaderboardContainer = styled.div<{ theme: DefaultTheme}>`
@@ -20,7 +21,7 @@ const LeaderboardContainer = styled.div<{ theme: DefaultTheme}>`
 const LeaderboardPage: React.FC = () => {
     return(
         <LeaderboardContainer>
-            {/* <Leaderboard/> */}
+            <Leaderboard/>
         </LeaderboardContainer>
     );
 };
