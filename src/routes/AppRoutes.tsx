@@ -3,6 +3,8 @@ import BackgroundWrapper from "./BackgroundWrapper";
 import { Route, Routes } from "react-router-dom";
 import TaskListPage from "../pages/tasklist/TaskListPage";
 import LeaderboardPage from "../pages/leaderboard/LeaderboardPage";
+import AddressPopup from "../components/LinkwithRewards/modules/AddressPopup";
+import LinkWalletPage from "../pages/LinkwithAddress/LinkAddressPage";
 
 const AppRoutes: React.FC = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -21,6 +23,7 @@ const AppRoutes: React.FC = () => {
               <Routes>
                 <Route path="/Tasks" element={<TaskListPage/>} />
                 <Route path="/Leaderboard" element={<LeaderboardPage/>} />
+                <Route path="/LinkWallet" element={<LinkWalletPage/>} />
               </Routes>
             </BackgroundWrapper>
           )}

@@ -1,10 +1,24 @@
 import React from 'react';
-import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BoardWrapper, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers, SocialLogoDiv } from '../styles/Leaderboard.style';
+import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
+import Medal from '../../../assets/medal.png';
 import { Card } from '../../common/Card';
+import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
 
 const Leaderboard: React.FC = () => {
 
-    const players = [
+    const Runnerups = [
+        'Yash',
+        'Yash',
+        'Yash',
+    ];
+
+
+    const Players = [
+        'Tenex',
+        'Tenex',
+        'Tenex',
+        'Tenex',
+        'Tenex',
         'Tenex',
         'Tenex',
         'Tenex',
@@ -13,13 +27,25 @@ const Leaderboard: React.FC = () => {
         'Tenex'
     ];
 
+    const RunnerupsPoints = [
+        '999',
+        '888',
+        '777',
+    ];
+
+
     const PlayersPoints = [
-        '123',
-        '345',
-        '342',
-        '876',
-        '576',
-        '899'
+        '34523',
+        '34543',
+        '23455',
+        '45644',
+        '34534',
+        '34523',
+        '34543',
+        '23455',
+        '45644',
+        '34534',
+        '64544'
     ];
 
     return (
@@ -50,12 +76,12 @@ const Leaderboard: React.FC = () => {
                     </AirdropInfoSub>
                 </AirdropInfoBox>
             </AirdropBox>
-            <Card>
+            <Card width='90%'>
                 <RankandPointBoxWrapper>
                     <RankandPointBox>
                         <RankBox >
                             <Rankers Fontsize='24px'>
-                                Rankers
+                                Ranking
                             </Rankers>
                         </RankBox>
                         <PointBox >
@@ -64,23 +90,49 @@ const Leaderboard: React.FC = () => {
                             </Points>
                         </PointBox>
                     </RankandPointBox>
-                    <RankandPointValueBox>
-                        <RankBox Displaydirection='column'>
-                            {players.map((player) => (
-                                <Rankers key={player} Fontsize='20px'>
-                                    {player}
-                                </Rankers>
-                            ))}
-                        </RankBox>
-                        <PointBox Displaydirection='column'>
-                            {PlayersPoints.map((Point) => (
-                                <Points key={Point} Fontsize='20px'>{Point}</Points>
-                            ))}
-                        </PointBox>
+                    {/* <RankandPointValueBox>
+                        {Runnerups.map((Runnerup, index) => (
+                            <ParticipantBox key={index}>
+                            {index < 3 && (
+                                <SocialLogo height="30px" width="30px" src={Medal} />
+                            )}
+                            <Name>
+                                {index < 3 ? Runnerup : `${index + 1} ${Runnerup}`}
+                            </Name>
+                            <EarnedPoints>{RunnerupsPoints[index]}</EarnedPoints>
+                            </ParticipantBox>
+                        ))}
+                     {Players.map((Player, index) => (
+                        <ParticipantBox Margin='0px 0px 0px 10px' key={index}>
+                            {`${index + 4}`}
+                            <Name>
+                            {`${Player}`}
+                            </Name>
+                            <EarnedPoints>{PlayersPoints[index]}</EarnedPoints>
+                        </ParticipantBox>
+                        ))}
+                        </RankandPointValueBox> */}
 
-                    </RankandPointValueBox>
+<RankandPointValueBox>
+    {Players.map((Player, index) => (
+        <ParticipantBox key={index}>
+            <RankBox>
+                {index < 3 ? (
+                    <SocialLogo height="36px" width="36px" src={Medal} />
+                ) : (
+                    `${index + 1}`
+                )}
+            </RankBox>
+            <Name>
+                {Player}
+            </Name>
+            <EarnedPoints>{PlayersPoints[index]}</EarnedPoints>
+        </ParticipantBox>
+    ))}
+</RankandPointValueBox>
                 </RankandPointBoxWrapper>
             </Card>
+            <Score>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
         </BoardWrapper>
     );
 };
