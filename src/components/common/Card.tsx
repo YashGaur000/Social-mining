@@ -9,7 +9,9 @@ export const Card = styled.div<{
   margin?: string;
   Radius?: string;
   Boxshadow?: string;
+  Padding?: string;
 }>`
+  
   display: flex;
   flex-direction: column;
   background: ${({ theme, tag }) =>
@@ -39,6 +41,38 @@ export const Card = styled.div<{
     margin-top: 10px;
     grid-template-columns: none;
     justify-content: center;
+  }
+`;
+
+export const CardWrapper = styled.div<{
+  theme: DefaultTheme;
+  height?: string;
+  width?: string;
+  tag?: string;
+  margin?: string;
+  Radius?: string;
+  Boxshadow?: string;
+  Padding?: string;
+}>`
+ position: relative;
+  // background-color: ${({ theme }) => theme.colors.buttonBackground};
+  background: ${({ theme, tag }) =>
+    tag === 'top' ? theme.colors.background : theme.colors.buttonBackground};
+  border-radius: 10px;
+  padding: 0px 0px 0px 5px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: -10px;
+    right: -10px;
+    background: linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%);
+    border-radius: inherit;
+    z-index: -1;
+    filter: blur(10px);
   }
 `;
 

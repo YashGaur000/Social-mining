@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '../../common/Card';
+import { Card, CardWrapper } from '../../common/Card';
 import { GlobalButton } from '../../common/Buttons/GlobalButton';
 import Roundcheck from '../../../assets/round-check.png';
 import TwitterLogo from '../../../assets/twitter.png';
@@ -16,33 +16,35 @@ const TaskList: React.FC = () => {
     <TaskBoxFullWrapper>
       <TaskBoxWrapper>
         <TaskBox>
-          <Card>
-            <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={TwitterLogo} alt="twitter Logo" />
-              Twitter Engagement:
-              <LetsGoButton margin='-10px 0px 0px auto'>
-                <GlobalButton>
-                  Lets Go
-                </GlobalButton>
-              </LetsGoButton>
-            </TitleBox>
-            <ListBox>
-              <List>
-                <ListItem>
-                  <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Like, Retweet or reply to a @TenEx_Official tweets.
-                </ListItem>
-                <ListItem>
-                  <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Tag @TenEx_Official, $TENEX in your tweets.
-                </ListItem>
-                <ListItem>
-                  <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Mention TENEX in your tweets without tagging.
-                </ListItem>
-                <ListItem>
-                  Score 5 points by completing this task
-                </ListItem>
-              </List>
-            </ListBox>
-          </Card>
+          <CardWrapper>
+            <Card>
+              <TitleBox>
+                <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={TwitterLogo} alt="twitter Logo" />
+                Twitter Engagement:
+                <LetsGoButton margin='-10px 0px 0px auto'>
+                  <GlobalButton>
+                    Lets Go
+                  </GlobalButton>
+                </LetsGoButton>
+              </TitleBox>
+              <ListBox>
+                <List>
+                  <ListItem>
+                    <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Like, Retweet or reply to a @TenEx_Official tweets.
+                  </ListItem>
+                  <ListItem>
+                    <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Tag @TenEx_Official, $TENEX in your tweets.
+                  </ListItem>
+                  <ListItem>
+                    <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Mention TENEX in your tweets without tagging.
+                  </ListItem>
+                  <ListItem>
+                    Score 5 points by completing this task
+                  </ListItem>
+                </List>
+              </ListBox>
+            </Card>
+            </CardWrapper>
           <Card>
             <TitleBox>
               <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Reddit} alt="Reddit Logo" />
