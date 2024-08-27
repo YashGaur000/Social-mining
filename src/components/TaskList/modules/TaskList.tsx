@@ -45,6 +45,7 @@ const TaskList: React.FC = () => {
               </ListBox>
             </Card>
             </CardWrapper>
+            <CardWrapper>
           <Card>
             <TitleBox>
               <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Reddit} alt="Reddit Logo" />
@@ -69,6 +70,8 @@ const TaskList: React.FC = () => {
               </List>
             </ListBox>
           </Card>
+          </CardWrapper>
+          <CardWrapper>
           <Card>
             <TitleBox>
               <SocialLogo height='36px' width='36' margin='0px 13px 0px 5px' src={Discord} alt="Discord Logo" />
@@ -93,6 +96,8 @@ const TaskList: React.FC = () => {
               </List>
             </ListBox>
           </Card>  
+          </CardWrapper>
+          <CardWrapper>
           <Card>
             <TitleBox>
               <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Binance} alt="Binance Logo" />
@@ -114,6 +119,8 @@ const TaskList: React.FC = () => {
               </List>
             </ListBox>
           </Card>  
+          </CardWrapper>
+          <CardWrapper>
           <Card>
             <TitleBox>
               <SocialLogo height='36px' width='36' margin='0px 10px 0px 10px' src={Article} alt="Article Logo" />
@@ -138,6 +145,8 @@ const TaskList: React.FC = () => {
               </List>
             </ListBox>
           </Card>
+          </CardWrapper>
+          <CardWrapper>
           <Card>
             <TitleBox>
               <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Play} alt="Play Logo" />
@@ -161,6 +170,7 @@ const TaskList: React.FC = () => {
               </List>
             </ListBox>
           </Card>  
+          </CardWrapper>
         </TaskBox>
       </TaskBoxWrapper>
       <Score>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>

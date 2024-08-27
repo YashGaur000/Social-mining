@@ -59,7 +59,7 @@ export const CardWrapper = styled.div<{
   background: ${({ theme, tag }) =>
     tag === 'top' ? theme.colors.background : theme.colors.buttonBackground};
   border-radius: 10px;
-  padding: 0px 0px 0px 5px;
+  padding: 0px 0px 0px 6px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
   &:after {
