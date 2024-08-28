@@ -1,16 +1,16 @@
 import React from 'react';
 import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
-import Medal from '../../../assets/medal.png';
+import Medal from '../../../assets/medal1.svg';
 import { Card } from '../../common/Card';
 import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
 
 const Leaderboard: React.FC = () => {
 
-    const Runnerups = [
-        'Yash',
-        'Yash',
-        'Yash',
-    ];
+    // const Runnerups = [
+    //     'Yash',
+    //     'Yash',
+    //     'Yash',
+    // ];
 
 
     const Players = [
@@ -27,11 +27,11 @@ const Leaderboard: React.FC = () => {
         'Tenex'
     ];
 
-    const RunnerupsPoints = [
-        '999',
-        '888',
-        '777',
-    ];
+    // const RunnerupsPoints = [
+    //     '999',
+    //     '888',
+    //     '777',
+    // ];
 
 
     const PlayersPoints = [

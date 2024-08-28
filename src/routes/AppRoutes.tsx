@@ -26,10 +26,10 @@ const AppRoutes: React.FC = () => {
       <Suspense fallback={<div>Loading...</div>}>
         {!isLoading && (
           <BackgroundWrapper>
-           
+           <TitleUpdater setTitleHeader={setTitleHeader} />
             <Routes>
             <Route path="/" element={<SignUp />} />
-              <Route path="/Dashboard" element ={<SocialMining DashBoardTitle={"DashBoard"}/>}>
+              <Route path="/Dashboard" element ={<SocialMining DashBoardTitle={titleHeader}/>}>
               <Route index element={<DashBoardPage/>}></Route>
               <Route path="Tasks" element={<TaskListPage />} />
               <Route path="Leaderboard" element={<LeaderboardPage />} />

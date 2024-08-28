@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const MainContaier = styled.div`
   width: 60%;
-  margin-top: 40px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -14,6 +13,8 @@ export const Heading = styled.p`
   font-size: 36px;
   font-weight: 300;
   line-height: 53.82px;
+ 
+ 
 `;
 
 export const DashBoardCard = styled.div`

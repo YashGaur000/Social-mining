@@ -10,10 +10,10 @@ import {
   SocialMediaIcon,
 } from "../styles/PopUp.styles";
 
-import twitter from "../../../assets/Twitter.svg"
-import reddit from "../../../assets/Reddit.svg"
-import discord from "../../../assets/Discord.svg"
-import telegram from "../../../assets/TelegramLogo.svg"
+import twitter from "../../../assets/twitter.svg"
+import reddit from "../../../assets/reddit.svg"
+import discord from "../../../assets/discord.svg"
+import telegram from "../../../assets/telegram.svg"
 
 
 

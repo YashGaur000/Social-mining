@@ -1,4 +1,4 @@
-import TenexLogo from "../../../assets/logo.svg"
+import TenexLogo from "../../../assets/tenexlogo.svg"
 import { Outlet } from "react-router-dom";
 import { Main1container, LogoWrapper, LogoImage } from "../styles/SocialMining.styles";
 import { MainContaier, Heading } from "../../DashBoard/styles/DashBoard.styles";

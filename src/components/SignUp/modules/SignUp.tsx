@@ -1,5 +1,5 @@
 import token from "../../../assets/TenexToken.svg";
-import twitter from "../../../assets/Twitter.svg";
+import twitter from "../../../assets/twitter.svg";
 import Image from "../../../assets/image.svg";
 import TokenTitle from "../../../assets/logo.svg";
 
