@@ -138,7 +138,7 @@ export const RankBox = styled.div`
 
 export const Name = styled.div`
   flex: 1;
-  margin-left: -400px;
+  margin-left: -350px;
 
   @media (max-width: 768px) {
     margin-left: 0;

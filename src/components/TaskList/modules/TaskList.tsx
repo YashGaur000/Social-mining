@@ -1,13 +1,13 @@
 import React from 'react';
 import { Card, CardWrapper } from '../../common/Card';
 import { GlobalButton } from '../../common/Buttons/GlobalButton';
-import Roundcheck from '../../../assets/round-check.png';
-import TwitterLogo from '../../../assets/twitter.png';
-import Reddit from '../../../assets/reddit.png';
-import Discord from '../../../assets/discord.png';
-import Article from '../../../assets/article.png';
-import Play from '../../../assets/video-play.png';
-import Binance from '../../../assets/binance.png';
+import Roundcheck from '../../../assets/roundcheck.svg';
+import TwitterLogo from '../../../assets/twitter.svg';
+import Reddit from '../../../assets/reddit.svg';
+import Discord from '../../../assets/discord.svg';
+import Article from '../../../assets/article.svg';
+import Play from '../../../assets/play.svg';
+import Binance from '../../../assets/binance.svg';
 import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, TaskBox, TaskBoxFullWrapper, TaskBoxWrapper, TitleBox } from '../styles/TaskList.style';
 
 
