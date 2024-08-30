@@ -1,5 +1,5 @@
 import {
-  ConnectionButton,
+  PopUpConnectionButton,
   ConnectionButtonWrapper,
   MainPopUpScreen,
   PopScreenText,
@@ -14,6 +14,7 @@ import twitter from "../../../assets/twitter.svg"
 import reddit from "../../../assets/reddit.svg"
 import discord from "../../../assets/discord.svg"
 import telegram from "../../../assets/telegram.svg"
+import { useState } from "react";
 
 
 
@@ -22,11 +23,18 @@ interface PopUPProps {
 }
 
 const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
+
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
+
+   const[buttonText , setButtonText] = useState('connect');
+
+   const handleClick =() =>{
+    setButtonText('Connected');
+   }
 
   return (
     <PopUpScreenContainer onClick={handleOverlayClick}>
@@ -38,7 +46,7 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
             <PopScreenText>Connect with Twitter</PopScreenText>
           </PopUpScreenCard>
           <ConnectionButtonWrapper>
-            <ConnectionButton>Connected</ConnectionButton>
+            <PopUpConnectionButton onClick={handleClick}>{buttonText}</PopUpConnectionButton>
           </ConnectionButtonWrapper>
         </PopUpScreenWrapper>
         <PopUpScreenWrapper>
@@ -47,7 +55,7 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
             <PopScreenText>Connect with Reddit</PopScreenText>
           </PopUpScreenCard>
           <ConnectionButtonWrapper>
-            <ConnectionButton>Connect</ConnectionButton>
+            <PopUpConnectionButton>Connect</PopUpConnectionButton>
           </ConnectionButtonWrapper>
         </PopUpScreenWrapper>
         <PopUpScreenWrapper>
@@ -56,7 +64,7 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
             <PopScreenText>Connect with Discord</PopScreenText>
           </PopUpScreenCard>
           <ConnectionButtonWrapper>
-            <ConnectionButton>Connect</ConnectionButton>
+            <PopUpConnectionButton>Connect</PopUpConnectionButton>
           </ConnectionButtonWrapper>
         </PopUpScreenWrapper>
         <PopUpScreenWrapper>
@@ -65,7 +73,7 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
             <PopScreenText>Connect with $TENEX</PopScreenText>
           </PopUpScreenCard>
           <ConnectionButtonWrapper>
-            <ConnectionButton>Connect</ConnectionButton>
+            <PopUpConnectionButton>Connect</PopUpConnectionButton>
           </ConnectionButtonWrapper>
         </PopUpScreenWrapper>
       </MainPopUpScreen>

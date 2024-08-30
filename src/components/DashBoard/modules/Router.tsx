@@ -9,13 +9,13 @@ const TitleUpdater: React.FC<TitleUpdaterProps> = ({ setTitleHeader }) => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/Dashboard") {
+    if (location.pathname === "/dashboard") {
       setTitleHeader("Dashboard");
     } 
-    else if(location.pathname === "/dashboard/tasks"){
+    else if(location.pathname === "/dashboard/Tasks"){
       setTitleHeader("List of Social Mining Tasks");
     }
-    else if(location.pathname === "/dashboard/leaderboard"){
+    else if(location.pathname === "/dashboard/LeaderBoard"){
       setTitleHeader("LearderBoard");
     }
   }, [location, setTitleHeader]);
