@@ -1,41 +1,60 @@
 import styled from "styled-components";
+import { DefaultTheme } from "../../../styles/Theme";
 
-export const MainContaier = styled.div`
-  width: 60%;
-  margin-top: 40px;
+export const MainContaier = styled.div<{ theme: DefaultTheme}>`
+ 
+  width: 100%;
   text-align: center;
   display: flex;
   justify-content: center;
 `;
 
-export const Heading = styled.p`
-  color: #fff;
-  font-family: Kanit;
+export const Heading = styled.p<{ theme: DefaultTheme}>`
+  font-family: ${({ theme }) => theme.fonts.main};
   font-size: 36px;
   font-weight: 300;
   line-height: 53.82px;
+  color: ${({ theme }) => theme.colors.whiteBorder};
+
+ 
+ 
 `;
 
 export const DashBoardCard = styled.div`
-  // border: 2px solid crimson;
-  background: linear-gradient(180deg, #18264c 0%, #1f305f 100%);
+ 
+background:linear-gradient(188.32deg, #47FF99 -7.09%, #3EACFC 99.48%);
+  
   width: 100%;
-  height: 84px;
+  height: 80px;
   border-radius: 24px;
-  opacity: 0px;
-  padding: 10px;
+  padding: 8px;
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
-  opacity: 0px;
   margin: auto;
   position: relative;
-  box-shadow: -10px 0px 0px rgb(22, 192, 98), -15px 0px 0px rgb(62, 172, 252);
 
-
+  z-index:2;
+  
+  
+   &::after{
+   content:'';
+   position:absolute;
+   
+   
+   z-index:-1;
+   background: linear-gradient(180deg, #18264c 0%, #1f305f 100%);
+   width:100%;
+   height:80px;
+   border-radius:24px;
+   padding:0px 0px 0px 6px;
+   
+   
+   
+   }
 
   @media only screen and (max-width: 580px) {
-  // border:2px solid blue;
     width:100%;
     display:flex;
     justify-content:center;
@@ -44,13 +63,12 @@ export const DashBoardCard = styled.div`
 `;
 
 export const DashBoardCards = styled.div`
+ 
   width:100%;
-  // border:2px solid white;
-  margin: 50px 100px 202px 100px;
+  margin: 50px 60px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 30px;
+  gap: 20px;
 
  @media only screen and (max-width: 580px){
    width:100%;
@@ -58,13 +76,14 @@ export const DashBoardCards = styled.div`
    }
 `;
 
-export const DashBoardText = styled.p`
-  font-family: Kanit;
+export const DashBoardText = styled.p<{ theme: DefaultTheme}>`
+  font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
   font-weight: 300;
   line-height: 35.88px;
   text-align: left;
-  color: rgba(255, 255, 255, 1);
+  padding:50px;
+  color:${({ theme }) => theme.colors.whiteBorder};
 
   @media only screen and (max-width:780px) {
     font-size:1.2em;
@@ -76,16 +95,16 @@ export const DashBoardText = styled.p`
   }
 `;
 
-export const DashBoardButton = styled.button`
+export const DashBoardButton = styled.button<{ theme: DefaultTheme}>`
   width: 129px;
   height: 40px;
   padding: 10px 20px;
   border-radius: 12px;
   opacity: 1; 
-  color: white;
+  color: ${({ theme }) => theme.colors.whiteBorder};
   background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
   border: none;
-  font-family: Kanit;
+  font-family:${({ theme }) => theme.fonts.main};
   font-size: 16px;
   font-weight: 400;
   line-height: 23.92px;
@@ -109,13 +128,13 @@ export const DashBoardButton = styled.button`
   }
 `;
 
-export const DashBoardFooterText = styled.p`
-font-family: Kanit;
+export const DashBoardFooterText = styled.p<{ theme: DefaultTheme}>`
+font-family: ${({ theme }) => theme.fonts.main};
 font-size: 20px;
 font-weight: 300;
 line-height: 29.9px;
 text-align: center;
-color:#fff;
+color: ${({ theme }) => theme.colors.whiteBorder};
 
 
 `

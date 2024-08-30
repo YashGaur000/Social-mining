@@ -14,6 +14,7 @@ export interface DefaultTheme {
     extraLarge: string;
   }
   interface Colorpallate {
+    SocialMiningBackground:string;
     primary: string;
     secondary: string;
     background: string;
@@ -66,6 +67,9 @@ export interface DefaultTheme {
     colors: {
       primary: '#0070f3',
       secondary: '#1c1c1e',
+      SocialMiningBackground: `radial-gradient(71.67% 71.86% at 53.69% 43.65%, #16C062 0%, #3EACFC 100%) ,
+      linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)`,
+
       background:
         'linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)',
       backgroundHome: `radial-gradient(circle at 80% 8%,#43d6cd7a 0%, transparent 10%),
