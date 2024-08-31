@@ -1,20 +1,16 @@
 import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
-export const SignUpWrapper = styled.div`
- `;
+export const SignUpWrapper = styled.div``;
 
-export const ImageContainer = styled.div`
- 
-`;
+export const ImageContainer = styled.div``;
 
 export const Banner = styled.img`
-  width:600px;
-  height:650px;
-  Position:absolute;
-  top:20px;
-  left:760px;
-
+  width: 600px;
+  height: 650px;
+  position: absolute;
+  top: 20px;
+  left: 760px;
 
   @media only screen and (max-width: 1200px) {
     width: 80%;
@@ -30,48 +26,51 @@ export const Banner = styled.img`
 `;
 
 export const LogoToken = styled.img`
-  display:block;
-  margin-top:-200px;
+  width: 88px;
+  height: 36px;
+  position:absolute;
+  top:40px;
+  left:60px;
 `;
 export const SignUpDetails = styled.div`
+
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
   height: 190px;
-  margin-top: 150px;
+  margin-top: 10px;
 `;
 
-export const SignUpTitle = styled.h1<{ theme: DefaultTheme}>`
+export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
   width: 302px;
   height: 62px;
-  color:${({ theme }) => theme.colors.whiteBorder};
+  color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 38px;
   font-weight: 300;
   line-height: 71.76px;
 `;
 
-export const SignUpText = styled.p<{ theme: DefaultTheme}>`
+export const SignUpText = styled.p<{ theme: DefaultTheme }>`
   width: 370px;
   height: 36px;
-  color:${({ theme }) => theme.colors.whiteBorder};
-  font-family:${({ theme }) => theme.fonts.main};
+  color: ${({ theme }) => theme.colors.whiteBorder};
+  font-family: ${({ theme }) => theme.fonts.main};
   font-size: 20px;
   font-weight: 250;
   line-height: 35.88px;
   text-align: center;
 `;
 
-export const SignUpButton = styled.button<{ theme: DefaultTheme}>`
+export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
   background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
   border: none;
   width: 100%;
   height: 54px;
   border-radius: 12px;
   color: ${({ theme }) => theme.colors.whiteBorder};
-  font-family:${({ theme }) => theme.fonts.main};
+  font-family: ${({ theme }) => theme.fonts.main};
   font-size: 20px;
   font-weight: 400;
   line-height: 29.9px;

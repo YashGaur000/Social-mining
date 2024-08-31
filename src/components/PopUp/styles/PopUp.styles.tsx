@@ -4,7 +4,6 @@ import { DefaultTheme } from "../../../styles/Theme";
 export const MainPopUpScreen = styled.div`
   background: linear-gradient(180deg, #18264c 0%, #1f305f 100%);
   width: 460px;
-  height: 290px;
   padding: 30px;
   border-radius: 10px;
   position: absolute;
@@ -17,22 +16,21 @@ export const MainPopUpScreen = styled.div`
   gap: 20px;
   @media only screen and (max-width: 580px) {
     width: 360px;
-    height: 290px;
   }
 `;
 
 export const PopUpScreenTitle = styled.div<{ theme: DefaultTheme}>`
-  //  border:2px solid royalblue;
+display:flex;
   font-family:  ${({ theme }) => theme.fonts.main};
   font-size: 24px;
   font-weight: 300;
   line-height: 35.88px;
-  // text-align: center;
+  
   color: ${({ theme }) => theme.colors.whiteBorder};
 `;
 
 export const PopUpScreenWrapper = styled.div`
-  // border:3px solid pink;
+ 
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -93,10 +91,10 @@ background: linear-gradient(97.67deg, #0F1B3B 2.6%, #232938 94.56%);
 
 export const PopUpScreenCard = styled.div`
   display: flex;
+  gap:14px;
 `;
 
 export const PopUpScreenContainer = styled.div`
-  // border:2px solid red;
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
