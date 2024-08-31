@@ -29,11 +29,11 @@ const AppRoutes: React.FC = () => {
            <TitleUpdater setTitleHeader={setTitleHeader} />
             <Routes>
             <Route path="/" element={<SignUp />} />
-              <Route path="/Dashboard" element ={<SocialMining DashBoardTitle={titleHeader}/>}>
+              <Route path="/dashboard" element ={<SocialMining DashBoardTitle={titleHeader}/>}>
               <Route index element={<DashBoardPage/>}></Route>
-              <Route path="Tasks" element={<TaskListPage />} />
-              <Route path="Leaderboard" element={<LeaderboardPage />} />
-              <Route path="LinkWallet" element={<LinkWalletPage />} /> 
+              <Route path="tasks" element={<TaskListPage />} />
+              <Route path="leaderboard" element={<LeaderboardPage />} />
+              <Route path="linkWallet" element={<LinkWalletPage />} /> 
               </Route>
             </Routes>
           </BackgroundWrapper>
