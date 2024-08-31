@@ -9,10 +9,12 @@ import {
 import { useState } from "react";
 import AddressPopup from "../../LinkwithRewards/modules/AddressPopup";
 import PopUP from "../../PopUp/modules/PopUp";
+import { useNavigate } from "react-router-dom";
 
 const DashBoard: React.FC = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false);
   const [isAddressPopupOpen, setAddressPopupOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const handleConnectClick = () => {
     setIsPopUpVisible(true);
@@ -27,7 +29,15 @@ const DashBoard: React.FC = () => {
   };
 
   const toggleAddressPopup = () => {
-    setAddressPopupOpen(!isAddressPopupOpen);
+    setAddressPopupOpen(false);
+  };
+
+  const handleTasksClick = () => {
+    navigate('/dashboard/Tasks');
+  };
+
+  const handleLeaderboardClick = () => {
+    navigate('/dashboard/Leaderboard');
   };
 
   return (
@@ -47,11 +57,15 @@ const DashBoard: React.FC = () => {
           <DashBoardText>
             Browse the Task List, Complete Challenges, and Earn Rewards!
           </DashBoardText>
-          <DashBoardButton>View Tasks</DashBoardButton>
+          <DashBoardButton onClick={handleTasksClick}>
+            View Tasks
+          </DashBoardButton>
         </DashBoardCard>
         <DashBoardCard>
           <DashBoardText>View Top Contributors in the Community</DashBoardText>
-          <DashBoardButton>View</DashBoardButton>
+          <DashBoardButton onClick={handleLeaderboardClick}>
+            View
+          </DashBoardButton>
         </DashBoardCard>
         <DashBoardCard>
           <DashBoardText>
