@@ -1,9 +1,65 @@
 import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
-export const BoardWrapper = styled.div<{ theme: DefaultTheme}>`
+
+
+export const BackgroundImages = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url('C:\Users\DELL\Desktop\social\social-mining\src\assets\tenexbglogo.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  &::before {
+    top: 10%;
+    left: 5%;
+  }
+
+  &::after {
+    bottom: 10%;
+    right: 5%;
+  }
+
+  & > div::before,
+  & > div::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url('/path/to/your/image.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  & > div::before {
+    top: 10%;
+    right: 5%;
+  }
+
+  & > div::after {
+    bottom: 10%;
+    left: 5%;
+  }
+`;
+
+export const BoardWrapper = styled.div<{ theme: DefaultTheme }>`
+  position: relative;
+  z-index: 1;
+  
   @media (max-width: 768px) {
-    // Add responsive styles for smaller screens
     padding: 10px;
   }
 `;

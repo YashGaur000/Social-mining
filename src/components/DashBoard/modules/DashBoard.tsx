@@ -1,3 +1,4 @@
+// DashBoard.tsx
 import {
   DashBoardCard,
   DashBoardButton,
@@ -5,12 +6,13 @@ import {
   DashBoardFooterText,
   DashBoardText,
 } from "../styles/DashBoard.styles";
-import PopUP from "../../PopUp/modules/PopUp";
 import { useState } from "react";
-
+import AddressPopup from "../../LinkwithRewards/modules/AddressPopup";
+import PopUP from "../../PopUp/modules/PopUp";
 
 const DashBoard: React.FC = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false);
+  const [isAddressPopupOpen, setAddressPopupOpen] = useState<boolean>(false);
 
   const handleConnectClick = () => {
     setIsPopUpVisible(true);
@@ -20,9 +22,18 @@ const DashBoard: React.FC = () => {
     setIsPopUpVisible(false);
   };
 
+  const handleGetRewardsClick = () => {
+    setAddressPopupOpen(true); 
+  };
+
+  const toggleAddressPopup = () => {
+    setAddressPopupOpen(!isAddressPopupOpen);
+  };
+
   return (
     <>
       {isPopUpVisible && <PopUP onClose={handleClosePopUp} />}
+      <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
       <DashBoardCards>
         <DashBoardCard>
           <DashBoardText>
@@ -46,7 +57,9 @@ const DashBoard: React.FC = () => {
           <DashBoardText>
             Link Your Wallet to Receive Your Social Mining Rewards
           </DashBoardText>
-          <DashBoardButton>Get Rewards</DashBoardButton>
+          <DashBoardButton onClick={handleGetRewardsClick}>
+            Get Rewards
+          </DashBoardButton>
         </DashBoardCard>
         <DashBoardFooterText>
           Airdrops will be distributed at the end of each month based on each

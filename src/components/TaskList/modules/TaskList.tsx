@@ -8,14 +8,15 @@ import Discord from '../../../assets/discord.svg';
 import Article from '../../../assets/article.svg';
 import Play from '../../../assets/play.svg';
 import Binance from '../../../assets/binance.svg';
-import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, TaskBox, TaskBoxFullWrapper, TaskBoxWrapper, TitleBox } from '../styles/TaskList.style';
+import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, TaskBox, TaskBoxFullWrapper, TitleBox } from '../styles/TaskList.style';
 
 
 const TaskList: React.FC = () => {
   return(
     <TaskBoxFullWrapper>
-      <TaskBoxWrapper>
+      {/* <TaskBoxWrapper> */}
         <TaskBox>
+          <Score>Complete the following task and earn $TENEX</Score>
           <CardWrapper>
             <Card>
               <TitleBox>
@@ -30,7 +31,7 @@ const TaskList: React.FC = () => {
               <ListBox>
                 <List>
                   <ListItem>
-                    <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Like, Retweet or reply to a @TenEx_Official tweets.
+                    <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Like, Retweet or reply to a <u>@TenEx_Official</u> tweets.
                   </ListItem>
                   <ListItem>
                     <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Tag @TenEx_Official, $TENEX in your tweets.
@@ -91,7 +92,7 @@ const TaskList: React.FC = () => {
                   <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Offer support and answer questions for additional rewards.
                 </ListItem>
                 <ListItem>
-                  Score 5 points by completing this task
+                  Score 10 points by completing this task
                 </ListItem>
               </List>
             </ListBox>
@@ -114,7 +115,7 @@ const TaskList: React.FC = () => {
                   <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> Connect Binance using a read-only API key.
                 </ListItem>
                 <ListItem>
-                  Score 5 points by completing this task
+                  Score 10 points by completing this task
                 </ListItem>
               </List>
             </ListBox>
@@ -160,20 +161,23 @@ const TaskList: React.FC = () => {
             <ListBox>
               <List>
                 <ListItem>
-                  <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" />
-                  Create your own video about TENEX and submit a link to it. The TENEX team will then review
-                  your video and assign points to you based on its quality.
+                  <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo"/>
+                  Capture an engaging video about TENEX to share on your social media platforms.
                 </ListItem>
                 <ListItem>
-                  <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" />You can earn up to <strong>40 points</strong> for a video.
+                  <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" />
+                  After reaching 100 views, send us the link of your video to claim your poinits.
+                </ListItem>
+                <ListItem>
+                  More views equal more points! Earn up to 100 points per video depending on its reach.
                 </ListItem>
               </List>
             </ListBox>
           </Card>  
           </CardWrapper>
         </TaskBox>
-      </TaskBoxWrapper>
-      <Score>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
+      {/* </TaskBoxWrapper> */}
+      <Score Margin='100px 0px 0px 0px'>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
     </TaskBoxFullWrapper>
 
   );

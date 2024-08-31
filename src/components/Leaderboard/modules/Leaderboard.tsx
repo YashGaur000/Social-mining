@@ -1,5 +1,5 @@
 import React from 'react';
-import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
+import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BackgroundImages, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
 import { Card } from '../../common/Card';
 import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
@@ -49,6 +49,10 @@ const Leaderboard: React.FC = () => {
     ];
 
     return (
+        <>
+        <BackgroundImages>
+                <div />
+            </BackgroundImages>
         <BoardWrapper>
             <AirdropBox>
                 <AirdropInfoBox>
@@ -90,29 +94,6 @@ const Leaderboard: React.FC = () => {
                             </Points>
                         </PointBox>
                     </RankandPointBox>
-                    {/* <RankandPointValueBox>
-                        {Runnerups.map((Runnerup, index) => (
-                            <ParticipantBox key={index}>
-                            {index < 3 && (
-                                <SocialLogo height="30px" width="30px" src={Medal} />
-                            )}
-                            <Name>
-                                {index < 3 ? Runnerup : `${index + 1} ${Runnerup}`}
-                            </Name>
-                            <EarnedPoints>{RunnerupsPoints[index]}</EarnedPoints>
-                            </ParticipantBox>
-                        ))}
-                     {Players.map((Player, index) => (
-                        <ParticipantBox Margin='0px 0px 0px 10px' key={index}>
-                            {`${index + 4}`}
-                            <Name>
-                            {`${Player}`}
-                            </Name>
-                            <EarnedPoints>{PlayersPoints[index]}</EarnedPoints>
-                        </ParticipantBox>
-                        ))}
-                        </RankandPointValueBox> */}
-
 <RankandPointValueBox>
     {Players.map((Player, index) => (
         <ParticipantBox key={index}>
@@ -132,8 +113,9 @@ const Leaderboard: React.FC = () => {
 </RankandPointValueBox>
                 </RankandPointBoxWrapper>
             </Card>
-            <Score>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
+            <Score Margin='80px 0px 0px 0px' textalign='left'>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
         </BoardWrapper>
+        </>
     );
 };
 

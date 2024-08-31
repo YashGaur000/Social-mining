@@ -24,7 +24,7 @@ export const PopupHeader = styled.div<{ theme: DefaultTheme}>`
 `;
 
 export const InputFieldBox = styled.div<{ theme: DefaultTheme}>`
-  margin: 10px 40px 10px 40px;
+  // margin: 10px 40px 10px 40px;
 
   @media (max-width: 768px) {
     margin: 10px 20px;
@@ -34,7 +34,7 @@ export const InputFieldBox = styled.div<{ theme: DefaultTheme}>`
 export const InputField = styled.input<{ theme: DefaultTheme}>`
   background: transparent;
   height: 38px;
-  width: 380px;
+  width: 80%;
   border: 2px solid #B8B8B8CC;
   border-radius: 8px;
   padding: 10px;
