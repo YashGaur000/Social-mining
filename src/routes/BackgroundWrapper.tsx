@@ -47,11 +47,11 @@ const BackgroundWrapper: React.FC<BackgroundWrapperProps> = ({ children }) => {
     case '/dashboard':
       background = theme.colors.backgroundLiquidity;
       break;
-      case '/dashboard/Tasks':
-      background = theme.colors.backgroundLiquidity;
+    case '/dashboard/Tasks':
+      background = theme.colors.backgroundTasks;
       break;
-      case '/dashboard/LeaderBoard':
-      background = theme.colors.backgroundLiquidity;
+    case '/dashboard/Leaderboard':
+      background = theme.colors.backgroundLeaderboard;
       break;
 
     default:
