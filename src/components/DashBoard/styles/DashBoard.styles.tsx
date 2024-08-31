@@ -135,6 +135,7 @@ font-weight: 300;
 line-height: 29.9px;
 text-align: center;
 color: ${({ theme }) => theme.colors.whiteBorder};
+margin:30px;
 
 
 `
