@@ -4,8 +4,10 @@ import ThemeProvider from './components/ThemeProvider'
 import AppRoutes from './routes/AppRoutes';
 
 function App() {
+  
   return (
     <ThemeProvider>
+      
       <Router>
         <AppRoutes/>
       </Router>

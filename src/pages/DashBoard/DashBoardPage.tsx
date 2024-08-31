@@ -1,13 +1,14 @@
 import React from 'react';
 import { DefaultTheme } from '../../styles/Theme';
 import styled from 'styled-components';
-import Leaderboard from '../../components/Leaderboard/modules/Leaderboard';
+import DashBoard from '../../components/DashBoard/modules/DashBoard';
 
 
-const LeaderboardContainer = styled.div<{ theme: DefaultTheme}>`
+
+const DashBoardContainer = styled.div<{ theme: DefaultTheme}>`
     display: flex;
-    justify-content: center;
-    // align-items: flex-start;
+    justify-content: flex-start;
+    align-items: flex-start;
     // gap: 20px;
     // padding: 40px;
     color: ${({ theme }) => theme.colors.text};
@@ -18,12 +19,12 @@ const LeaderboardContainer = styled.div<{ theme: DefaultTheme}>`
     }
 `;
 
-const LeaderboardPage: React.FC = () => {
+const DashBoardPage: React.FC = () => {
     return(
-        <LeaderboardContainer>
-            <Leaderboard/>
-        </LeaderboardContainer>
+        <DashBoardContainer>
+          <DashBoard/>
+        </DashBoardContainer>
     );
 };
 
-export default LeaderboardPage;
+export default DashBoardPage;

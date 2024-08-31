@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
-export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme}>`
+export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  width: 90%;
 
   @media (max-width: 1200px) {
     padding: 15px;
@@ -19,13 +20,13 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme}>`
   }
 `;
 
-export const TaskBoxWrapper = styled.div<{ theme: DefaultTheme}>`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
+// export const TaskBoxWrapper = styled.div<{ theme: DefaultTheme }>`
+//   display: flex;
+//   flex-direction: column;
+//   width: auto;
+// `;
 
-export const TaskBox = styled.div<{ theme: DefaultTheme}>`
+export const TaskBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -44,10 +45,12 @@ export const TaskBox = styled.div<{ theme: DefaultTheme}>`
   }
 `;
 
-export const TitleBox = styled.div<{ theme: DefaultTheme}>`
+export const TitleBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   align-items: center;
+  font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
+  margin-left: 15px;
 
   @media (max-width: 1200px) {
     font-size: 22px;
@@ -73,26 +76,30 @@ export const SocialLogo = styled.img<{
   Zindex?: string;
 }>`
   z-index: ${({ Zindex }) => Zindex};
-  positon: ${({ Position }) => Position};
-  width: ${({ width }) => width};
-  height: ${({ height }) => height};
-  margin: ${({ margin }) => (margin ? margin : '0px')};
+  position: ${({ Position }) => Position}; /* Fixed typo */
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
+  margin: ${({ margin }) => margin || '0px'};
+
+  @media (max-width: 1630px){
+    margin: '0px 0px 27px 0px';
+  }
 `;
 
 export const LetsGoButton = styled.div<{ 
   margin?: string; 
-  theme: DefaultTheme}>`
+  theme: DefaultTheme }>`
   display: flex;
-  margin: ${({ margin }) => (margin ? margin : '0px')};  
+  margin: ${({ margin }) => margin || '0px'};  
   width: 130px;
 
   @media (max-width: 768px) {
-    margin: 10px 0 0 0;
+    margin: 0px 0 0 0;
     align-self: flex-end;
   }
 `;
 
-export const ListBox = styled.div<{ theme: DefaultTheme}>`
+export const ListBox = styled.div<{ theme: DefaultTheme }>`
   font-size: 20px;
   line-height: 29.9px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -115,7 +122,7 @@ export const ListBox = styled.div<{ theme: DefaultTheme}>`
 
 export const List = styled.ul`
   list-style-type: none;
-  padding: 0;
+  padding-left: 25px;
   margin-bottom: 20px;
 
   @media (max-width: 768px) {
@@ -128,7 +135,7 @@ export const ListItem = styled.li<{
   alignitems?: string;
 }>`
   display: flex;
-  align-items: ${({ alignitems }) => (alignitems ? alignitems : 'center' )};
+  align-items: ${({ alignitems }) => alignitems || 'center'};
   gap: 10px;
   margin-bottom: 10px;
 
@@ -148,9 +155,17 @@ export const ListItem = styled.li<{
   }
 `;
 
-export const Score = styled.p`
+export const Score = styled.p<{ 
+  theme: DefaultTheme;
+  Margin?: string;
+  textalign?: string;
+}>`
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
+  line-height: 29.9px;
   font-size: 20px;
-  margin-top: 100px;
+  margin: ${({ Margin }) => Margin || '0px'};
+  text-align: ${({ textalign }) => textalign || 'center'};
 
   @media (max-width: 1200px) {
     font-size: 18px;

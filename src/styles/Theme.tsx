@@ -14,6 +14,7 @@ export interface DefaultTheme {
     extraLarge: string;
   }
   interface Colorpallate {
+    SocialMiningBackground:string;
     primary: string;
     secondary: string;
     background: string;
@@ -46,6 +47,8 @@ export interface DefaultTheme {
     stepperColor: string;
     backgroundAnalytics: string;
     separator: string;
+    backgroundTasks: string;
+    backgroundLeaderboard: string;
   }
   
   interface FontType {
@@ -66,6 +69,9 @@ export interface DefaultTheme {
     colors: {
       primary: '#0070f3',
       secondary: '#1c1c1e',
+      SocialMiningBackground: `radial-gradient(71.67% 71.86% at 53.69% 43.65%, #16C062 0%, #3EACFC 100%) ,
+      linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)`,
+
       background:
         'linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)',
       backgroundHome: `radial-gradient(circle at 80% 8%,#43d6cd7a 0%, transparent 10%),
@@ -89,6 +95,11 @@ export interface DefaultTheme {
                            radial-gradient(circle at 97% 0%,#43d6cd7a 0%, transparent 0%),
                            radial-gradient(circle at 50% 100%,#43d6cd7a -10%, transparent 9%),
                            linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)`,
+      backgroundTasks: `radial-gradient(circle at 50% 30%,#43d6cd7a 0%, transparent 30%),
+      radial-gradient(circle at 50% 75%,#43d6cd7a 0%, transparent 30%),
+       linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)`,
+      backgroundLeaderboard: `radial-gradient(circle at 50% 30%,#43d6cd7a 0%, transparent 50%),
+      linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)`, 
       text: '#ffffff',
       buttonBackground:
         'linear-gradient(188.32deg, #47FF99 -7.09%, #3EACFC 99.48%)',

@@ -58,9 +58,9 @@ export const CardWrapper = styled.div<{
   // background-color: ${({ theme }) => theme.colors.buttonBackground};
   background: ${({ theme, tag }) =>
     tag === 'top' ? theme.colors.background : theme.colors.buttonBackground};
-  border-radius: 10px;
-  padding: 0px 0px 0px 6px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px 20px 20px 10px;
+  padding: 0px 0px 0px 7px;
+  // box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 
   &:after {
     content: '';
@@ -73,6 +73,23 @@ export const CardWrapper = styled.div<{
     border-radius: inherit;
     z-index: -1;
     filter: blur(10px);
+  }
+    @media (max-width: 1024px) {
+    width: 350px;
+  }
+
+  @media (max-width: 900px) {
+    margin-top: 10px;
+    grid-template-columns: none;
+    justify-content: center;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    grid-template-columns: none;
+    justify-content: center;
+    border-radius: 10px;
   }
 `;
 
