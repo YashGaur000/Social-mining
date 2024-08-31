@@ -25,7 +25,7 @@ const AppRoutes: React.FC = () => {
     <>
       <Suspense fallback={<div>Loading...</div>}>
         {!isLoading && (
-          <BackgroundWrapper>
+          <BackgroundWrapper> 
            <TitleUpdater setTitleHeader={setTitleHeader} />
             <Routes>
             <Route path="/" element={<SignUp />} />
