@@ -20,39 +20,28 @@ export const Heading = styled.p<{ theme: DefaultTheme}>`
  
 `;
 
+export const SideImage = styled.img`
+width: 32px;
+height: 84px;
+
+`;
+
+export const DashBoardWrapper = styled.div`
+width:100%;
+height:84px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+`
+
 export const DashBoardCard = styled.div`
- 
-background:linear-gradient(188.32deg, #47FF99 -7.09%, #3EACFC 99.48%);
-  
   width: 100%;
-  height: 80px;
+  height: 84px;
   border-radius: 24px;
   padding: 8px;
-  
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin: auto;
-  position: relative;
-
-  z-index:2;
-  
-  
-   &::after{
-   content:'';
-   position:absolute;
-   
-   
-   z-index:-1;
-   background: linear-gradient(180deg, #18264c 0%, #1f305f 100%);
-   width:100%;
-   height:80px;
-   border-radius:24px;
-   padding:0px 0px 0px 6px;
-   
-   
-   
-   }
+  border-radius:24px;
 
   @media only screen and (max-width: 580px) {
     width:100%;
@@ -63,12 +52,10 @@ background:linear-gradient(188.32deg, #47FF99 -7.09%, #3EACFC 99.48%);
 `;
 
 export const DashBoardCards = styled.div`
- 
   width:100%;
-  margin: 50px 60px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
 
  @media only screen and (max-width: 580px){
    width:100%;
@@ -135,7 +122,7 @@ font-weight: 300;
 line-height: 29.9px;
 text-align: center;
 color: ${({ theme }) => theme.colors.whiteBorder};
-margin:30px;
+margin:10px;
 
 
 `

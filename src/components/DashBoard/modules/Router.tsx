@@ -12,11 +12,11 @@ const TitleUpdater: React.FC<TitleUpdaterProps> = ({ setTitleHeader }) => {
     if (location.pathname === "/dashboard") {
       setTitleHeader("Dashboard");
     } 
-    else if(location.pathname === "/dashboard/tasks"){
+    else if(location.pathname === "/dashboard/Tasks"){
       setTitleHeader("List of Social Mining Tasks");
     }
-    else if(location.pathname === "/dashboard/leaderboard"){
-      setTitleHeader("LearderBoard");
+    else if(location.pathname === "/dashboard/Leaderboard"){
+      setTitleHeader("LeaderBoard");
     }
   }, [location, setTitleHeader]);
 

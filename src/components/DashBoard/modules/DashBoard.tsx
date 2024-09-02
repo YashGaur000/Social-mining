@@ -5,11 +5,14 @@ import {
   DashBoardCards,
   DashBoardFooterText,
   DashBoardText,
+  SideImage,
+  DashBoardWrapper,
 } from "../styles/DashBoard.styles";
 import { useState } from "react";
 import AddressPopup from "../../LinkwithRewards/modules/AddressPopup";
 import PopUP from "../../PopUp/modules/PopUp";
 import { useNavigate } from "react-router-dom";
+import sideborder from "../../../assets/sideborder.svg";
 
 const DashBoard: React.FC = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false);
@@ -25,7 +28,7 @@ const DashBoard: React.FC = () => {
   };
 
   const handleGetRewardsClick = () => {
-    setAddressPopupOpen(true); 
+    setAddressPopupOpen(true);
   };
 
   const toggleAddressPopup = () => {
@@ -33,11 +36,11 @@ const DashBoard: React.FC = () => {
   };
 
   const handleTasksClick = () => {
-    navigate('/dashboard/Tasks');
+    navigate("/dashboard/Tasks");
   };
 
   const handleLeaderboardClick = () => {
-    navigate('/dashboard/Leaderboard');
+    navigate("/dashboard/Leaderboard");
   };
 
   return (
@@ -46,35 +49,61 @@ const DashBoard: React.FC = () => {
       <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
       <DashBoardCards>
         <DashBoardCard>
-          <DashBoardText>
-            Link Your Social Media to Start Mining Rewards
-          </DashBoardText>
-          <DashBoardButton onClick={handleConnectClick}>
-            Connect
-          </DashBoardButton>
+          <div>
+            <SideImage src={sideborder} alt="sideImage" />
+          </div>
+          <DashBoardWrapper>
+            <DashBoardText>
+              Link Your Social Media to Start Mining Rewards
+            </DashBoardText>
+            <DashBoardButton onClick={handleConnectClick}>
+              Connect
+            </DashBoardButton>
+          </DashBoardWrapper>
         </DashBoardCard>
+
         <DashBoardCard>
-          <DashBoardText>
-            Browse the Task List, Complete Challenges, and Earn Rewards!
-          </DashBoardText>
-          <DashBoardButton onClick={handleTasksClick}>
-            View Tasks
-          </DashBoardButton>
+          <div>
+            <SideImage src={sideborder} alt="sideImage" />
+          </div>
+          <DashBoardWrapper>
+            <DashBoardText>
+              Browse the Task List, Complete Challenges, and Earn Rewards!
+            </DashBoardText>
+            <DashBoardButton onClick={handleTasksClick}>
+              View Tasks
+            </DashBoardButton>
+          </DashBoardWrapper>
         </DashBoardCard>
+
         <DashBoardCard>
-          <DashBoardText>View Top Contributors in the Community</DashBoardText>
-          <DashBoardButton onClick={handleLeaderboardClick}>
-            View
-          </DashBoardButton>
+          <div>
+            <SideImage src={sideborder} alt="sideImage" />
+          </div>
+          <DashBoardWrapper>
+            <DashBoardText>
+              View Top Contributors in the Community
+            </DashBoardText>
+            <DashBoardButton onClick={handleLeaderboardClick}>
+              View
+            </DashBoardButton>
+          </DashBoardWrapper>
         </DashBoardCard>
+
         <DashBoardCard>
-          <DashBoardText>
-            Link Your Wallet to Receive Your Social Mining Rewards
-          </DashBoardText>
-          <DashBoardButton onClick={handleGetRewardsClick}>
-            Get Rewards
-          </DashBoardButton>
+          <div>
+            <SideImage src={sideborder} alt="sideImage" />
+          </div>
+          <DashBoardWrapper>
+            <DashBoardText>
+              Link Your Wallet to Receive Your Social Mining Rewards
+            </DashBoardText>
+            <DashBoardButton onClick={handleGetRewardsClick}>
+              Get Rewards
+            </DashBoardButton>
+          </DashBoardWrapper>
         </DashBoardCard>
+
         <DashBoardFooterText>
           Airdrops will be distributed at the end of each month based on each
           user’s accrued points
