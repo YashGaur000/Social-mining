@@ -8,6 +8,8 @@ const SignUpPageContainer = styled.div<{ theme: DefaultTheme}>`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    width:100vw;
+    border: 2px solid red;
   
     color: ${({ theme }) => theme.colors.text};
   

@@ -16,7 +16,7 @@ const GlobalStyles = createGlobalStyle<{
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
     font-family: 'Kanit', sans-serif;
-    padding:0px 55px;
+    padding:0px 0px;
 
 @media (min-width: 600px) {
   body {
