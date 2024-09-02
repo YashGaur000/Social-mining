@@ -12,6 +12,7 @@ const SignUp = () => {
   const handleTwitterSignIn = () => {
     navigate("/dashboard");
   };
+
   return (
     <>
      <LogoToken src={TokenTitle}></LogoToken>
