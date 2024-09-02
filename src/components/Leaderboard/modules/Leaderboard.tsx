@@ -1,6 +1,7 @@
 import React from 'react';
 import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BackgroundImages, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
+import Bigtenex from '../../../assets/bigtenexbg.svg';
 import { Card } from '../../common/Card';
 import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
 
@@ -54,7 +55,9 @@ const Leaderboard: React.FC = () => {
                 <div />
             </BackgroundImages>
         <BoardWrapper>
+            <SocialLogo src={Bigtenex} Position='absolute' margin='185px 0px 0px -250px' Zindex='-1'/>
             <AirdropBox>
+                <Card>
                 <AirdropInfoBox>
                     <AirdropInfo>
                         01/09/2024
@@ -63,6 +66,8 @@ const Leaderboard: React.FC = () => {
                         Airdrop Date
                     </AirdropInfoSub>
                 </AirdropInfoBox>
+                </Card>
+                <Card>
                 <AirdropInfoBox>
                     <AirdropInfo>
                         $1,000,000
@@ -71,16 +76,19 @@ const Leaderboard: React.FC = () => {
                         Airdrop Amount
                     </AirdropInfoSub>
                 </AirdropInfoBox>
+                </Card>
+                <Card>
                 <AirdropInfoBox>
                     <AirdropInfo>
-                        14 days 10 hours
+                        100
                     </AirdropInfo>
                     <AirdropInfoSub>
-                        Time Left
+                        Participants
                     </AirdropInfoSub>
                 </AirdropInfoBox>
+                </Card>
             </AirdropBox>
-            <Card width='90%'>
+            <Card width='90%' background='linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .2) 100%)'>
                 <RankandPointBoxWrapper>
                     <RankandPointBox>
                         <RankBox >
@@ -113,10 +121,11 @@ const Leaderboard: React.FC = () => {
 </RankandPointValueBox>
                 </RankandPointBoxWrapper>
             </Card>
-            <Score Margin='80px 0px 0px 0px' textalign='left'>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
+            <Score Margin='80px 0px 0px -50px' textalign='center'>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
         </BoardWrapper>
         </>
     );
 };
 
 export default Leaderboard;
+

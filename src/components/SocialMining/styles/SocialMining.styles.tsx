@@ -1,11 +1,15 @@
-import styled from "styled-components";
+import styled, { DefaultTheme } from "styled-components";
 
-export const Main1container = styled.section`
+export const Main1container = styled.section<{ 
+  theme: DefaultTheme;
+  Marginbottom?: string;
+}>`
   
   margin-top:40px;
   display: flex;
   align-items: center;
   gap: 20px;
+  margin-botton: ${({ Marginbottom }) => Marginbottom };
 `;
 
 export const LogoWrapper = styled.div`

@@ -10,14 +10,58 @@ export const Card = styled.div<{
   Radius?: string;
   Boxshadow?: string;
   Padding?: string;
+  background?: string;
+  Opacity?: string;
 }>`
   
   display: flex;
   flex-direction: column;
-  background: ${({ theme, tag }) =>
-    tag === 'top' ? theme.colors.cardDark : theme.colors.card};
+  background: ${({ theme, background }) => (background ? background : theme.colors.card)};
   border-radius: 10px;
   padding: 20px;
+  margin: ${({ margin }) => (margin ? margin : '0px')};
+  radius: ${({ Radius }) => (Radius ? Radius : '0px')};
+  width: ${({ width }) => (width ? width : '100%')};
+  height: ${({ height }) => (height ? height : '')};
+  text-align: center;
+  color: ${({ theme }) => theme.colors.text}; 
+  // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
+  box-shadow: ${({ Boxshadow }) => Boxshadow};
+  opacity: ${({ Opacity }) => Opacity};
+
+  @media (max-width: 1024px) {
+    width: 350px;
+  }
+
+  @media (max-width: 900px) {
+    margin-top: 10px;
+    grid-template-columns: none;
+    justify-content: center;
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+    grid-template-columns: none;
+    justify-content: center;
+  }
+`;
+
+export const CardBox = styled.div<{
+  theme: DefaultTheme;
+  height?: string;
+  width?: string;
+  tag?: string;
+  margin?: string;
+  Radius?: string;
+  Boxshadow?: string;
+  Padding?: string;
+}>`
+  
+  display: flex;
+  flex-direction: column;
+  
+  border-radius: 10px;
+  padding: 0px;
   margin: ${({ margin }) => (margin ? margin : '0px')};
   radius: ${({ Radius }) => (Radius ? Radius : '0px')};
   width: ${({ width }) => (width ? width : '100%')};
@@ -44,6 +88,7 @@ export const Card = styled.div<{
   }
 `;
 
+
 export const CardWrapper = styled.div<{
   theme: DefaultTheme;
   height?: string;
@@ -54,10 +99,10 @@ export const CardWrapper = styled.div<{
   Boxshadow?: string;
   Padding?: string;
 }>`
- position: relative;
-  // background-color: ${({ theme }) => theme.colors.buttonBackground};
-  background: ${({ theme, tag }) =>
-    tag === 'top' ? theme.colors.background : theme.colors.buttonBackground};
+  display: flex;
+  width: 100%;
+//  position: relative;
+  // background-color: ${({ theme }) => theme.colors.background};
   border-radius: 10px 20px 20px 10px;
   padding: 0px 0px 0px 7px;
   // box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
@@ -126,3 +171,6 @@ export const CardDescription = styled.p<{
   color: ${({ theme }) => theme.colors.greyLight};
   margin-bottom: 20px;
 `;
+
+// background: ${({ theme, tag }) =>
+//     tag === 'top' ? theme.colors.cardDark : theme.colors.card};

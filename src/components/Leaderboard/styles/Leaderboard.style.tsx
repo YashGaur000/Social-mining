@@ -18,7 +18,7 @@ export const BackgroundImages = styled.div`
     position: absolute;
     width: 100px;
     height: 100px;
-    background-image: url('C:\Users\DELL\Desktop\social\social-mining\src\assets\tenexbglogo.svg');
+    background-image: url('social-mining\src\assets\bigtenexbg.svg');
     background-repeat: no-repeat;
     background-size: contain;
   }
@@ -55,9 +55,11 @@ export const BackgroundImages = styled.div`
   }
 `;
 
+
 export const BoardWrapper = styled.div<{ theme: DefaultTheme }>`
   position: relative;
   z-index: 1;
+  background-image: url('social-mining\src\assets\bigtenexbg.svg');
   
   @media (max-width: 768px) {
     padding: 10px;
