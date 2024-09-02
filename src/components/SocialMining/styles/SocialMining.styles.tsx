@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Main1container = styled.section`
   display: flex;
   align-items: center;
+  margin-bottom:60px;
 `;
 
 export const LogoWrapper = styled.div`

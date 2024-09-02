@@ -1,23 +1,31 @@
 import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
-export const SignUpWrapper = styled.div``;
+export const SignUpWrapper = styled.div`
+
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 export const ImageContainer = styled.div``;
 
 export const Banner = styled.img`
-  width: 600px;
-  height: 650px;
-  position: absolute;
-  top: 20px;
-  left: 760px;
+ 
+  width: 560px;
+  height: 648px;
+  float: right;
 
   @media only screen and (max-width: 1200px) {
-    width: 80%;
+    width: 550px;
+    height: 600px;
   }
 
-  @media only screen and (max-width: 600px) {
-    width: 70%;
+  @media only screen and (max-width: 780px) {
+    width: 500px;
+    height: 550px;
   }
 
   @media only screen and (max-width: 580px) {
@@ -28,18 +36,20 @@ export const Banner = styled.img`
 export const LogoToken = styled.img`
   width: 88px;
   height: 36px;
-  position:absolute;
-  top:40px;
-  left:60px;
+  position: absolute;
+  top: 40px;
+  left: 60px;
 `;
-export const SignUpDetails = styled.div`
 
-  width: 50%;
+export const SignUpDetails = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   height: 190px;
-  margin-top: 10px;
+  margin-left:100px;
+
+  @media only screen and (max-width: 580px) {
+    margin: auto;
+  }
 `;
 
 export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
