@@ -51,11 +51,22 @@ export const DashBoardCard = styled.div`
   }
 `;
 
+export const MiddleLogo = styled.img`
+position:fixed;
+width: 400px;
+height: 400px;
+top: 190px;
+left: 520px;
+opacity: 0.12px;
+
+`
+
 export const DashBoardCards = styled.div`
   width:100%;
   display: flex;
   flex-direction: column;
   gap: 40px;
+  margin:1px 100px 1px 100px;
 
  @media only screen and (max-width: 580px){
    width:100%;
@@ -117,7 +128,7 @@ export const DashBoardButton = styled.button<{ theme: DefaultTheme}>`
 
 export const DashBoardFooterText = styled.p<{ theme: DefaultTheme}>`
 font-family: ${({ theme }) => theme.fonts.main};
-font-size: 20px;
+font-size: 18px;
 font-weight: 300;
 line-height: 29.9px;
 text-align: center;

@@ -7,13 +7,14 @@ import {
   DashBoardText,
   SideImage,
   DashBoardWrapper,
+  MiddleLogo,
 } from "../styles/DashBoard.styles";
 import { useState } from "react";
 import AddressPopup from "../../LinkwithRewards/modules/AddressPopup";
 import PopUP from "../../PopUp/modules/PopUp";
 import { useNavigate } from "react-router-dom";
 import sideborder from "../../../assets/sideborder.svg";
-
+import middleLogo from '../../../assets/middleLogo.svg'
 const DashBoard: React.FC = () => {
   const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false);
   const [isAddressPopupOpen, setAddressPopupOpen] = useState<boolean>(false);
@@ -48,6 +49,7 @@ const DashBoard: React.FC = () => {
       {isPopUpVisible && <PopUP onClose={handleClosePopUp} />}
       <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
       <DashBoardCards>
+        <MiddleLogo src={middleLogo} alt="" />
         <DashBoardCard>
           <div>
             <SideImage src={sideborder} alt="sideImage" />

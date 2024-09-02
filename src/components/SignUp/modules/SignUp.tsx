@@ -26,21 +26,26 @@ const SignUp = () => {
   return (
     <>
       <LogoToken src={tokenTitle}></LogoToken>
+
       <SignUpWrapper>
+
+      
         <SignUpDetails>
-            <SignUpTitle>Become a TENEX</SignUpTitle>
-            <SignUpText>Join our mission to spread TenEx Message</SignUpText>
-            <SignUpButton onClick={handleTwitterSignIn}>
-              <img src={twitter} />
-              Sigh In Twitter
-            </SignUpButton>
-            <SignUpToken>
-              <SignUpTokens src={token} alt="" />
-            </SignUpToken>
+          <SignUpTitle>Become a TENEX</SignUpTitle>
+          <SignUpText>Join our mission to spread TenEx Message</SignUpText>
+          <SignUpButton onClick={handleTwitterSignIn}>
+            <img src={twitter} />
+            Sigh In Twitter
+          </SignUpButton>
+          <SignUpToken>
+            <SignUpTokens src={token} alt="" />
+          </SignUpToken>
         </SignUpDetails>
+
         <ImageContainer>
           <Banner src={image} alt="" />
         </ImageContainer>
+        
       </SignUpWrapper>
     </>
   );

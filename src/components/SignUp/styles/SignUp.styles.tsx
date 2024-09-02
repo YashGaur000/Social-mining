@@ -2,35 +2,45 @@ import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
 export const SignUpWrapper = styled.div`
-
+// border:2px solid red;
   width: 100%;
-  height: 80vh;
+  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-export const ImageContainer = styled.div``;
+export const ImageContainer = styled.div`
+float:right;
+
+`;
 
 export const Banner = styled.img`
- 
-  width: 560px;
-  height: 648px;
-  float: right;
+width: 580px;
+height: 628px;
+
 
   @media only screen and (max-width: 1200px) {
-    width: 550px;
+    width: 560px;
+    height: 748px;
+  }
+
+  @media only screen and (max-width: 1100px) {
+    width: 400px;
     height: 600px;
   }
 
-  @media only screen and (max-width: 780px) {
-    width: 500px;
-    height: 550px;
+  @media only screen and (max-width: 900px) {
+    width: 300px;
+    height: 500px;
   }
 
-  @media only screen and (max-width: 580px) {
+  @media only screen and (max-width: 780px) {
     display: none;
   }
+`;
+export const LogoTokenWrapper = styled.div`
+  position: relative;
 `;
 
 export const LogoToken = styled.img`
@@ -42,13 +52,15 @@ export const LogoToken = styled.img`
 `;
 
 export const SignUpDetails = styled.div`
+
+ margin-left:100px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   height: 190px;
-  margin-left:100px;
-
   @media only screen and (max-width: 580px) {
-    margin: auto;
+    display:flex;
+    justify-content:center;
   }
 `;
 
@@ -60,6 +72,16 @@ export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
   font-size: 38px;
   font-weight: 300;
   line-height: 71.76px;
+  @media only screen and (max-width: 900px) {
+    font-size: 24px;
+  }
+  @media only screen and (max-width: 780px) {
+    font-size: 36px;
+  }
+
+   @media only screen and (max-width: 500px) {
+    
+  }
 `;
 
 export const SignUpText = styled.p<{ theme: DefaultTheme }>`
@@ -71,13 +93,23 @@ export const SignUpText = styled.p<{ theme: DefaultTheme }>`
   font-weight: 250;
   line-height: 35.88px;
   text-align: center;
+  @media only screen and (max-width: 900px) {
+    font-size: 14px;
+  }
+     @media only screen and (max-width: 780px) {
+    font-size: 20px;
+  }
 `;
 
 export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
   background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
   border: none;
-  width: 100%;
+  width: 444px;
   height: 54px;
+
+  border-radius: 12px 0px 0px 0px;
+  opacity: 0px;
+
   border-radius: 12px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
@@ -85,11 +117,23 @@ export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
   font-weight: 400;
   line-height: 29.9px;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 10px;
   display: flex;
   align-items: center;
   gap: 6px;
   justify-content: center;
+
+  @media only screen and (max-width: 900px) {
+    font-size: 14px;
+    width: 300px;
+    margin-left: 55px;
+  }
+
+  @media only screen and (max-width: 780px) {
+    font-size: 14px;
+    width: 300px;
+    margin-left:0px;
+  }
 `;
 
 export const SignUpToken = styled.div`
@@ -97,17 +141,17 @@ export const SignUpToken = styled.div`
 `;
 
 export const SignUpTokens = styled.img`
+
   position: absolute;
   width: 253px;
   height: 214px;
   top: 30px;
   left: 80px;
 
-  @media only screen and (max-width: 480px) {
+  @media only screen and (max-width: 580px) {
     position: absolute;
-    width: 283px;
-    height: 244px;
-    top: 50px;
-    left: 10px;
+    width: 200px;
+    height: 170px;
+    
   }
 `;
