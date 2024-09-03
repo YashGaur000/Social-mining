@@ -14,7 +14,7 @@ const BackgroundWrapper: React.FC<BackgroundWrapperProps> = ({ children }) => {
 
   switch (location.pathname) {
     case '/':
-      background = theme.colors.backgroundLiquidity;
+      background = theme.colors.SocialMiningBackground;
       break;
     case '/swap':
       background = theme.colors.backgroundSwap;
@@ -45,7 +45,7 @@ const BackgroundWrapper: React.FC<BackgroundWrapperProps> = ({ children }) => {
       break;
 
     case '/dashboard':
-      background = theme.colors.backgroundLiquidity;
+      background = theme.colors.SocialMiningBackground;
       break;
     case '/dashboard/Tasks':
       background = theme.colors.backgroundTasks;
