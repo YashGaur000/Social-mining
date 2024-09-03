@@ -35,7 +35,7 @@ const SignUp = () => {
           <SignUpText>Join our mission to spread TenEx Message</SignUpText>
           <SignUpButton onClick={handleTwitterSignIn}>
             <img src={twitter} />
-            Sigh In Twitter
+            Sign In Twitter
           </SignUpButton>
           <SignUpToken>
             <SignUpTokens src={token} alt="" />
