@@ -49,7 +49,7 @@ const DashBoard: React.FC = () => {
       {isPopUpVisible && <PopUP onClose={handleClosePopUp} />}
       <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
       <DashBoardCards>
-        <MiddleLogo src={middleLogo} alt="" />
+        <MiddleLogo Opacity="0.12px" Top="26vh" Width="35vw" Height="30vw" Left="48%"  src={middleLogo} alt="" />
         <DashBoardCard>
           <div>
             <SideImage src={sideborder} alt="sideImage" />

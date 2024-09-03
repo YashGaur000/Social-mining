@@ -26,6 +26,7 @@ export const TaskBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   flex-direction: column;
   gap: 40px;
+  margin-top: -40px;
   font-family: ${({ theme }) => theme.fonts.main};
   background-image: url('C:/Users/DELL/Desktop/social/social-mining/src/assets/bigtenexbg.svg');
   
@@ -91,15 +92,15 @@ export const SocialLogo = styled.img<{
   margin: ${({ margin }) => margin || '0px'};
 
   @media (max-width: 1200px) {
-    margin: 0px 0px 0px 0px;
+    
   }
 
     @media (max-width: 1024px) {
-    margin: 0px 0px 0px 0px;
+
   }
 
     @media (max-width: 768px) {
-    margin: 0px 0px 0px 0px;
+  
   }
 `;
 
