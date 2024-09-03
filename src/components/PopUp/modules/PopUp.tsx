@@ -14,7 +14,7 @@ import twitter from "../../../assets/twitter.svg"
 import reddit from "../../../assets/reddit.svg"
 import discord from "../../../assets/discord.svg"
 import telegram from "../../../assets/telegram.svg"
-import { useState } from "react";
+
 
 
 
@@ -30,11 +30,7 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
     }
   };
 
-   const[buttonText , setButtonText] = useState('connect');
 
-   const handleClick =() =>{
-    setButtonText('Connected');
-   }
 
   return (
     <PopUpScreenContainer onClick={handleOverlayClick}>
@@ -46,18 +42,10 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
             <PopScreenText>Connect with Twitter</PopScreenText>
           </PopUpScreenCard>
           <ConnectionButtonWrapper>
-            <PopUpConnectionButton onClick={handleClick}>{buttonText}</PopUpConnectionButton>
+            <PopUpConnectionButton>connect</PopUpConnectionButton>
           </ConnectionButtonWrapper>
         </PopUpScreenWrapper>
-        <PopUpScreenWrapper>
-          <PopUpScreenCard>
-            <SocialMediaIcon src={reddit} alt="Reddit Image" />
-            <PopScreenText>Connect with Reddit</PopScreenText>
-          </PopUpScreenCard>
-          <ConnectionButtonWrapper>
-            <PopUpConnectionButton>Connect</PopUpConnectionButton>
-          </ConnectionButtonWrapper>
-        </PopUpScreenWrapper>
+        
         <PopUpScreenWrapper>
           <PopUpScreenCard>
             <SocialMediaIcon src={discord} alt="Discord Image" />
@@ -70,7 +58,16 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
         <PopUpScreenWrapper>
           <PopUpScreenCard>
             <SocialMediaIcon src={telegram} alt="Telegram Image" />
-            <PopScreenText>Connect with $TENEX</PopScreenText>
+            <PopScreenText>Connect with Telegram</PopScreenText>
+          </PopUpScreenCard>
+          <ConnectionButtonWrapper>
+            <PopUpConnectionButton>Connect</PopUpConnectionButton>
+          </ConnectionButtonWrapper>
+        </PopUpScreenWrapper>
+        <PopUpScreenWrapper>
+          <PopUpScreenCard>
+            <SocialMediaIcon src={reddit} alt="Reddit Image" />
+            <PopScreenText>Connect with Reddit</PopScreenText>
           </PopUpScreenCard>
           <ConnectionButtonWrapper>
             <PopUpConnectionButton>Connect</PopUpConnectionButton>

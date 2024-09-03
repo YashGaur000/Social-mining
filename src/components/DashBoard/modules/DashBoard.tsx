@@ -56,7 +56,7 @@ const DashBoard: React.FC = () => {
           </div>
           <DashBoardWrapper>
             <DashBoardText>
-              Link Your Social Media to Start Mining Rewards
+            Link your social Media to start mining
             </DashBoardText>
             <DashBoardButton onClick={handleConnectClick}>
               Connect
@@ -70,7 +70,7 @@ const DashBoard: React.FC = () => {
           </div>
           <DashBoardWrapper>
             <DashBoardText>
-              Browse the Task List, Complete Challenges, and Earn Rewards!
+            Browse the task list, complete challenges, and earn points!
             </DashBoardText>
             <DashBoardButton onClick={handleTasksClick}>
               View Tasks
@@ -84,7 +84,7 @@ const DashBoard: React.FC = () => {
           </div>
           <DashBoardWrapper>
             <DashBoardText>
-              View Top Contributors in the Community
+            View Top Contributors in the Community
             </DashBoardText>
             <DashBoardButton onClick={handleLeaderboardClick}>
               View
@@ -98,7 +98,7 @@ const DashBoard: React.FC = () => {
           </div>
           <DashBoardWrapper>
             <DashBoardText>
-              Link Your Wallet to Receive Your Social Mining Rewards
+            Link your wallet to claim $TENEX
             </DashBoardText>
             <DashBoardButton onClick={handleGetRewardsClick}>
               Get Rewards
@@ -107,8 +107,7 @@ const DashBoard: React.FC = () => {
         </DashBoardCard>
 
         <DashBoardFooterText>
-          Airdrops will be distributed at the end of each month based on each
-          user’s accrued points
+        Airdrops will be distributed at the end of each month based on each user’s accured points
         </DashBoardFooterText>
       </DashBoardCards>
     </>
