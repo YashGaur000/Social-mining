@@ -68,8 +68,17 @@ export const TitleMiniBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
 `;
 
-export const SocialLogoBox = styled.div<{ theme: DefaultTheme }>`
+export const SocialLogoBox = styled.div<{ theme: DefaultTheme 
+  Position?: string;
+  width?: string;
+  height?: string;
+}>`
   display: flex;
+  justify-content: space-around;
+  position: ${({ Position }) => Position}; 
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
+
 
   // @media(max-width: 1200px){
   //   margin-bottom: 10px;

@@ -10,6 +10,7 @@ function App() {
       
       <Router>
         <AppRoutes/>
+      
       </Router>
     </ThemeProvider>
   );

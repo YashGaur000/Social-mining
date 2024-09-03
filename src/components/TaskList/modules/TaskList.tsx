@@ -19,7 +19,11 @@ const TaskList: React.FC = () => {
     <TaskBoxFullWrapper>
       
         <TaskBox>
-        <SocialLogo src={Bigtenex} Position='fixed' margin='70px 0px 0px 560px'/>
+          <SocialLogoBox Position='fixed' >
+            <div>
+        <SocialLogo src={Bigtenex} />
+        </div>
+        </SocialLogoBox>
           <Score Fontsize='20px' Lineheight='29.9px'>Complete the following task and earn $TENEX</Score>
           <CardWrapper>
             <SocialLogoBox>

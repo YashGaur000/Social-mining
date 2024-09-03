@@ -2,8 +2,11 @@ import React from 'react';
 import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BackgroundImages, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
+import tenexbglogo from '../../../assets/tenexbglogo.svg';
+import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
 import { Card } from '../../common/Card';
 import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
+
 
 const Leaderboard: React.FC = () => {
 
@@ -55,7 +58,10 @@ const Leaderboard: React.FC = () => {
                 <div />
             </BackgroundImages>
         <BoardWrapper>
-            <SocialLogo src={Bigtenex} Position='absolute' margin='185px 0px 0px -250px' Zindex='-1'/>
+            <SocialLogo src={Bigtenex} Position='absolute' margin='185px 0px 0px 
+            -250px' Zindex='-1'/>
+            <SocialLogo src={tenexbglogo} Position='absolute' margin='350px 0px 0px -600px' />
+            <SocialLogo src={tenexbglogo2} Position='absolute' margin='450px 0px 0px 400px' />
             <AirdropBox>
                 <Card>
                 <AirdropInfoBox>
@@ -121,7 +127,8 @@ const Leaderboard: React.FC = () => {
 </RankandPointValueBox>
                 </RankandPointBoxWrapper>
             </Card>
-            <Score Margin='80px 0px 0px -50px' textalign='center'>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
+            <Score Margin='80px 0px 0px -50px' textalign='center'>Rewards are paid at the end of each month based on each user&apos;s accrued points 
+            </Score>
         </BoardWrapper>
         </>
     );
