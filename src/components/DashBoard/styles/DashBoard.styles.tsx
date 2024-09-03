@@ -53,10 +53,11 @@ export const DashBoardCard = styled.div`
 
 export const MiddleLogo = styled.img`
 position:fixed;
-width: 400px;
-height: 400px;
-top: 190px;
-left: 520px;
+width: 35vw;
+height: 30vw;
+top: 26vh;
+left: 56%;
+transform: translateX(-50%);
 opacity: 0.12px;
 
 `
