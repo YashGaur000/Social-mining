@@ -2,21 +2,19 @@ import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
 export const SignUpWrapper = styled.div`
-// border:2px solid red;
   width: 100%;
-  height: 100%;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
 export const ImageContainer = styled.div`
-float:right;
 `;
 
 export const Banner = styled.img`
-width: 500px;
-height: fit-content;
+width: 700px;
+height:fit-content;
 position:absolute;
 top:10px;
 right:10px;
@@ -54,12 +52,19 @@ export const LogoToken = styled.img`
 `;
 
 export const SignUpDetails = styled.div`
-
- margin-left:150px;
-  width: 100%;
+  
+  margin-left:150px;
+  width: 50%;
   display: flex;
   flex-direction: column;
+  gap:10px;
   height: 190px;
+
+  position:absolute;
+  top:295px;
+  left:108px;
+ 
+
   @media only screen and (max-width: 580px) {
     display:flex;
     justify-content:center;
@@ -67,12 +72,13 @@ export const SignUpDetails = styled.div`
 `;
 
 export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
-  width: 302px;
-  height: 62px;
+  width: 400px;
+  height: 72px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
-  font-size: 38px;
+  font-size: 48px;
   font-weight: 300;
+  display:flex;
   line-height: 71.76px;
   @media only screen and (max-width: 900px) {
     font-size: 24px;
@@ -87,11 +93,11 @@ export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
 `;
 
 export const SignUpText = styled.p<{ theme: DefaultTheme }>`
-  width: 370px;
+  width: 440px;
   height: 36px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 250;
   line-height: 35.88px;
   text-align: center;
@@ -109,7 +115,7 @@ export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
   width: 444px;
   height: 54px;
 
-  border-radius: 12px 0px 0px 0px;
+  border-radius: 12px;
   opacity: 0px;
 
   border-radius: 12px;
@@ -145,8 +151,8 @@ export const SignUpToken = styled.div`
 export const SignUpTokens = styled.img`
 
   position: absolute;
-  width: 253px;
-  height: 214px;
+  width: 350px;
+  height: 300px;
   top: 30px;
   left: 80px;
 
