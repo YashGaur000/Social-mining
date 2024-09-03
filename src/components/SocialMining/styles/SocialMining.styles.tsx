@@ -13,9 +13,8 @@ export const LogoWrapper = styled.div`
 `;
 
 export const LogoImage = styled.img`
-  position:absolute;
-  top:40px;
-  left:60px;
+  display:block;
+  margin-left:28px;
   width: 88px;
   height: 36px;
 `;

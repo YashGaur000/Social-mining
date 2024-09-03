@@ -42,6 +42,8 @@ export const DashBoardCard = styled.div`
   display: flex;
   align-items: center;
   border-radius:24px;
+ 
+
 
   @media only screen and (max-width: 580px) {
     width:100%;
@@ -64,6 +66,7 @@ opacity: 0.12px;
 
 export const DashBoardCards = styled.div`
   width:100%;
+  height:80vh;
   display: flex;
   flex-direction: column;
   gap: 40px;
