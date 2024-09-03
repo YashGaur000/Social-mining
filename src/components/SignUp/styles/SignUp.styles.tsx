@@ -12,12 +12,17 @@ export const SignUpWrapper = styled.div`
 
 export const ImageContainer = styled.div`
 float:right;
+position:absolute;
+top:10px;
+right:10px;
 
 `;
 
 export const Banner = styled.img`
-width: 580px;
-height: 628px;
+width: 500px;
+height: fit-content;
+// position:absolute;
+top:0px;
 
 
   @media only screen and (max-width: 1200px) {
@@ -53,7 +58,7 @@ export const LogoToken = styled.img`
 
 export const SignUpDetails = styled.div`
 
- margin-left:100px;
+ margin-left:150px;
   width: 100%;
   display: flex;
   flex-direction: column;
