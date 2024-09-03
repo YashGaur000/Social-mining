@@ -2,8 +2,11 @@ import React from 'react';
 import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BackgroundImages, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
+import tenexbglogo from '../../../assets/tenexbglogo.svg';
+import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
 import { Card } from '../../common/Card';
 import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
+import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
 
 const Leaderboard: React.FC = () => {
 
@@ -55,7 +58,12 @@ const Leaderboard: React.FC = () => {
                 <div />
             </BackgroundImages>
         <BoardWrapper>
+            {/* <SocialLogo src={tenexbglogo} Position='absolute' margin='370px 0px 0px -600px'/>
+            <SocialLogo src={tenexbglogo2} Position='absolute' margin='480px 0px 0px 400px'/> */}
             <SocialLogo src={Bigtenex} Position='absolute' margin='185px 0px 0px -250px' Zindex='-1'/>
+            <MiddleLogo src={tenexbglogo} Top='53vh' Left='40vh' />
+            <MiddleLogo src={tenexbglogo2} Top='65vh' Left='150vh' />
+            {/* <MiddleLogo Opacity='0.12px' src={Bigtenex} Top='34vh' Left='48%' Zindex='-1'/> */}
             <AirdropBox>
                 <Card>
                 <AirdropInfoBox>
