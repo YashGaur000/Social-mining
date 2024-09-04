@@ -20,6 +20,8 @@ export const Heading = styled.p<{ theme: DefaultTheme}>`
  
 `;
 
+export const SideImageWrapper = styled.div``;
+
 export const SideImage = styled.img`
 width: 32px;
 height: 84px;

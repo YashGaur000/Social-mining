@@ -8,6 +8,7 @@ import {
   SideImage,
   DashBoardWrapper,
   MiddleLogo,
+  SideImageWrapper,
 } from "../styles/DashBoard.styles";
 import { useState } from "react";
 import AddressPopup from "../../LinkwithRewards/modules/AddressPopup";
@@ -51,9 +52,9 @@ const DashBoard: React.FC = () => {
       <DashBoardCards>
         <MiddleLogo Opacity="0.12px" Top="26vh" Width="35vw" Height="30vw" Left="48%"  src={middleLogo} alt="" />
         <DashBoardCard>
-          <div>
+          <SideImageWrapper>
             <SideImage src={sideborder} alt="sideImage" />
-          </div>
+          </SideImageWrapper>
           <DashBoardWrapper>
             <DashBoardText>
             Link your social Media to start mining
@@ -65,9 +66,9 @@ const DashBoard: React.FC = () => {
         </DashBoardCard>
 
         <DashBoardCard>
-          <div>
+          <SideImageWrapper>
             <SideImage src={sideborder} alt="sideImage" />
-          </div>
+          </SideImageWrapper>
           <DashBoardWrapper>
             <DashBoardText>
             Browse the task list, complete challenges, and earn points!
@@ -79,9 +80,9 @@ const DashBoard: React.FC = () => {
         </DashBoardCard>
 
         <DashBoardCard>
-          <div>
+          <SideImageWrapper>
             <SideImage src={sideborder} alt="sideImage" />
-          </div>
+          </SideImageWrapper>
           <DashBoardWrapper>
             <DashBoardText>
             View Top Contributors in the Community
@@ -93,9 +94,9 @@ const DashBoard: React.FC = () => {
         </DashBoardCard>
 
         <DashBoardCard>
-          <div>
+          <SideImageWrapper>
             <SideImage src={sideborder} alt="sideImage" />
-          </div>
+          </SideImageWrapper>
           <DashBoardWrapper>
             <DashBoardText>
             Link your wallet to claim $TENEX
