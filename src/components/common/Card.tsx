@@ -12,13 +12,18 @@ export const Card = styled.div<{
   Padding?: string;
   background?: string;
   Opacity?: string;
+  Borderradius?: string;
+  Border?: string;
+  BorderImageSlice?: string;
+  BorderWidth?: string;
+  BorderImageSource?: string;
 }>`
-  
   display: flex;
   flex-direction: column;
   background: ${({ theme, background }) => (background ? background : theme.colors.card)};
-  border-radius: 10px;
-  padding: 20px;
+  // border-radius: 16px;
+  border-radius: ${({ Borderradius }) => (Borderradius ? Borderradius : '16px')};
+  padding: ${({ Padding }) => Padding ?? '20px' };
   margin: ${({ margin }) => (margin ? margin : '0px')};
   radius: ${({ Radius }) => (Radius ? Radius : '0px')};
   width: ${({ width }) => (width ? width : '100%')};
@@ -28,6 +33,10 @@ export const Card = styled.div<{
   // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
   box-shadow: ${({ Boxshadow }) => Boxshadow};
   opacity: ${({ Opacity }) => Opacity};
+
+  border: ${({ Border }) => Border ?? '2px solid transparent'};
+  
+  
 
   @media (max-width: 1024px) {
     width: 350px;
@@ -174,3 +183,4 @@ export const CardDescription = styled.p<{
 
 // background: ${({ theme, tag }) =>
 //     tag === 'top' ? theme.colors.cardDark : theme.colors.card};
+

@@ -7,6 +7,7 @@ export const MainContaier = styled.div<{ theme: DefaultTheme}>`
   text-align: center;
   display: flex;
   justify-content: center;
+  
 `;
 
 export const Heading = styled.p<{ theme: DefaultTheme}>`
@@ -80,6 +81,7 @@ z-index: ${({ Zindex }) => Zindex };
 `;
 
 export const DashBoardCards = styled.div`
+
   width:100%;
   height:80vh;
   display: flex;
