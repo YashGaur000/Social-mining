@@ -11,7 +11,7 @@ const LeaderboardContainer = styled.div<{ theme: DefaultTheme}>`
     // gap: 20px;
     // padding: 40px;
     color: ${({ theme }) => theme.colors.text};
-    height: 150vh;
+    // height: 100vh;
     @media (max-width: 1024px) {
         display: inline;
         text-align: -webkit-center;

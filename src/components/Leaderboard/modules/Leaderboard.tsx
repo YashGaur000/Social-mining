@@ -1,11 +1,13 @@
 import React from 'react';
-import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BackgroundImages, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers} from '../styles/Leaderboard.style';
+import { AirdropBox, AirdropInfo, AirdropInfoBox, AirdropInfoSub, BoardWrapper, EarnedPoints, Name, ParticipantBox, PointBox, Points, RankandPointBox, RankandPointBoxWrapper, RankandPointValueBox, RankBox, Rankers, UserRankandPointValueBox} from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
 import tenexbglogo from '../../../assets/tenexbglogo.svg';
 import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
 import { Card } from '../../common/Card';
 import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
+import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
+import { StyledButton } from '../../common/Buttons/GradientButton';
 
 
 const Leaderboard: React.FC = () => {
@@ -53,17 +55,15 @@ const Leaderboard: React.FC = () => {
     ];
 
     return (
-        <>
-        <BackgroundImages>
-                <div />
-            </BackgroundImages>
         <BoardWrapper>
-            <SocialLogo src={Bigtenex} Position='absolute' margin='185px 0px 0px 
-            -250px' Zindex='-1'/>
-            <SocialLogo src={tenexbglogo} Position='absolute' margin='350px 0px 0px -600px' />
-            <SocialLogo src={tenexbglogo2} Position='absolute' margin='450px 0px 0px 400px' />
+            {/* <SocialLogo src={tenexbglogo} Position='absolute' margin='370px 0px 0px -600px'/>
+            <SocialLogo src={tenexbglogo2} Position='absolute' margin='480px 0px 0px 400px'/> */}
+            <SocialLogo src={Bigtenex} Position='absolute' margin='185px 0px 0px -250px' Zindex='-1'/>
+            <MiddleLogo src={tenexbglogo} Top='53vh' Left='40vh' />
+            <MiddleLogo src={tenexbglogo2} Top='65vh' Left='150vh' />
+            {/* <MiddleLogo Opacity='0.12px' src={Bigtenex} Top='34vh' Left='48%' Zindex='-1'/> */}
             <AirdropBox>
-                <Card>
+                <Card width='260px' >
                 <AirdropInfoBox>
                     <AirdropInfo>
                         01/09/2024
@@ -73,7 +73,7 @@ const Leaderboard: React.FC = () => {
                     </AirdropInfoSub>
                 </AirdropInfoBox>
                 </Card>
-                <Card>
+                <Card width='260px'>
                 <AirdropInfoBox>
                     <AirdropInfo>
                         $1,000,000
@@ -83,7 +83,7 @@ const Leaderboard: React.FC = () => {
                     </AirdropInfoSub>
                 </AirdropInfoBox>
                 </Card>
-                <Card>
+                <Card width='260px'>
                 <AirdropInfoBox>
                     <AirdropInfo>
                         100
@@ -94,7 +94,7 @@ const Leaderboard: React.FC = () => {
                 </AirdropInfoBox>
                 </Card>
             </AirdropBox>
-            <Card width='90%' background='linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .2) 100%)'>
+            <Card width='90%' background='linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)' Borderradius='24px' Padding='30px 50px 40px 50px'>
                 <RankandPointBoxWrapper>
                     <RankandPointBox>
                         <RankBox >
@@ -125,12 +125,26 @@ const Leaderboard: React.FC = () => {
         </ParticipantBox>
     ))}
 </RankandPointValueBox>
+        <StyledButton width='100%'>
+<UserRankandPointValueBox>
+        <ParticipantBox>
+            <RankBox display='flex'>
+                99
+            </RankBox>
+            <Name display='flex'>
+                Bonker
+            </Name>
+            <EarnedPoints display='flex'>
+                340
+            </EarnedPoints>
+        </ParticipantBox>
+</UserRankandPointValueBox>
+</StyledButton>
                 </RankandPointBoxWrapper>
             </Card>
             <Score Margin='80px 0px 0px -50px' textalign='center'>Rewards are paid at the end of each month based on each user&apos;s accrued points 
             </Score>
         </BoardWrapper>
-        </>
     );
 };
 

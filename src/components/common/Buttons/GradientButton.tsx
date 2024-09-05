@@ -12,7 +12,7 @@ interface GradientButtonProps {
   background?: string;
   color?: string;
   cursor?: string;
-  marginTop?: string;
+  margin?: string;
   className?: string;
   children: React.ReactNode;
 }
@@ -20,10 +20,11 @@ interface GradientButtonProps {
 export const StyledButton = styled.button<
   GradientButtonProps & { theme: DefaultTheme }
 >`
+  display
   width: ${({ width }) => width ?? 'auto'};
   height: ${({ height }) => height ?? 'auto'};
   padding: ${({ padding }) => padding ?? '12px 31.5px'};
-  border: ${({ border }) => border ?? '2px solid transparent'};
+  border: ${({ border }) => border ?? '1px solid transparent'};
   border-radius: ${({ borderRadius }) => borderRadius ?? '12px'};
   background: ${({ theme, background }) => background ?? theme.colors.card},
     ${({ theme, background }) => background ?? theme.colors.buttonBackground};
@@ -36,22 +37,11 @@ export const StyledButton = styled.button<
   letter-spacing: 0.02em;
   text-align: center;
   color: ${({ theme, color }) => color ?? theme.colors.buttonBackground};
-  margin-top: ${({ marginTop }) => marginTop ?? '0'};
-  transition:
-    background-color 0.3s,
-    color 0.3s;
+  margin: ${({ margin }) => margin};
 
-  &:hover {
-    background: ${({ theme }) => theme.colors.buttonBackground};
-    color: ${({ theme }) => theme.colors.text};
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-  }
-
-  &:hover span {
-    background: white;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+   &:hover {
+    border: ${({ border }) => border ?? '1px solid transparent'};
+    box-shadow: none; /* Explicitly set box-shadow to none */
   }
 
   @media (max-width: 768px) {
@@ -119,7 +109,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   background,
   color,
   cursor,
-  marginTop,
+  margin,
   children,
 }: GradientButtonProps) => {
   return (
@@ -133,7 +123,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
       background={background}
       color={color}
       cursor={cursor}
-      marginTop={marginTop}
+      margin={margin}
     >
       <GradientSpan>{children}</GradientSpan>
     </StyledButton>

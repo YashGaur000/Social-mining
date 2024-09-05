@@ -7,6 +7,7 @@ export const MainContaier = styled.div<{ theme: DefaultTheme}>`
   text-align: center;
   display: flex;
   justify-content: center;
+  
 `;
 
 export const Heading = styled.p<{ theme: DefaultTheme}>`
@@ -42,6 +43,8 @@ export const DashBoardCard = styled.div`
   display: flex;
   align-items: center;
   border-radius:24px;
+ 
+
 
   @media only screen and (max-width: 580px) {
     width:100%;
@@ -51,19 +54,36 @@ export const DashBoardCard = styled.div`
   }
 `;
 
-export const MiddleLogo = styled.img`
+export const MiddleLogo = styled.img<{ theme : DefaultTheme
+  Left?: string;
+  Zindex?: string;
+  Width?: string;
+  Height?: string;
+  Top?: string;
+  Opacity?: string;
+}>`
 position:fixed;
-width: 35vw;
-height: 30vw;
-top: 26vh;
-left: 56%;
+width: ${({ Width }) => Width };
+height: ${({ Height }) => Height };
+// width: 35vw;
+// height: 30vw;
+top: ${({ Top }) => Top};
+left: ${({ Left }) => Left};
 transform: translateX(-50%);
-opacity: 0.12px;
+// opacity: 0.12px;
+opacity: ${({ Opacity }) => Opacity }; 
+z-index: ${({ Zindex }) => Zindex };
 
-`
+@media(max-width: 1200px){
+  // opacity: 0.12;
+  display: none;
+}
+`;
 
 export const DashBoardCards = styled.div`
+
   width:100%;
+  height:80vh;
   display: flex;
   flex-direction: column;
   gap: 40px;

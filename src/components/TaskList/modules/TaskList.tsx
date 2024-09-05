@@ -12,6 +12,7 @@ import Binance from '../../../assets/binance.svg';
 import SideDesign from '../../../assets/sidedesign.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
 import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, SocialLogoBox, TaskBox, TaskBoxFullWrapper, TitleBox} from '../styles/TaskList.style';
+import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
 
 
 const TaskList: React.FC = () => {
@@ -19,11 +20,8 @@ const TaskList: React.FC = () => {
     <TaskBoxFullWrapper>
       
         <TaskBox>
-          <SocialLogoBox Position='fixed' >
-            <div>
-        <SocialLogo src={Bigtenex} />
-        </div>
-        </SocialLogoBox>
+        {/* <SocialLogo src={Bigtenex} Position='fixed' margin='70px 0px 0px 560px'/> */}
+        <MiddleLogo Zindex='2' Top='26vh' Left='53%' src={Bigtenex} alt='#'/>
           <Score Fontsize='20px' Lineheight='29.9px'>Complete the following task and earn $TENEX</Score>
           <CardWrapper>
             <SocialLogoBox>

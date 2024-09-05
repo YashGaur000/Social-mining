@@ -3,9 +3,9 @@ import { GlobalButton } from '../../common/Buttons/GlobalButton';
 import { Backdrop, Input, ModalContainer, ModalTitle } from '../styles/AddressPopup.style';
 
 interface WalletPopupProps {
-  isOpen: boolean; 
-  onClose: () => void;
-}
+  isOpen?: boolean; 
+  onClose?: () => void;
+};
 
 const AddressPopup: React.FC<WalletPopupProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
