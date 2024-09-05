@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
-export const Main1container = styled.section`
+export const Main1container = styled.section<{
+  margin?: string;
+}>`
   display: flex;
   align-items: center;
-  margin-bottom:80px;
-  margin-right:120px;
+  margin: ${({ margin }) => margin ? margin : "0px 120px 80px 0px"};
+  // margin-bottom:80px;
+  // margin-right:120px;
 `;
 
 export const LogoWrapper = styled.div`

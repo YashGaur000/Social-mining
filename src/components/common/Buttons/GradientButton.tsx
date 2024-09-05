@@ -14,6 +14,7 @@ interface GradientButtonProps {
   cursor?: string;
   margin?: string;
   className?: string;
+  alignitems?: string;
   children: React.ReactNode;
 }
 
@@ -38,6 +39,7 @@ export const StyledButton = styled.button<
   text-align: center;
   color: ${({ theme, color }) => color ?? theme.colors.buttonBackground};
   margin: ${({ margin }) => margin};
+  align-items: ${({ alignitems }) => alignitems };
 
    &:hover {
     border: ${({ border }) => border ?? '1px solid transparent'};

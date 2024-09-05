@@ -1,66 +1,10 @@
 import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
-
-
-// export const BackgroundImages = styled.div`
-//   position: fixed;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   z-index: -1;
-//   pointer-events: none;
-
-//   &::before,
-//   &::after {
-//     content: '';
-//     position: absolute;
-//     width: 100px;
-//     height: 100px;
-//     background-image: url('social-mining\src\assets\bigtenexbg.svg');
-//     background-repeat: no-repeat;
-//     background-size: contain;
-//   }
-
-//   &::before {
-//     top: 10%;
-//     left: 5%;
-//   }
-
-//   &::after {
-//     bottom: 10%;
-//     right: 5%;
-//   }
-
-//   & > div::before,
-//   & > div::after {
-//     content: '';
-//     position: absolute;
-//     width: 100px;
-//     height: 100px;
-//     background-image: url('/path/to/your/image.svg');
-//     background-repeat: no-repeat;
-//     background-size: contain;
-//   }
-
-//   & > div::before {
-//     top: 10%;
-//     right: 5%;
-//   }
-
-//   & > div::after {
-//     bottom: 10%;
-//     left: 5%;
-//   }
-// `;
-
-
 export const BoardWrapper = styled.div<{ theme: DefaultTheme }>`
   position: relative;
   z-index: 1;
   
-
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -120,11 +64,19 @@ export const AirdropInfoSub = styled.div<{ theme: DefaultTheme}>`
   }
 `;
 
-export const RankandPointBoxWrapper = styled.div<{ theme: DefaultTheme}>`
+export const RankandPointBoxWrapper = styled.div<{ theme: DefaultTheme
+  padding?: string;
+  margin?: string;
+  flex?: string;
+  alignitems?: string;
+}>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px;
+  align-items: ${({ alignitems }) => alignitems };
+  padding: ${({ padding }) => padding ? padding : '20px'};
+  margin: ${({ margin }) => margin };
+  flex: ${({ flex }) => flex};
 
   @media (max-width: 768px) {
     padding: 10px;
@@ -206,11 +158,14 @@ export const Medal = styled.div<{ theme: DefaultTheme}>`
   }
 `;
 
-export const ParticipantBox = styled.div`
+export const ParticipantBox = styled.div<{ margin?: string; 
+  padding?: string;
+}>`
   display: flex;
   align-items: center;
-  padding: 10px 0;
+  padding: ${({ padding }) => padding ? padding : "10px 0"};
   font-size: 20px;
+  margin: ${({ margin }) => margin };
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -234,24 +189,27 @@ export const RankBox = styled.div<{ theme : DefaultTheme
 export const Name = styled.div<{ theme :  DefaultTheme
   display?: string;
   flex?: string;
+  margin?: string;
 }>`
   display: ${({ display }) => display};
   // flex: 1;
   flex: ${({ flex }) => flex};
   text-align: left;
   padding: 0px 0px 0px 20px;
+  margin: ${({ margin }) => margin};
 
   @media (max-width: 768px) {
-    margin-left: 0;
+    margin: 0;
   }
 `;
 
 export const EarnedPoints = styled.div<{ theme : DefaultTheme
   display?: string;
   flex?: string;
+  margin?: string;
 }>`
   display: ${({ display }) => display};     
-  margin-left: auto;
+  margin: ${({ margin }) => margin ? margin :'0px 0px 0px auto'};
   flex: ${({ flex }) => flex};
 
   @media (max-width: 768px) {
