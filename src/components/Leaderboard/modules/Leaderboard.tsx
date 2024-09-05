@@ -9,6 +9,7 @@ import { Score, SocialLogo } from '../../TaskList/styles/TaskList.style';
 import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
 import { StyledButton } from '../../common/Buttons/GradientButton';
 
+
 const Leaderboard: React.FC = () => {
 
     // const Runnerups = [
@@ -127,22 +128,22 @@ const Leaderboard: React.FC = () => {
         <StyledButton width='100%'>
 <UserRankandPointValueBox>
         <ParticipantBox>
-            <RankBox>
+            <RankBox display='flex'>
                 99
             </RankBox>
-            <Name>
+            <Name display='flex'>
                 Bonker
             </Name>
-            <EarnedPoints>
+            <EarnedPoints display='flex'>
                 340
             </EarnedPoints>
         </ParticipantBox>
 </UserRankandPointValueBox>
 </StyledButton>
                 </RankandPointBoxWrapper>
-                
             </Card>
-            <Score Margin='80px 0px 0px -50px' textalign='center'>Rewards are paid at the end of each month based on each user&apos;s accrued points</Score>
+            <Score Margin='80px 0px 0px -50px' textalign='center'>Rewards are paid at the end of each month based on each user&apos;s accrued points 
+            </Score>
         </BoardWrapper>
     );
 };

@@ -12,7 +12,7 @@ interface GradientButtonProps {
   background?: string;
   color?: string;
   cursor?: string;
-  marginTop?: string;
+  margin?: string;
   className?: string;
   children: React.ReactNode;
 }
@@ -20,6 +20,7 @@ interface GradientButtonProps {
 export const StyledButton = styled.button<
   GradientButtonProps & { theme: DefaultTheme }
 >`
+  display
   width: ${({ width }) => width ?? 'auto'};
   height: ${({ height }) => height ?? 'auto'};
   padding: ${({ padding }) => padding ?? '12px 31.5px'};
@@ -36,7 +37,7 @@ export const StyledButton = styled.button<
   letter-spacing: 0.02em;
   text-align: center;
   color: ${({ theme, color }) => color ?? theme.colors.buttonBackground};
-  margin-top: ${({ marginTop }) => marginTop ?? '0'};
+  margin: ${({ margin }) => margin};
 
    &:hover {
     border: ${({ border }) => border ?? '1px solid transparent'};
@@ -108,7 +109,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
   background,
   color,
   cursor,
-  marginTop,
+  margin,
   children,
 }: GradientButtonProps) => {
   return (
@@ -122,7 +123,7 @@ const GradientButton: React.FC<GradientButtonProps> = ({
       background={background}
       color={color}
       cursor={cursor}
-      marginTop={marginTop}
+      margin={margin}
     >
       <GradientSpan>{children}</GradientSpan>
     </StyledButton>

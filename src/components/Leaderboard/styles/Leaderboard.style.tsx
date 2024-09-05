@@ -218,25 +218,41 @@ export const ParticipantBox = styled.div`
   }
 `;
 
-export const RankBox = styled.div`
+export const RankBox = styled.div<{ theme : DefaultTheme
+  display?: string;
+  flex?: string;
+}>`
   width: 30px;
+  display: ${({ display }) => display};
+  flex: ${({ flex }) => flex};
 
   @media (max-width: 768px) {
     width: 20px;
   }
 `;
 
-export const Name = styled.div`
-  flex: 1;
-  margin-left: -350px;
+export const Name = styled.div<{ theme :  DefaultTheme
+  display?: string;
+  flex?: string;
+}>`
+  display: ${({ display }) => display};
+  // flex: 1;
+  flex: ${({ flex }) => flex};
+  text-align: left;
+  padding: 0px 0px 0px 20px;
 
   @media (max-width: 768px) {
     margin-left: 0;
   }
 `;
 
-export const EarnedPoints = styled.div`
+export const EarnedPoints = styled.div<{ theme : DefaultTheme
+  display?: string;
+  flex?: string;
+}>`
+  display: ${({ display }) => display};     
   margin-left: auto;
+  flex: ${({ flex }) => flex};
 
   @media (max-width: 768px) {
     margin-left: 0;
