@@ -5,11 +5,10 @@ export const Main1container = styled.section<{
 }>`
   display: flex;
   align-items: center;
-  // margin: ${({ margin }) => margin ? margin : "0px 120px 80px 0px"};
-
 `;
 
 export const LogoWrapper = styled.div`
+    
 
   @media only screen and (max-width: 580px) {
     margin: 40px 0px 0px 0px;

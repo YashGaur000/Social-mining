@@ -4,8 +4,7 @@ import { DefaultTheme } from "../../../styles/Theme";
 export const SignUpWrapper = styled.div`
   width: 100vw;
   height: 90vh;
-  display: flex;
-  justify-content: space-between;
+  
   
 `;
 
@@ -13,30 +12,17 @@ export const ImageContainer = styled.div`
   width:40%;
   display:flex;
   
+  
 `;
 
 export const Banner = styled.img`
-  width: 35rem;
-  height: fit-content;
+  width: 40%;
+  height: 100%;
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 1px;
 
-  // @media only screen and (max-width: 1200px) {
-  //   width: 560px;
-  //   height: 748px;
-  // }
-
-  // @media only screen and (max-width: 1100px) {
-  //   width: 400px;
-  //   height: 600px;
-  // }
-
-  // @media only screen and (max-width: 900px) {
-  //   width: 300px;
-  //   height: 500px;
-  // }
-
+  
   @media only screen and (max-width: 780px) {
     display: none;
   }
@@ -53,18 +39,24 @@ export const LogoToken = styled.img`
 `;
 
 export const SignUpDetailsWrapper = styled.div`
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+margin-top:180px ;
 
 `
 
 export const SignUpDetails = styled.div`
-  position:relative;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content:center;
-  align-items:center;
-  gap: 10px;
+  width:50%;
   height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+
 
 `;
 
@@ -124,18 +116,13 @@ export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
 `;
 
 export const SignUpToken = styled.div`
-  position:absolute;
-  display:flex;
-  top:64%;
-  left:20%;
-  bottom:0px;
-  width:383px;
-  height:260px;
+  
+ 
 `;
 
 export const SignUpTokens = styled.img`
-  width: 383px;
-  height: 244px;
-  position:absolute;
-  top:10px;
+  width: 283px;
+  height: 204px;
+  margin:15px 0px 0px 320px ;
+
 `;

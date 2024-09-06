@@ -39,15 +39,17 @@ const SignUp = () => {
               <img src={twitter} />
               Sign In Twitter
             </SignUpButton>
+            <SignUpToken>
+        <SignUpTokens src={token} alt="" />
+      </SignUpToken>
           </SignUpDetailsWrapper>
+          
         </SignUpDetails>
-
+          
         <ImageContainer>
           <Banner src={image} alt="" />
         </ImageContainer>
-        <SignUpToken>
-        <SignUpTokens src={token} alt="" />
-      </SignUpToken>
+       
       </SignUpWrapper>
       
     </>
