@@ -44,7 +44,6 @@ export const Banner = styled.img`
 export const LogoTokenWrapper = styled.div`
   position: relative;
 `;
-
 export const LogoToken = styled.img`
   width: 88px;
   height: 36px;
