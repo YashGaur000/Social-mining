@@ -21,7 +21,7 @@ const TaskList: React.FC = () => {
       
         <TaskBox>
         {/* <SocialLogo src={Bigtenex} Position='fixed' margin='70px 0px 0px 560px'/> */}
-        <MiddleLogo Zindex='2' Top='26vh' Left='53%' src={Bigtenex} alt='#'/>
+        <MiddleLogo Zindex='2' Top='26vh' Left='50%' src={Bigtenex} alt='#'/>
           <Score Fontsize='20px' Lineheight='29.9px'>Complete the following task and earn $TENEX</Score>
           <CardWrapper>
             <SocialLogoBox>

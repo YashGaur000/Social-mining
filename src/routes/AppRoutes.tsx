@@ -27,6 +27,7 @@ const AppRoutes: React.FC = () => {
         {!isLoading && (
           <BackgroundWrapper> 
            <TitleUpdater setTitleHeader={setTitleHeader} />
+            
             <Routes>
             <Route path="/" element={<SignUp />} />
               <Route path="/dashboard" element ={<SocialMining DashBoardTitle={titleHeader}/>}>

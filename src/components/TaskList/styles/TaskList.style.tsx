@@ -6,7 +6,7 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
   flex-direction: column;
   padding: 20px;
   width: 90%;
-  
+  margin-top: 40px;
 
   @media (max-width: 1200px) {
     padding: 15px;
@@ -69,8 +69,17 @@ export const TitleMiniBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
 `;
 
-export const SocialLogoBox = styled.div<{ theme: DefaultTheme }>`
+export const SocialLogoBox = styled.div<{ theme: DefaultTheme 
+  Position?: string;
+  width?: string;
+  height?: string;
+}>`
   display: flex;
+  justify-content: space-around;
+  position: ${({ Position }) => Position}; 
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
+
 
   // @media(max-width: 1200px){
   //   margin-bottom: 10px;
@@ -195,12 +204,8 @@ export const Score = styled.p<{
   font-size: ${({ Fontsize }) => Fontsize};
   margin: ${({ Margin }) => Margin || '0px'};
   text-align: ${({ textalign }) => textalign || 'center'};
-
-  @media (max-width: 1200px) {
-    font-size: 18px;
-    margin-bottom: 0px;
-  }
-
+  color: ${({ theme }) => theme.colors.whiteBorder};
+  
   @media (max-width: 1030px) {
     font-size: 16px;
     margin-top: 0px;

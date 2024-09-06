@@ -7,6 +7,7 @@ export const MainContaier = styled.div<{ theme: DefaultTheme}>`
   text-align: center;
   display: flex;
   justify-content: center;
+  
 `;
 
 export const Heading = styled.p<{ theme: DefaultTheme}>`
@@ -15,6 +16,7 @@ export const Heading = styled.p<{ theme: DefaultTheme}>`
   font-weight: 300;
   line-height: 53.82px;
   color: ${({ theme }) => theme.colors.whiteBorder};
+  margin-right: 7%;
 
  
  
@@ -82,12 +84,13 @@ z-index: ${({ Zindex }) => Zindex };
 `;
 
 export const DashBoardCards = styled.div`
+
   width:100%;
   height:80vh;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin:1px 100px 1px 100px;
+  margin:80px 100px 1px 100px;
 
  @media only screen and (max-width: 580px){
    width:100%;
