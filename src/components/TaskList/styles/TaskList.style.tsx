@@ -204,12 +204,8 @@ export const Score = styled.p<{
   font-size: ${({ Fontsize }) => Fontsize};
   margin: ${({ Margin }) => Margin || '0px'};
   text-align: ${({ textalign }) => textalign || 'center'};
-
-  @media (max-width: 1200px) {
-    font-size: 18px;
-    margin-bottom: 0px;
-  }
-
+  color: ${({ theme }) => theme.colors.whiteBorder};
+  
   @media (max-width: 1030px) {
     font-size: 16px;
     margin-top: 0px;

@@ -119,15 +119,16 @@ const Leaderboard: React.FC = () => {
           <RankandPointValueBox>
             {Players.map((Player, index) => (
               <ParticipantBox key={index}>
-                <RankBox>
+                <RankBox><Score>
                   {index < 3 ? (
                     <SocialLogo height="36px" width="36px" src={Medal} />
                   ) : (
                     `${index + 1}`
                   )}
+                  </Score>
                 </RankBox>
-                <Name>{Player}</Name>
-                <EarnedPoints>{PlayersPoints[index]}</EarnedPoints>
+                <Name><Score>{Player}</Score></Name>
+                <EarnedPoints><Score>{PlayersPoints[index]}</Score></EarnedPoints>
               </ParticipantBox>
             ))}
           </RankandPointValueBox>
@@ -136,9 +137,21 @@ const Leaderboard: React.FC = () => {
         <StyledButton  padding="12px 0px 12px 20px">
           {/* <UserRankandPointValueBox> */}
             <ParticipantBox  >
-              <RankBox display="flex">99</RankBox>
-              <Name display="flex" margin="0px 0px 0px 0px">Bonker</Name>
-              <EarnedPoints display="flex" margin="0px 0px 0px 67%" >340</EarnedPoints>
+              <RankBox display="flex">
+                <Score>
+                99
+                </Score>
+                </RankBox>
+              <Name display="flex" margin="0px 0px 0px 0px">
+                <Score Fontsize="20px">
+                Bonker
+                </Score>
+                </Name>
+              <EarnedPoints display="flex" margin="0px 0px 0px 67%" >
+                <Score>
+                340
+                </Score>
+                </EarnedPoints>
             </ParticipantBox>
           {/* </UserRankandPointValueBox> */}
         </StyledButton>
