@@ -154,7 +154,7 @@ export const SignUpTokens = styled.img`
   width: 350px;
   height: 300px;
   top: 30px;
-  left: 80px;
+  left: 140px;
 
   @media only screen and (max-width: 580px) {
     position: absolute;

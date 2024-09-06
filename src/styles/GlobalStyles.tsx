@@ -4,6 +4,7 @@ import { DefaultTheme } from './Theme';
 const GlobalStyles = createGlobalStyle<{
   theme: DefaultTheme;
   background: string;
+  height?: string;
 }>`
    * {
     margin: 0;
@@ -17,6 +18,7 @@ const GlobalStyles = createGlobalStyle<{
     color: ${({ theme }) => theme.colors.text};
     font-family: 'Kanit', sans-serif;
     padding:0px 0px;
+    
 
 @media (min-width: 600px) {
   body {

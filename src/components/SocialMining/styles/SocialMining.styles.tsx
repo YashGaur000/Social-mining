@@ -5,9 +5,8 @@ export const Main1container = styled.section<{
 }>`
   display: flex;
   align-items: center;
-  margin: ${({ margin }) => margin ? margin : "0px 120px 80px 0px"};
-  // margin-bottom:80px;
-  // margin-right:120px;
+  // margin: ${({ margin }) => margin ? margin : "0px 120px 80px 0px"};
+
 `;
 
 export const LogoWrapper = styled.div`

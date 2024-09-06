@@ -42,7 +42,7 @@ const PopUP: React.FC<PopUPProps> = ({ onClose }) => {
             <PopScreenText>Connect with Twitter</PopScreenText>
           </PopUpScreenCard>
           <ConnectionButtonWrapper>
-            <PopUpConnectionButton>connect</PopUpConnectionButton>
+            <PopUpConnectionButton>Connect</PopUpConnectionButton>
           </ConnectionButtonWrapper>
         </PopUpScreenWrapper>
         

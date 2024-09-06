@@ -12,6 +12,7 @@ import {
   Points,
   RankandPointBox,
   RankandPointBoxWrapper,
+  RankandPointFullBoxWrapper,
   RankandPointValueBox,
   RankBox,
   Rankers,
@@ -99,6 +100,7 @@ const Leaderboard: React.FC = () => {
           </AirdropInfoBox>
         </Card>
       </AirdropBox>
+      <RankandPointFullBoxWrapper>
       <Card
         width="90%"
         background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
@@ -136,16 +138,18 @@ const Leaderboard: React.FC = () => {
             <ParticipantBox  >
               <RankBox display="flex">99</RankBox>
               <Name display="flex" margin="0px 0px 0px 0px">Bonker</Name>
-              <EarnedPoints display="flex" margin="0px 0px 0px 70%" >340</EarnedPoints>
+              <EarnedPoints display="flex" margin="0px 0px 0px 67%" >340</EarnedPoints>
             </ParticipantBox>
           {/* </UserRankandPointValueBox> */}
         </StyledButton>
         {/* </RankandPointBoxWrapper> */}
       </Card>
+      </RankandPointFullBoxWrapper>
       <Score Margin="80px 0px 0px -50px" textalign="center">
         Rewards are paid at the end of each month based on each user&apos;s
         accrued points
       </Score>
+      
     </BoardWrapper>
   );
 };

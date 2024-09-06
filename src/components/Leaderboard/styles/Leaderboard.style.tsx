@@ -4,7 +4,8 @@ import { DefaultTheme } from "../../../styles/Theme";
 export const BoardWrapper = styled.div<{ theme: DefaultTheme }>`
   position: relative;
   z-index: 1;
-  
+  margin-top: 40px;
+
   @media (max-width: 768px) {
     padding: 10px;
   }
@@ -62,6 +63,12 @@ export const AirdropInfoSub = styled.div<{ theme: DefaultTheme}>`
   @media (max-width: 768px) {
     font-size: 14px;
   }
+`;
+
+export const RankandPointFullBoxWrapper = styled.div<{ theme: DefaultTheme
+}>`
+  display: flex;
+  margin: 0px 0px 0px 80px;
 `;
 
 export const RankandPointBoxWrapper = styled.div<{ theme: DefaultTheme
