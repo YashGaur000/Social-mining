@@ -15,6 +15,7 @@ import {
   SignUpTokens,
   LogoToken,
   SignUpWrapper,
+  SignUpDetailsWrapper,
 } from "../styles/SignUp.styles";
 
 const SignUp = () => {
@@ -28,25 +29,29 @@ const SignUp = () => {
       <LogoToken src={tokenTitle}></LogoToken>
 
       <SignUpWrapper>
-
-      
         <SignUpDetails>
-          <SignUpTitle>Become a TENEX</SignUpTitle>
-          <SignUpText>Join our mission to spread TenEx Message</SignUpText>
-          <SignUpButton onClick={handleTwitterSignIn}>
-            <img src={twitter} />
-            Sign In Twitter
-          </SignUpButton>
-          <SignUpToken>
-            <SignUpTokens src={token} alt="" />
-          </SignUpToken>
-        </SignUpDetails>
+          <SignUpDetailsWrapper>
+            <SignUpTitle>Become a TENEX</SignUpTitle>
 
+            <SignUpText>Join our mission to spread TenEx Message</SignUpText>
+
+            <SignUpButton onClick={handleTwitterSignIn}>
+              <img src={twitter} />
+              Sign In Twitter
+            </SignUpButton>
+            <SignUpToken>
+        <SignUpTokens src={token} alt="" />
+      </SignUpToken>
+          </SignUpDetailsWrapper>
+          
+        </SignUpDetails>
+          
         <ImageContainer>
           <Banner src={image} alt="" />
         </ImageContainer>
-        
+       
       </SignUpWrapper>
+      
     </>
   );
 };

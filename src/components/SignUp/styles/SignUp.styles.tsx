@@ -2,39 +2,27 @@ import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
 export const SignUpWrapper = styled.div`
-  width: 100%;
-  height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100vw;
+  height: 90vh;
+  
+  
 `;
 
 export const ImageContainer = styled.div`
+  width:40%;
+  display:flex;
+  
+  
 `;
 
 export const Banner = styled.img`
-width: 700px;
-height:fit-content;
-position:absolute;
-top:10px;
-right:10px;
+  width: 40%;
+  height: 100%;
+  position: absolute;
+  top: 10px;
+  right: 1px;
 
-
-  @media only screen and (max-width: 1200px) {
-    width: 560px;
-    height: 748px;
-  }
-
-  @media only screen and (max-width: 1100px) {
-    width: 400px;
-    height: 600px;
-  }
-
-  @media only screen and (max-width: 900px) {
-    width: 300px;
-    height: 500px;
-  }
-
+  
   @media only screen and (max-width: 780px) {
     display: none;
   }
@@ -42,7 +30,6 @@ right:10px;
 export const LogoTokenWrapper = styled.div`
   position: relative;
 `;
-
 export const LogoToken = styled.img`
   width: 88px;
   height: 36px;
@@ -51,45 +38,46 @@ export const LogoToken = styled.img`
   left: 60px;
 `;
 
+export const SignUpDetailsWrapper = styled.div`
+width:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+margin-top:180px ;
+
+`
+
 export const SignUpDetails = styled.div`
-  
-  margin-left:150px;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  gap:10px;
-  height: 190px;
+  width:50%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
 
-  position:absolute;
-  top:295px;
-  left:108px;
- 
 
-  @media only screen and (max-width: 580px) {
-    display:flex;
-    justify-content:center;
-  }
+
 `;
 
 export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
-  width: 400px;
+  color: ${({ theme }) => theme.colors.whiteBorder};
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-size: 3rem;
+  font-weight: 300;
+  display: flex;
+  line-height: 71.76px;
+  width: 362px;
   height: 72px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: 300;
-  display:flex;
+  display: flex;
   line-height: 71.76px;
-  @media only screen and (max-width: 900px) {
-    font-size: 24px;
-  }
-  @media only screen and (max-width: 780px) {
-    font-size: 36px;
   }
 
-   @media only screen and (max-width: 500px) {
-    
-  }
+ 
 `;
 
 export const SignUpText = styled.p<{ theme: DefaultTheme }>`
@@ -97,16 +85,11 @@ export const SignUpText = styled.p<{ theme: DefaultTheme }>`
   height: 36px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 250;
   line-height: 35.88px;
   text-align: center;
-  @media only screen and (max-width: 900px) {
-    font-size: 14px;
-  }
-     @media only screen and (max-width: 780px) {
-    font-size: 20px;
-  }
+
 `;
 
 export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
@@ -114,14 +97,13 @@ export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
   border: none;
   width: 444px;
   height: 54px;
-
   border-radius: 12px;
   opacity: 0px;
-
   border-radius: 12px;
+
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
-  font-size: 20px;
+  font-size: 1.5rem;
   font-weight: 400;
   line-height: 29.9px;
   text-align: center;
@@ -131,35 +113,16 @@ export const SignUpButton = styled.button<{ theme: DefaultTheme }>`
   gap: 6px;
   justify-content: center;
 
-  @media only screen and (max-width: 900px) {
-    font-size: 14px;
-    width: 300px;
-    margin-left: 55px;
-  }
-
-  @media only screen and (max-width: 780px) {
-    font-size: 14px;
-    width: 300px;
-    margin-left:0px;
-  }
 `;
 
 export const SignUpToken = styled.div`
-  position: relative;
+  
+ 
 `;
 
 export const SignUpTokens = styled.img`
+  width: 283px;
+  height: 204px;
+  margin:15px 0px 0px 320px ;
 
-  position: absolute;
-  width: 350px;
-  height: 300px;
-  top: 30px;
-  left: 140px;
-
-  @media only screen and (max-width: 580px) {
-    position: absolute;
-    width: 200px;
-    height: 170px;
-    
-  }
 `;

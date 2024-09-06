@@ -22,6 +22,8 @@ export const Heading = styled.p<{ theme: DefaultTheme}>`
  
 `;
 
+export const SideImageWrapper = styled.div``;
+
 export const SideImage = styled.img`
 width: 32px;
 height: 84px;
@@ -44,6 +46,7 @@ export const DashBoardCard = styled.div`
   display: flex;
   align-items: center;
   border-radius:24px;
+  
  
 
 
@@ -88,7 +91,7 @@ export const DashBoardCards = styled.div`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin:80px 100px 1px 100px;
+  margin:60px 100px 1px 100px;
 
  @media only screen and (max-width: 580px){
    width:100%;
@@ -155,7 +158,6 @@ font-weight: 300;
 line-height: 29.9px;
 text-align: center;
 color: ${({ theme }) => theme.colors.whiteBorder};
-margin:10px;
 
 
 `
