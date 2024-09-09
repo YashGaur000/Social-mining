@@ -16,6 +16,7 @@ import {
   LogoToken,
   SignUpWrapper,
   SignUpDetailsWrapper,
+  TwitterImage,
 } from "../styles/SignUp.styles";
 
 const SignUp = () => {
@@ -36,7 +37,7 @@ const SignUp = () => {
             <SignUpText>Join our mission to spread TenEx Message</SignUpText>
 
             <SignUpButton onClick={handleTwitterSignIn}>
-              <img src={twitter} />
+              <TwitterImage src={twitter} />
               Sign In Twitter
             </SignUpButton>
             <SignUpToken>

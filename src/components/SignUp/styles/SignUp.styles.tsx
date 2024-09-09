@@ -15,6 +15,9 @@ export const ImageContainer = styled.div`
   
 `;
 
+export const TwitterImage = styled.img`
+`;
+
 export const Banner = styled.img`
   width: 40%;
   height: 100%;
