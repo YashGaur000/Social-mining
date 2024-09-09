@@ -24,14 +24,15 @@ const TaskList: React.FC = () => {
         <MiddleLogo Zindex='2' Top='26vh' Left='50%' src={Bigtenex} alt='#'/>
           <Score Fontsize='20px' Lineheight='29.9px'>Complete the following task and earn $TENEX</Score>
           <CardWrapper>
+          
             <SocialLogoBox>
-          <SocialLogo height='260px' src={SideDesign} alt='sidedesign'/>
+          <SocialLogo height='275px' src={SideDesign} alt='sidedesign' Zindex='2'/>
           </SocialLogoBox>
-          <CardBox margin='15px 0px 0px 0px'>
+          <CardBox margin='0px 0px 0px -25px'>
             <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={TwitterLogo} alt="Reddit Logo" />
+              <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={TwitterLogo} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Twitter Engagement:</Score>
-              <LetsGoButton margin='-10px 0px 0px auto'>
+              <LetsGoButton margin='10px 40px 0px auto'>
                 <GlobalButton>
                   Lets Go
                 </GlobalButton>
@@ -52,20 +53,20 @@ const TaskList: React.FC = () => {
                 </ListItem>
                 <ListItem>
                   <Score Fontsize='20px' Lineheight='29.9px'>Score 5 points by completing this task</Score>
-                </ListItem>
+                </ListItem> 
               </List>
             </ListBox>
           </CardBox>
           </CardWrapper>
           <CardWrapper>
             <SocialLogoBox>
-          <SocialLogo height='240px' src={SideDesign} alt='sidedesign'/>
+          <SocialLogo height='240px' src={SideDesign} alt='sidedesign' Zindex='2'/>
           </SocialLogoBox>
-          <CardBox margin='15px 0px 0px 0px'>
+          <CardBox margin='0px 0px 0px -25px'>
             <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Discord} alt="Reddit Logo" />
+              <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Discord} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Discord Participation:</Score>
-              <LetsGoButton margin='-10px 0px 0px auto'>
+              <LetsGoButton margin='10px 40px 0px auto'>
                 <GlobalButton>
                   Lets Go
                 </GlobalButton>
@@ -89,13 +90,13 @@ const TaskList: React.FC = () => {
           </CardWrapper>
           <CardWrapper>
             <SocialLogoBox>
-          <SocialLogo height='240px' src={SideDesign} alt='sidedesign'/>
+          <SocialLogo height='240px' src={SideDesign} alt='sidedesign' Zindex='2'/>
           </SocialLogoBox>
-          <CardBox margin='15px 0px 0px 0px'>
+          <CardBox margin='0px 0px 0px -25px'>
             <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Telegram} alt="Reddit Logo" />
+              <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Telegram} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Telegram Contribution:</Score>
-              <LetsGoButton margin='-10px 0px 0px auto'>
+              <LetsGoButton margin='10px 40px 0px auto'>
                 <GlobalButton>
                   Lets Go
                 </GlobalButton>
@@ -119,13 +120,13 @@ const TaskList: React.FC = () => {
           </CardWrapper>
           <CardWrapper>
             <SocialLogoBox>
-          <SocialLogo height='240px' src={SideDesign} alt='sidedesign'/>
+          <SocialLogo height='240px' src={SideDesign} alt='sidedesign' Zindex='2'/>
           </SocialLogoBox>
-          <CardBox margin='15px 0px 0px 0px'>
+          <CardBox margin='0px 0px 0px -25px'>
             <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Reddit} alt="Reddit Logo" />
+              <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Reddit} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Reddit Contribution:</Score>
-              <LetsGoButton margin='-10px 0px 0px auto'>
+              <LetsGoButton margin='10px 40px 0px auto'>
                 <GlobalButton>
                   Lets Go
                 </GlobalButton>
@@ -149,13 +150,13 @@ const TaskList: React.FC = () => {
           </CardWrapper>
           <CardWrapper>
             <SocialLogoBox>
-          <SocialLogo height='210px' src={SideDesign} alt='sidedesign'/>
+          <SocialLogo height='210px' src={SideDesign} alt='sidedesign' Zindex='2'/>
           </SocialLogoBox>
-          <CardBox margin='15px 0px 0px 0px'>
+          <CardBox margin='0px 0px 0px -25px'>
             <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Binance} alt="Reddit Logo" />
+              <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Binance} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Exchange Activity:</Score>
-              <LetsGoButton margin='-10px 0px 0px auto'>
+              <LetsGoButton margin='10px 40px 0px auto'>
                 <GlobalButton>
                   Lets Go
                 </GlobalButton>
@@ -176,13 +177,13 @@ const TaskList: React.FC = () => {
           </CardWrapper>
           <CardWrapper>
             <SocialLogoBox>
-          <SocialLogo height='240px' src={SideDesign} alt='sidedesign'/>
+          <SocialLogo height='240px' src={SideDesign} alt='sidedesign' Zindex='2'/>
           </SocialLogoBox>
-          <CardBox margin='15px 0px 0px 0px'>
+          <CardBox margin='0px 0px 0px -25px'>
             <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Article} alt="Reddit Logo" />
+              <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Article} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Write an article about TENEX</Score>
-              <LetsGoButton margin='-10px 0px 0px auto'>
+              <LetsGoButton margin='10px 40px 0px auto'>
                 <GlobalButton>
                   Lets Go
                 </GlobalButton>
@@ -206,13 +207,13 @@ const TaskList: React.FC = () => {
           </CardWrapper>
           <CardWrapper>
             <SocialLogoBox>
-          <SocialLogo height='240px' src={SideDesign} alt='sidedesign'/>
+          <SocialLogo height='240px' src={SideDesign} alt='sidedesign' Zindex='2'/>
           </SocialLogoBox>
-          <CardBox margin='15px 0px 0px 0px'>
+          <CardBox margin='0px 0px 0px -25px'>
             <TitleBox>
-              <SocialLogo height='36px' width='36' margin='0px 15px 0px 10px' src={Play} alt="Reddit Logo" />
+              <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Play} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Create a video about TENEX</Score>
-              <LetsGoButton margin='-10px 0px 0px auto'>
+              <LetsGoButton margin='10px 40px 0px auto'>
                 <GlobalButton>
                   Lets Go
                 </GlobalButton>

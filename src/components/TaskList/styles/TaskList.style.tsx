@@ -133,7 +133,7 @@ export const ListBox = styled.div<{ theme: DefaultTheme }>`
   font-size: 20px;
   line-height: 30px;
   font-family: ${({ theme }) => theme.fonts.main};
-  margin: 0px 0px 0px -10px;
+  margin: 0px 0px 0px 10px;
 
   @media (max-width: 1200px) {
     font-size: 18px;
