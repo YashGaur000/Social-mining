@@ -68,7 +68,7 @@ export const CardBox = styled.div<{
   
   display: flex;
   flex-direction: column;
-  
+  background: ${({ theme }) => theme.colors.card };
   border-radius: 10px;
   padding: 0px;
   margin: ${({ margin }) => (margin ? margin : '0px')};
@@ -79,6 +79,7 @@ export const CardBox = styled.div<{
   color: ${({ theme }) => theme.colors.text};
   // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
   box-shadow: ${({ Boxshadow }) => Boxshadow};
+  
 
   @media (max-width: 1024px) {
     width: 350px;
