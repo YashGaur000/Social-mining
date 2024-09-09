@@ -79,24 +79,25 @@ export const ModalContainer = styled.div`
 export const ModalTitle = styled.p<{ theme: DefaultTheme }>`
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
   line-height: 35.88px;
-  color: #ffffff;
+  color: ${({ theme }) => theme.colors.whiteBorder};
   margin-bottom: 20px;
   text-align: left;
 `;
 
-export const Input = styled.input`
+export const Input = styled.input<{theme : DefaultTheme}>`
   width: 100%;
-  padding: 10px 15px;
+  padding: 15px 15px;
   border: 1px solid #8b98b4;
   border-radius: 10px;
-  font-size: 1rem;
-  color: #ffffff;
-  background-color: #2c3e5b;
-  margin-bottom: 20px;
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.titleColor};
+  background-color: transparent;
+  margin-bottom: 10px;
   outline: none;
   
   &::placeholder {
-    color: #b0bec5;
+    color: ${({ theme }) => theme.colors.titleColor};
   }
 `;

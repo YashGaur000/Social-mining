@@ -21,11 +21,13 @@ export const GlobalButton = styled.button<{
   font-size: 16px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   margin: 20px 0px;
+  transition: all 0.3s ease; 
 
   &:hover {
-    background: ${({ theme, disabled }) =>
-      disabled ? theme.colors.grey : theme.colors.buttonHover};
+    opacity: 0.9; 
+    transform: scale(1.05); 
   }
+
   @media (max-width: 768px) {
     padding: 6px 12px;
     font-size: 16px;
@@ -110,3 +112,8 @@ export const LaunchDappSpan = styled.span<{
   display: inline-block;
   transition: background 0.3s ease;
 `;
+
+// &:hover {
+//   background: ${({ theme, disabled }) =>
+//     disabled ? theme.colors.grey : theme.colors.buttonHover};
+// }
