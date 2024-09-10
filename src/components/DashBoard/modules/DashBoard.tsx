@@ -50,6 +50,8 @@ const DashBoard: React.FC = () => {
     navigate("/dashboard/Leaderboard");
   };
 
+
+
   return (
     <>
       <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
@@ -82,7 +84,7 @@ const DashBoard: React.FC = () => {
             <DashBoardConnectionText>
               Connect with Discord
             </DashBoardConnectionText>
-            <DashBoardConnectionButton>
+            <DashBoardConnectionButton onClick={import.meta.env.DISCORD_OAUTH}>
               <DashBoardConnectionImage src={discord} />
               connect
             </DashBoardConnectionButton>
