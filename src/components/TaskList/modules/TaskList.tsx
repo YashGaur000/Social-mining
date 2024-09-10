@@ -16,6 +16,16 @@ import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
 
 
 const TaskList: React.FC = () => {
+
+  const handleDiscordRedirect = () => {
+    const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH; 
+    if (discordOAuthUrl) {
+      window.location.href = discordOAuthUrl; 
+    } else {
+      console.error('Discord OAuth URL not found in environment variables.');
+    }
+  };
+
   return(
     <TaskBoxFullWrapper>
       
@@ -67,7 +77,7 @@ const TaskList: React.FC = () => {
               <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Discord} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Discord Participation:</Score>
               <LetsGoButton margin='10px 40px 0px auto'>
-                <GlobalButton>
+                <GlobalButton onClick={handleDiscordRedirect}>
                   Lets Go
                 </GlobalButton>
               </LetsGoButton>

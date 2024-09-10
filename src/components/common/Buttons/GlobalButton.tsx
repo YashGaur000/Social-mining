@@ -14,7 +14,6 @@ export const GlobalButton = styled.button<{
   color: ${({ theme }) => theme.colors.text};
   width: ${({ width }) => (width ? width : '100%')};
   height: ${({ height }) => (height ? height : '')};
-
   padding: ${({ padding }) => padding};
   border-radius: 10px;
   border: none;
@@ -26,6 +25,10 @@ export const GlobalButton = styled.button<{
   &:hover {
     opacity: 0.9; 
     transform: scale(1.05); 
+  }
+
+    &:focus {
+    outline: none;
   }
 
   @media (max-width: 768px) {
