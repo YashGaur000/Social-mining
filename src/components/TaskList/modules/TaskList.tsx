@@ -26,6 +26,16 @@ const TaskList: React.FC = () => {
     }
   };
 
+  const handleRedditRedirect = () => {
+    const redditOAuthUrl = import.meta.env.VITE_REDDIT_OAUTH; 
+    if (redditOAuthUrl) {
+      window.location.href = redditOAuthUrl; 
+    } else {
+      console.error('Reddit OAuth URL not found in environment variables.');
+    }
+  };
+
+
   return(
     <TaskBoxFullWrapper>
       
@@ -137,7 +147,7 @@ const TaskList: React.FC = () => {
               <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={Reddit} alt="Reddit Logo" />
               <Score Fontsize='24px' Lineheight='35.88px'>Reddit Contribution:</Score>
               <LetsGoButton margin='10px 40px 0px auto'>
-                <GlobalButton>
+                <GlobalButton onClick={handleRedditRedirect}>
                   Lets Go
                 </GlobalButton>
               </LetsGoButton>
