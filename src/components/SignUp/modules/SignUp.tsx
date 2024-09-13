@@ -2,6 +2,7 @@ import token from "../../../assets/TenexToken.svg";
 import twitter from "../../../assets/twitter.svg";
 import image from "../../../assets/banner.svg";
 import tokenTitle from "../../../assets/logo.svg";
+import walletIcon from "../../../assets/walletIcon.svg";
 
 import { useNavigate } from "react-router-dom";
 import {
@@ -10,18 +11,26 @@ import {
   SignUpDetails,
   SignUpTitle,
   SignUpText,
-  SignUpButton,
   SignUpToken,
   SignUpTokens,
   LogoToken,
   SignUpWrapper,
   SignUpDetailsWrapper,
   TwitterImage,
+  WalletImage,
+  SignUpButtonWrapper,
+  SignUpTitleAndTextWrapper,
+  SignUpButtonWallet,
+  SignUpButtonTwitter,
 } from "../styles/SignUp.styles";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const handleTwitterSignIn = () => {
+    navigate("/dashboard");
+  };
+
+  const handleWalletSignIn = () => {
     navigate("/dashboard");
   };
 
@@ -32,27 +41,33 @@ const SignUp = () => {
       <SignUpWrapper>
         <SignUpDetails>
           <SignUpDetailsWrapper>
-            <SignUpTitle>Become a TENEX</SignUpTitle>
+            <SignUpTitleAndTextWrapper>
+              <SignUpTitle>Become a TENEX</SignUpTitle>
 
-            <SignUpText>Join our mission to spread TenEx Message</SignUpText>
+              <SignUpText>Join our mission to spread TenEx Message</SignUpText>
+            </SignUpTitleAndTextWrapper>
 
-            <SignUpButton onClick={handleTwitterSignIn}>
-              <TwitterImage src={twitter} />
-              Sign In Twitter
-            </SignUpButton>
+            <SignUpButtonWrapper>
+              <SignUpButtonWallet onClick={handleWalletSignIn}>
+                <WalletImage src={walletIcon} />
+                Sign up with Wallet
+              </SignUpButtonWallet>
+
+              <SignUpButtonTwitter onClick={handleTwitterSignIn}>
+                <TwitterImage src={twitter} />
+                Sign In Twitter
+              </SignUpButtonTwitter>
+            </SignUpButtonWrapper>
             <SignUpToken>
-        <SignUpTokens src={token} alt="" />
-      </SignUpToken>
+              <SignUpTokens src={token} alt="" />
+            </SignUpToken>
           </SignUpDetailsWrapper>
-          
         </SignUpDetails>
-          
+
         <ImageContainer>
           <Banner src={image} alt="" />
         </ImageContainer>
-       
       </SignUpWrapper>
-      
     </>
   );
 };

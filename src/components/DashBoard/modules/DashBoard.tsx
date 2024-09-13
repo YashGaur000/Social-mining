@@ -117,6 +117,7 @@ const DashBoard: React.FC = () => {
           alt=""
         />
         
+
         <DashBoardCard>
           <SideImageWrapper>
             <SideImage src={sideborder} alt="sideImage" />
@@ -153,6 +154,19 @@ const DashBoard: React.FC = () => {
             <DashBoardText>Link your wallet to claim $TENEX</DashBoardText>
             <DashBoardButton onClick={handleGetRewardsClick}>
               Get Rewards
+            </DashBoardButton>
+          </DashBoardWrapper>
+        </DashBoardCard>
+        <DashBoardCard>
+          <SideImageWrapper>
+            <SideImage src={sideborder} alt="sideImage" />
+          </SideImageWrapper>
+          <DashBoardWrapper>
+            <DashBoardText>
+            Invite friends and earn points!
+            </DashBoardText>
+            <DashBoardButton onClick={handleTasksClick}>
+               Invite
             </DashBoardButton>
           </DashBoardWrapper>
         </DashBoardCard>
