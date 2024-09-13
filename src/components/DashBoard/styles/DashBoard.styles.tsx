@@ -3,9 +3,16 @@ import { DefaultTheme } from "../../../styles/Theme";
 
 export const DashBoardConnectionCards = styled.div`
   width: 100%;
-  height: 150px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
+
+  @media only screen and (max-width: 580px) {
+    flex-wrap:wrap;
+    
+    
+  }
+  
 `;
 
 export const DashBoardConnectionCard = styled.div`
@@ -63,7 +70,7 @@ export const DashBoardConnectionButton = styled.div<{theme:DefaultTheme}>`
  line-height: 12px;
  `
 
- 
+
 export const LoginTickImage = styled.img`
 width:12px;
 height:12px;
@@ -81,7 +88,7 @@ export const DashBoardConnectionImage = styled.img`
 
 
 export const MainContaier = styled.div<{ theme: DefaultTheme }>`
-  width: 100%;
+  width: 100vw;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -95,6 +102,15 @@ export const Heading = styled.p<{ theme: DefaultTheme }>`
   line-height: 53.82px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   margin-right: 7%;
+
+    @media only screen and (max-width: 580px) {
+ 
+    display:flex;
+    align-items:center;
+    
+    
+    
+  }
 `;
 
 export const SideImageWrapper = styled.div`
@@ -157,7 +173,7 @@ export const MiddleLogo = styled.img<{
 
 export const DashBoardCards = styled.div`
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   gap: 20px;
