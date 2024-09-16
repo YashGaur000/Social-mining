@@ -46,6 +46,10 @@ const DashBoard: React.FC = () => {
     navigate("/dashboard/Tasks");
   };
 
+  const handleInviteClick = () => {
+    navigate("/dashboard/Invite");
+  };
+
   const handleLeaderboardClick = () => {
     navigate("/dashboard/Leaderboard");
   };
@@ -165,7 +169,7 @@ const DashBoard: React.FC = () => {
             <DashBoardText>
             Invite friends and earn points!
             </DashBoardText>
-            <DashBoardButton onClick={handleTasksClick}>
+            <DashBoardButton onClick={handleInviteClick}>
                Invite
             </DashBoardButton>
           </DashBoardWrapper>
