@@ -39,9 +39,10 @@ export const DashBoardConnectionText = styled.p< {theme:DefaultTheme}>`
   color: ${({ theme }) => theme.colors.whiteBorder};
 `;
 
-export const DashBoardConnectionButton = styled.div<{theme:DefaultTheme}>`
+export const DashBoardConnectionButton = styled.button<{theme:DefaultTheme}>`
 
- 
+  z-index:10;
+  pointer-events:auto;
   width: 130px;
   height: 30px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -59,6 +60,7 @@ export const DashBoardConnectionButton = styled.div<{theme:DefaultTheme}>`
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   gap: 5px;
+
   &:focus,
   active {
     background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
@@ -67,6 +69,7 @@ export const DashBoardConnectionButton = styled.div<{theme:DefaultTheme}>`
 `;
 
  export const DashBoardButtonsWrapper = styled.label`
+ cursor:pointer;
  line-height: 12px;
  `
 

@@ -32,8 +32,6 @@ const DashBoard: React.FC = () => {
   const [isAddressPopupOpen, setAddressPopupOpen] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  
-
   const handleGetRewardsClick = () => {
     setAddressPopupOpen(true);
   };
@@ -54,62 +52,95 @@ const DashBoard: React.FC = () => {
     navigate("/dashboard/Leaderboard");
   };
 
+  const handleDiscordRedirect = () => {
+    const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH;
+    if (discordOAuthUrl) {
+      window.location.href = discordOAuthUrl;
+    } else {
+      console.error("Discord OAuth URL not found in environment variables.");
+    }
+  };
 
+  const handleRedditRedirect = () => {
+    const redditOAuthUrl = import.meta.env.VITE_REDDIT_OAUTH;
+    {
+      /* <SocialLogo src={Bigtenex} Position='fixed' margin='70px 0px 0px 560px'/> */
+    }
+    if (redditOAuthUrl) {
+      window.location.href = redditOAuthUrl;
+    } else {
+      console.error("Reddit OAuth URL not found in environment variables.");
+    }
+  };
 
   return (
     <>
       <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
       <DashBoardCards>
+
         <DashBoardConnectionCards>
 
           <DashBoardConnectionCard>
             <DashBoardConnectionText>
               Connect with Twitter
             </DashBoardConnectionText>
-           
-           <DashBoardConnectionButton>
-
+            <DashBoardConnectionButton>
               <DashBoardButtonsWrapper>
                 <DashBoardConnectionImage src={twitter} />
               </DashBoardButtonsWrapper>
-
-              <DashBoardButtonsWrapper> connect </DashBoardButtonsWrapper>
-              
               <DashBoardButtonsWrapper>
-                <LoginTickImage src={logintick}/>
+                 connect
+               </DashBoardButtonsWrapper>
+              <DashBoardButtonsWrapper>
+                <LoginTickImage src={logintick} />
               </DashBoardButtonsWrapper>
-
             </DashBoardConnectionButton>
-           
           </DashBoardConnectionCard>
-
 
           <DashBoardConnectionCard>
             <DashBoardConnectionText>
               Connect with Discord
             </DashBoardConnectionText>
-            <DashBoardConnectionButton onClick={import.meta.env.DISCORD_OAUTH}>
-              <DashBoardConnectionImage src={discord} />
-              connect
+            <DashBoardConnectionButton onClick={handleDiscordRedirect}>
+              <DashBoardButtonsWrapper>
+                <DashBoardConnectionImage src={discord} />
+              </DashBoardButtonsWrapper>
+              <DashBoardButtonsWrapper>
+                 connect
+               </DashBoardButtonsWrapper>
             </DashBoardConnectionButton>
           </DashBoardConnectionCard>
+
+
           <DashBoardConnectionCard>
             <DashBoardConnectionText>
               Connect with Telegram
             </DashBoardConnectionText>
             <DashBoardConnectionButton>
-              <DashBoardConnectionImage src={telegram} /> connect
+              <DashBoardButtonsWrapper>
+                <DashBoardConnectionImage src={telegram} />
+              </DashBoardButtonsWrapper>
+              <DashBoardButtonsWrapper>
+                 connect
+               </DashBoardButtonsWrapper>
             </DashBoardConnectionButton>
           </DashBoardConnectionCard>
+
           <DashBoardConnectionCard>
             <DashBoardConnectionText>
               Connect with Reddit
             </DashBoardConnectionText>
-            <DashBoardConnectionButton>
-              <DashBoardConnectionImage src={reddit} />
-              connect
+            <DashBoardConnectionButton onClick={handleRedditRedirect}>
+              <DashBoardButtonsWrapper>
+                <DashBoardConnectionImage src={reddit} />
+              </DashBoardButtonsWrapper>
+              <DashBoardButtonsWrapper>
+                 connect
+               </DashBoardButtonsWrapper>
             </DashBoardConnectionButton>
           </DashBoardConnectionCard>
+          
+          
         </DashBoardConnectionCards>
         <MiddleLogo
           Opacity="0.12px"
@@ -120,7 +151,6 @@ const DashBoard: React.FC = () => {
           src={middleLogo}
           alt=""
         />
-        
 
         <DashBoardCard>
           <SideImageWrapper>
@@ -166,11 +196,9 @@ const DashBoard: React.FC = () => {
             <SideImage src={sideborder} alt="sideImage" />
           </SideImageWrapper>
           <DashBoardWrapper>
-            <DashBoardText>
-            Invite friends and earn points!
-            </DashBoardText>
+            <DashBoardText>Invite friends and earn points!</DashBoardText>
             <DashBoardButton onClick={handleInviteClick}>
-               Invite
+              Invite
             </DashBoardButton>
           </DashBoardWrapper>
         </DashBoardCard>

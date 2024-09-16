@@ -26,7 +26,7 @@ const TaskList: React.FC = () => {
     }
   };
 
-  const handleRedditRedirect = () => {
+   const handleRedditRedirect = () => {
     const redditOAuthUrl = import.meta.env.VITE_REDDIT_OAUTH; {/* <SocialLogo src={Bigtenex} Position='fixed' margin='70px 0px 0px 560px'/> */}
     if (redditOAuthUrl) {
       window.location.href = redditOAuthUrl; 
