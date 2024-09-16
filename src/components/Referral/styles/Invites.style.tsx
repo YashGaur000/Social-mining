@@ -77,6 +77,7 @@ export const RankandPointBoxWrapper = styled.div<{ theme: DefaultTheme
   flex?: string;
   alignitems?: string;
 }>`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -94,6 +95,7 @@ export const RankandPointBox = styled.div<{ theme: DefaultTheme}>`
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
+
 
   @media (max-width: 768px) {
     flex-direction: column;
@@ -184,7 +186,8 @@ export const RankBox = styled.div<{ theme : DefaultTheme
   display?: string;
   flex?: string;
 }>`
-  width: 30px;
+  width: 100px;
+
   display: ${({ display }) => display};
   flex: ${({ flex }) => flex};
 

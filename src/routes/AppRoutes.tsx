@@ -9,6 +9,7 @@ import SignUp from "../components/SignUp/modules/SignUp";
 import DashBoardPage from "../pages/DashBoard/DashBoardPage";
 import TitleUpdater from "../components/DashBoard/modules/Router";
 import SocialMining from "../components/SocialMining/modules/SocialMining";
+import InvitePage from "../pages/Referral/InvitePage";
 
 
 const AppRoutes: React.FC = () => {
@@ -35,6 +36,7 @@ const AppRoutes: React.FC = () => {
               <Route path="tasks" element={<TaskListPage />} />
               <Route path="leaderboard" element={<LeaderboardPage />} />
               <Route path="linkWallet" element={<LinkWalletPage />} /> 
+              <Route path="invite" element={<InvitePage/>} />
               </Route>
             </Routes>
           </BackgroundWrapper>

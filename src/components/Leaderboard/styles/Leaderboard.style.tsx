@@ -227,6 +227,7 @@ export const EarnedPoints = styled.div<{ theme : DefaultTheme
 export const Rankers = styled.div<{ theme: DefaultTheme; Fontsize?: string;}>`
   font-size: ${({ Fontsize }) => Fontsize};
   font-family: ${({ theme }) => theme.fonts.main};
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
 
   @media (max-width: 768px) {
     font-size: ${({ Fontsize }) => Fontsize ? `calc(${Fontsize} * 0.8)` : '16px'};
