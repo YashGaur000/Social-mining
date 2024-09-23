@@ -19,7 +19,6 @@ import {
   GlobalButton 
 } from "../../common/Buttons/GlobalButton";
 import { 
-  BoardWrapper,
   EarnedPoints,
   Name,
   ParticipantBox,
@@ -27,7 +26,6 @@ import {
   Points,
   RankandPointBox,
   RankandPointBoxWrapper,
-  RankandPointFullBoxWrapper,
   RankandPointValueBox,
   RankBox,
   Rankers 
