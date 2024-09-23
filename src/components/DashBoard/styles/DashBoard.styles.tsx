@@ -124,6 +124,7 @@ export const SideImage = styled.img`
 `;
 
 export const DashBoardWrapper = styled.div`
+
   width: 100%;
   height: 84px;
   display: flex;
@@ -131,9 +132,15 @@ export const DashBoardWrapper = styled.div`
   justify-content: space-between;
 `;
 
+export const DashBoardCardsWrapper = styled.section`
+display:flex;
+flex-direction:column;
+margin-top:40px;
+gap:24px;
+
+`;
 export const DashBoardCard = styled.div`
   background: linear-gradient(180deg, #18264C 0%, #1F305F 100%);
-qq
   width: 100%;
   height: 84px;
   border-radius: 24px;
@@ -154,24 +161,25 @@ export const MiddleLogo = styled.img<{
   theme: DefaultTheme;
   Left?: string;
   Zindex?: string;
-  Width?: string;
-  Height?: string;
+  width?: string;
+  height?: string;
   Top?: string;
-  Opacity?: string;
+  opacity?: string;
 }>`
   position: fixed;
-  width: ${({ Width }) => Width};
-  height: ${({ Height }) => Height};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   top: ${({ Top }) => Top};
   left: ${({ Left }) => Left};
   transform: translateX(-40%);
-  opacity: ${({ Opacity }) => Opacity};
+  opacity: ${({ opacity }) => opacity};
   z-index: ${({ Zindex }) => Zindex};
 
   
 `;
 
 export const DashBoardCards = styled.div`
+
   width: 100%;
   height: 90vh;
   display: flex;
@@ -191,7 +199,7 @@ export const DashBoardText = styled.p<{ theme: DefaultTheme }>`
   font-weight: 300;
   line-height: 35.88px;
   text-align: left;
-  padding: 50px;
+  padding: 10px;
   color: ${({ theme }) => theme.colors.whiteBorder};
 
   @media only screen and (max-width: 780px) {
@@ -208,6 +216,7 @@ export const DashBoardButton = styled.button<{ theme: DefaultTheme }>`
   width: 129px;
   height: 40px;
   padding: 10px 20px;
+  margin-right:20px;
   border-radius: 12px;
   opacity: 1;
   color: ${({ theme }) => theme.colors.whiteBorder};
@@ -243,4 +252,6 @@ export const DashBoardFooterText = styled.p<{ theme: DefaultTheme }>`
   line-height: 29.9px;
   text-align: center;
   color: ${({ theme }) => theme.colors.whiteBorder};
+  margin-top:20px;
 `;
+
