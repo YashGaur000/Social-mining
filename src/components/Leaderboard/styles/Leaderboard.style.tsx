@@ -184,7 +184,7 @@ export const RankBox = styled.div<{ theme : DefaultTheme
   display?: string;
   flex?: string;
 }>`
-  width: 30px;
+  
   display: ${({ display }) => display};
   flex: ${({ flex }) => flex};
 

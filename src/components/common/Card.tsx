@@ -108,6 +108,7 @@ export const CardWrapper = styled.div<{
   Radius?: string;
   Boxshadow?: string;
   Padding?: string;
+  gap?: string;
 }>`
   display: flex;
   width: 100%;

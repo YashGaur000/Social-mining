@@ -50,6 +50,7 @@ export interface DefaultTheme {
     backgroundTasks: string;
     backgroundLeaderboard: string;
     backgroundTransparent: string;
+    backgroundInvite: string;
   }
   
   interface FontType {
@@ -102,6 +103,8 @@ export interface DefaultTheme {
       backgroundLeaderboard: `radial-gradient(circle at 50% 30%,#43d6cd7a 0%, transparent 50%),
       linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)`, 
       backgroundTransparent: 'linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .2) 100%)',
+      backgroundInvite: `radial-gradient(circle at 50% 30%,#43d6cd7a 0%, transparent 50%),
+      linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%)`, 
       text: '#ffffff',
       buttonBackground:
         'linear-gradient(188.32deg, #47FF99 -7.09%, #3EACFC 99.48%)',

@@ -2,7 +2,7 @@ import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { useAccount } from '../../hooks/useAccount';
 import { Container, FlexContainer } from './style';
 import { SignUpButtonWallet } from '../SignUp/styles/SignUp.styles';
-import walletImg from '../../assets/walletIcon.svg';
+// import walletImg from '../../assets/walletIcon.svg';
 import { GlobalButton } from '../common/Buttons/GlobalButton';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';

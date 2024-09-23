@@ -40,9 +40,6 @@ export const DashBoardConnectionText = styled.p< {theme:DefaultTheme}>`
 `;
 
 export const DashBoardConnectionButton = styled.button<{theme:DefaultTheme}>`
-
-  z-index:10;
-  pointer-events:auto;
   width: 130px;
   height: 30px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -162,21 +159,21 @@ export const DashBoardCard = styled.div`
 
 export const MiddleLogo = styled.img<{
   theme: DefaultTheme;
-  left?: string;
-  zindex?: string;
+  Left?: string;
+  Zindex?: string;
   width?: string;
   height?: string;
-  top?: string;
+  Top?: string;
   opacity?: string;
 }>`
   position: fixed;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  top: ${({ top }) => top};
-  left: ${({ left }) => left};
+  top: ${({ Top }) => Top};
+  left: ${({ Left }) => Left};
   transform: translateX(-40%);
   opacity: ${({ opacity }) => opacity};
-  z-index: ${({ zindex }) => zindex};
+  z-index: ${({ Zindex }) => Zindex};
 
   
 `;

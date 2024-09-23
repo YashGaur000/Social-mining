@@ -53,6 +53,9 @@ const BackgroundWrapper: React.FC<BackgroundWrapperProps> = ({ children }) => {
     case '/dashboard/Leaderboard':
       background = theme.colors.backgroundLeaderboard;
       break;
+      case '/dashboard/Invite':
+        background = theme.colors.backgroundLeaderboard;
+        break;
 
     default:
       if (location.pathname.startsWith('/documentation')) {

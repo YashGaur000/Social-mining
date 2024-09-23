@@ -18,6 +18,9 @@ const TitleUpdater: React.FC<TitleUpdaterProps> = ({ setTitleHeader }) => {
     else if(location.pathname === "/dashboard/Leaderboard"){
       setTitleHeader("LeaderBoard");
     }
+    else if(location.pathname === "/dashboard/Invite"){
+      setTitleHeader("Invite Friends");
+    }
   }, [location, setTitleHeader]);
 
   return null; 
