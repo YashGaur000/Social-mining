@@ -40,9 +40,6 @@ export const DashBoardConnectionText = styled.p< {theme:DefaultTheme}>`
 `;
 
 export const DashBoardConnectionButton = styled.button<{theme:DefaultTheme}>`
-
-  z-index:10;
-  pointer-events:auto;
   width: 130px;
   height: 30px;
   font-family: ${({ theme }) => theme.fonts.main};

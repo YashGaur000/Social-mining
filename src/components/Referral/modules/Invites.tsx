@@ -1,9 +1,24 @@
 import React from "react";
-import {
-//   AirdropBox,
-//   AirdropInfo,
-//   AirdropInfoBox,
-//   AirdropInfoSub,
+import { 
+  CardContainer, 
+  InviteWrapper 
+} from "../styles/Invites.style";
+import { 
+  Card, 
+  CardBox, 
+  CardWrapper 
+} from "../../common/Card";
+import { 
+  LetsGoButton, 
+  Score, 
+  SocialLogo, 
+  SocialLogoBox, 
+  TitleBox 
+} from "../../TaskList/styles/TaskList.style";
+import { 
+  GlobalButton 
+} from "../../common/Buttons/GlobalButton";
+import { 
   BoardWrapper,
   EarnedPoints,
   Name,
@@ -15,22 +30,16 @@ import {
   RankandPointFullBoxWrapper,
   RankandPointValueBox,
   RankBox,
-  Rankers,
-} from "../../Referral/styles/Invites.style";
+  Rankers 
+} from "../../Leaderboard/styles/Leaderboard.style";
+import ReferralSideDesign from '../../../assets/referralsidedesign.svg';
 import Bigtenex from "../../../assets/bigtenexbg.svg";
+import { MiddleLogo } from "../../DashBoard/styles/DashBoard.styles";
 import tenexbglogo from "../../../assets/tenexbglogo.svg";
 import tenexbglogo2 from "../../../assets/tenexbglogo2.svg";
-import { Card, CardBox, CardWrapper } from "../../common/Card";
-import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, SocialLogoBox, TitleBox } from "../../TaskList/styles/TaskList.style";
-import { MiddleLogo } from "../../DashBoard/styles/DashBoard.styles";
-import { GlobalButton } from "../../common/Buttons/GlobalButton";
-import SideDesign from '../../../assets/sidedesign.svg';
-import Roundcheck from '../../../assets/roundcheck.svg';
-import TwitterLogo from '../../../assets/twitter.svg';
 
 const Invite: React.FC = () => {
-
-  const Players = [
+  const players = [
     "Tenex",
     "Tenex",
     "Tenex",
@@ -44,7 +53,7 @@ const Invite: React.FC = () => {
     "Tenex",
   ];
 
-  const PlayersPoints = [
+  const playersPoints = [
     "34523",
     "34543",
     "23455",
@@ -59,87 +68,77 @@ const Invite: React.FC = () => {
   ];
 
   return (
-    <BoardWrapper>
+    <InviteWrapper>
+       
+  <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
+  <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
+      <CardContainer margin="100px 0px 100px 0px">
         <CardWrapper>
-          
-                       <SocialLogoBox>
-                     <SocialLogo height='275px' src={SideDesign} alt='sidedesign' Zindex='2'/>
-                     </SocialLogoBox>
-                     <CardBox margin='0px 0px 0px -25px'>
-                       <TitleBox>
-                         <SocialLogo height='36px' width='36' margin='0px 15px 0px 30px' src={TwitterLogo} alt="Reddit Logo" />
-                         <Score Fontsize='24px' Lineheight='35.88px'>Twitter Engagement:</Score>
-                         <LetsGoButton margin='10px 40px 0px auto'>
-                           <GlobalButton>
-                            Lets Go
-                           </GlobalButton>
-                         </LetsGoButton>
-                       </TitleBox>
-                       <ListBox>
-                         <List>
-                           <ListItem>
-                             <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" />
-                             {/* <Score Fontsize='20px' Lineheight='29.9px'>Like, Retweet or reply to a <u>@TenEx_Official</u> tweets.</Score> */}
-                             <Score Fontsize='20px' Lineheight='29.9px'>Like, Retweet or reply to a <u>@TenEx_Official</u> tweets.</Score>
-                           </ListItem>
-                           <ListItem>
-                             <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> <Score Fontsize='20px' Lineheight='29.9px'>Tag @TenEx_Official, $TENEX in your tweets.</Score>
-                           </ListItem>
-                           <ListItem>
-                             <SocialLogo height='20px' width='20px' src={Roundcheck} alt="roundcheck Logo" /> <Score Fontsize='20px' Lineheight='29.9px'>Mention TENEX in your tweets without tagging.</Score>
-                           </ListItem>
-                           <ListItem>
-                             <Score Fontsize='20px' Lineheight='29.9px'>Score 5 points by completing this task</Score>
-                           </ListItem> 
-                         </List>
-                       </ListBox>
-                     </CardBox>
-                     </CardWrapper>
-      <SocialLogo
-        src={Bigtenex}
-        Position="absolute"
-        margin="185px 0px 0px -250px"
-        Zindex="-1"
-      />
-      <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
-      <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
-      <RankandPointFullBoxWrapper>
-      <Card
-        width="90%"
-        background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
-        Borderradius="24px"
-        Padding="30px 50px 40px 50px"
-      >
-        <RankandPointBoxWrapper>
-          <RankandPointBox>
-            <RankBox>
-              <Rankers Fontsize="24px">List of your friends (20)</Rankers>
-            </RankBox>
-            <PointBox>
-              <Points Fontsize="24px">Earned Points</Points>
-            </PointBox>
-          </RankandPointBox>
-          <RankandPointValueBox>
-            {Players.map((Player, index) => (
-              <ParticipantBox key={index}>
-                <RankBox><Score>
-                  {(`${index + 1}`)}
-                  </Score>
+          <SocialLogoBox>
+            <SocialLogo margin="0px -30px 0px 0px" height="100px" src={ReferralSideDesign} alt="Side Design" Zindex="2" />
+          </SocialLogoBox>
+          <CardBox>
+            <TitleBox>
+              <Score Fontsize="24px" Lineheight="35.88px" Margin="0px 0px 0px 50px">
+                When they join, both you and your friend will receive 10 points each!
+              </Score>
+              <LetsGoButton margin="8px 50px 0px 800px">
+                <GlobalButton>
+                  Invite
+                </GlobalButton>
+              </LetsGoButton>
+            </TitleBox>
+          </CardBox>
+        </CardWrapper>
+      </CardContainer>
+      <CardContainer margin="0px 0px 0px 0px">
+        {/* <RankandPointFullBoxWrapper> */}
+        <SocialLogo
+    src={Bigtenex}
+    Position="absolute"
+    margin="15px 0px 0px -10px"
+    Zindex="1"
+  />
+          <Card
+            width="40%"
+            background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
+            Borderradius="24px"
+            Padding="30px 50px 40px 50px"
+          >
+            <RankandPointBoxWrapper>
+              <RankandPointBox>
+                <RankBox>
+                  <Rankers Fontsize="24px">List of your friends (20)</Rankers>
                 </RankBox>
-                <Name><Score>{Player}</Score></Name>
-                <EarnedPoints><Score>{PlayersPoints[index]}</Score></EarnedPoints>
-              </ParticipantBox>
-            ))}
-          </RankandPointValueBox>
-        </RankandPointBoxWrapper>
-      </Card>
-      </RankandPointFullBoxWrapper>
-      <Score Margin="80px 0px 0px -50px" textalign="center">
+                <PointBox>
+                  <Points Fontsize="24px">Earned Points</Points>
+                </PointBox>
+              </RankandPointBox>
+
+              <RankandPointValueBox>
+                {players.map((player, index) => (
+                  <ParticipantBox key={index}>
+                    <RankBox>
+                      <Score>{index + 1}</Score>
+                    </RankBox>
+                    <Name>
+                      <Score>{player}</Score>
+                    </Name>
+                    <EarnedPoints>
+                      <Score>{playersPoints[index]}</Score>
+                    </EarnedPoints>
+                  </ParticipantBox>
+                ))}
+              </RankandPointValueBox>
+            </RankandPointBoxWrapper>
+          </Card>
+        {/* </RankandPointFullBoxWrapper> */}
+      </CardContainer>
+      <Score Margin="20px 0px 0px 0px" textalign="center">
         Rewards are paid at the end of each month based on each user&apos;s
         accrued points
       </Score>
-      
-    </BoardWrapper>
+    </InviteWrapper>
   );
 };
 

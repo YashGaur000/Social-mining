@@ -265,3 +265,126 @@ const TaskList: React.FC = () => {
 
 export default TaskList;
 
+
+// import React from 'react';
+// import { CardBox, CardWrapper } from '../../common/Card';
+// import { GlobalButton } from '../../common/Buttons/GlobalButton';
+// import Roundcheck from '../../../assets/roundcheck.svg';
+// import SideDesign from '../../../assets/sidedesign.svg';
+// import Bigtenex from '../../../assets/bigtenexbg.svg';
+// import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, SocialLogoBox, TaskBox, TaskBoxFullWrapper, TitleBox } from '../styles/TaskList.style';
+// import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
+
+// type Task = {
+//   logo: string;
+//   title: string;
+//   actions: string[];
+//   points: number;
+//   onClick?: () => void;
+// };
+
+// const tasks: Task[] = [
+//   {
+//     logo: '../../..',
+//     title: 'Twitter Engagement:',
+//     actions: [
+//       'Like, Retweet or reply to a @TenEx_Official tweet.',
+//       'Tag @TenEx_Official, $TENEX in your tweets.',
+//       'Mention TENEX in your tweets without tagging.',
+//     ],
+//     points: 5,
+//   },
+//   {
+//     logo: '../../../assets/discord.svg',
+//     title: 'Discord Participation:',
+//     actions: [
+//       'Join our Discord community and engage in discussions.',
+//       'Offer support and answer questions for additional rewards.',
+//     ],
+//     points: 10,
+//     onClick: () => {
+//       const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH; 
+//       if (discordOAuthUrl) {
+//         window.location.href = discordOAuthUrl;
+//       } else {
+//         console.error('Discord OAuth URL not found.');
+//       }
+//     },
+//   },
+//   {
+//     logo: '../../../assets/telegram.svg',
+//     title: 'Telegram Contribution:',
+//     actions: [
+//       'Join our Telegram community and engage in discussions.',
+//       'Offer support and answer questions for additional rewards.',
+//     ],
+//     points: 10,
+//   },
+//   {
+//     logo: '../../../assets/reddit.svg',
+//     title: 'Reddit Contribution:',
+//     actions: [
+//       'Create or comment on posts in r/TENEX.',
+//       'Mention TENEX or $TENEX in other subreddits.',
+//     ],
+//     points: 5,
+//     onClick: () => {
+//       const redditOAuthUrl = import.meta.env.VITE_REDDIT_OAUTH; 
+//       if (redditOAuthUrl) {
+//         window.location.href = redditOAuthUrl;
+//       } else {
+//         console.error('Reddit OAuth URL not found.');
+//       }
+//     },
+//   },
+//   // Add other tasks similarly...
+// ];
+
+// const TaskItem: React.FC<Task> = ({ logo, title, actions, points, onClick }) => (
+//   <CardWrapper>
+//     <SocialLogoBox>
+//       <SocialLogo height="240px" src={SideDesign} alt="sidedesign" Zindex="2" />
+//     </SocialLogoBox>
+//     <CardBox margin="0px 0px 0px -25px">
+//       <TitleBox>
+//         <SocialLogo height="36px" width="36px" margin="0px 15px 0px 30px" src={logo} alt="task logo" />
+//         <Score Fontsize="24px" Lineheight="35.88px">{title}</Score>
+//         <LetsGoButton margin="10px 40px 0px auto">
+//           <GlobalButton onClick={onClick}>
+//             Lets Go
+//           </GlobalButton>
+//         </LetsGoButton>
+//       </TitleBox>
+//       <ListBox>
+//         <List>
+//           {actions.map((action, index) => (
+//             <ListItem key={index}>
+//               <SocialLogo height="20px" width="20px" src={Roundcheck} alt="check logo" />
+//               <Score Fontsize="20px" Lineheight="29.9px">{action}</Score>
+//             </ListItem>
+//           ))}
+//           <ListItem>
+//             <Score Fontsize="20px" Lineheight="29.9px">Score {points} points by completing this task</Score>
+//           </ListItem>
+//         </List>
+//       </ListBox>
+//     </CardBox>
+//   </CardWrapper>
+// );
+
+// const TaskList: React.FC = () => {
+//   return (
+//     <TaskBoxFullWrapper>
+//       <TaskBox>
+//         <MiddleLogo Zindex="2" Top="26vh" Left="50%" src={Bigtenex} alt="#" />
+//         <Score Fontsize="20px" Lineheight="29.9px">Complete the following task and earn $TENEX</Score>
+//         {tasks.map((task, index) => (
+//           <TaskItem key={index} {...task} />
+//         ))}
+//       </TaskBox>
+//       <Score Margin="100px 0px 0px 0px">Rewards are paid at the end of each month based on each user's accrued points</Score>
+//     </TaskBoxFullWrapper>
+//   );
+// };
+
+// export default TaskList;

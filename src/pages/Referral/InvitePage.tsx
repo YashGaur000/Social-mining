@@ -3,7 +3,6 @@ import { DefaultTheme } from '../../styles/Theme';
 import styled from 'styled-components';
 import Invite from '../../components/Referral/modules/Invites';
 
-
 const InviteContainer = styled.div<{ theme: DefaultTheme}>`
     display: flex;
     justify-content: center;
