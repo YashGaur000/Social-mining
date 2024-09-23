@@ -125,10 +125,10 @@ const DashBoard: React.FC = () => {
 
         <MiddleLogo
           opacity="0.12px"
-          top="26vh"
+          Top="26vh"
           width="35vw"
           height="30vw"
-          left="48%"
+          Left="48%"
           src={middleLogo}
           alt=""
         />
