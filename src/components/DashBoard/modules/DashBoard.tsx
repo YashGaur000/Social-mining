@@ -74,6 +74,15 @@ const DashBoard: React.FC = () => {
     }
   };
 
+  const handleTelegramConnect =() => {
+    const telegramOAuthUrl = import.meta.env.VITE_TELEGRAM_OAUTH;
+    if (telegramOAuthUrl) {
+      window.open(telegramOAuthUrl, "_blank"); 
+    } else {
+      console.error("URL not found");
+    }
+  }
+
   return (
     <>
       <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
@@ -104,7 +113,7 @@ const DashBoard: React.FC = () => {
 
           <DashBoardConnectionCard>
             <DashBoardConnectionText>Connect with Telegram</DashBoardConnectionText>
-            <DashBoardConnectionButton>
+            <DashBoardConnectionButton onClick={handleTelegramConnect}>
               <DashBoardButtonsWrapper>
                 <DashBoardConnectionImage src={telegram} />
               </DashBoardButtonsWrapper>
