@@ -13,13 +13,13 @@ import SideDesign from '../../../assets/sidedesign.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
 import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, SocialLogoBox, TaskBox, TaskBoxFullWrapper, TitleBox} from '../styles/TaskList.style';
 import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+// import axios from 'axios';
+// import { useNavigate } from 'react-router-dom';
 
 
 const TaskList: React.FC = () => {
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const handleDiscordRedirect = async() => {
     try{

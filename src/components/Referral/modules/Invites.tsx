@@ -74,31 +74,31 @@ const Invite: React.FC = () => {
     try {
       const discordId = localStorage.getItem("userId");
 
-      const response = await axios.get('http://localhost:3000/api/users/referral',{params: { discordId }});
+      const response = await axios.post('http://localhost:3000/api/users/referral',{discordId });
       console.log(response.data.email);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const copyToClipboard = async () => {
-    const link = import.meta.env.VITE_REFERRAL;
+  // const copyToClipboard = async () => {
+  //   const link = import.meta.env.VITE_REFERRAL;
     
-    if (!link) {
-      console.error('Referral link is not defined');
-      return;
-    }
+  //   if (!link) {
+  //     console.error('Referral link is not defined');
+  //     return;
+  //   }
     
-    try {
-      await navigator.clipboard.writeText(link);
-      setIsCopied(true);
-      setTimeout(() => {
-        setIsCopied(false);
-      }, 2000);
-    } catch (err) {
-      console.error('Failed to copy: ', err);
-    }
-  };
+  //   try {
+  //     await navigator.clipboard.writeText(link);
+  //     setIsCopied(true);
+  //     setTimeout(() => {
+  //       setIsCopied(false);
+  //     }, 2000);
+  //   } catch (err) {
+  //     console.error('Failed to copy: ', err);
+  //   }
+  // };
 
   
 

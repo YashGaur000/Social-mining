@@ -20,7 +20,7 @@ import {
   SignUpTitleAndTextWrapper,
   SignUpButtonTwitter,
 } from "../styles/SignUp.styles";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { useEffect } from "react";
 
