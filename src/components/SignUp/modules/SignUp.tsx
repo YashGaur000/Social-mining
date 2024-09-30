@@ -20,11 +20,41 @@ import {
   SignUpTitleAndTextWrapper,
   SignUpButtonTwitter,
 } from "../styles/SignUp.styles";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
-const SignUp = () => {
+// interface SignUpprops{
+//   code: string;
+// }
+
+const SignUp: React.FC = () => {
+
+
+  useEffect(() => {
+
+    const params = new URLSearchParams(location.search);
+    const authCode = params.get('code');
+    console.log(location.search,authCode); 
+    if (authCode) {
+      sendCodeToBackend(authCode);
+    }
+
+  },[])
+
+  const sendCodeToBackend = async (code: string) => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/users/register', { code });
+      
+      console.log("DiscordResponseData****",response.data); // Handle response from the backend
+      localStorage.setItem("userId",response.data.data);
+    } catch (error) {
+      console.error('Error sending code to backend:', error);
+    }
+  };
+
+
   
-
- 
 
   return (
     <>

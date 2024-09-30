@@ -13,17 +13,48 @@ import SideDesign from '../../../assets/sidedesign.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
 import { LetsGoButton, List, ListBox, ListItem, Score, SocialLogo, SocialLogoBox, TaskBox, TaskBoxFullWrapper, TitleBox} from '../styles/TaskList.style';
 import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const TaskList: React.FC = () => {
 
-  const handleDiscordRedirect = () => {
-    const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH; 
-    if (discordOAuthUrl) {
-      window.location.href = discordOAuthUrl; 
-    } else {
-      console.error('Discord OAuth URL not found in environment variables.');
+  const navigate = useNavigate()
+
+  const handleDiscordRedirect = async() => {
+    try{
+      console.log("1-->",window.location)
+      const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH;
+
+      if (!discordOAuthUrl) {
+        console.error("Discord OAuth URL not found in environment variables.");
+        return;
+      }
+      window.location.href = discordOAuthUrl;
+
+      //navigate(discordOAuthUrl)
+
+      console.log("2--",window.location)
+
+      const fragment = new URLSearchParams(window.location.hash.slice(1));
+		const [code] = [fragment.get('code')];
+		console.log("code---->",code)
+
+
+      console.log(discordOAuthUrl);
+
+      // const response = await axios.get("http://localhost:3000");
+      // console.log("===================>", response.data);
+
     }
+    catch(err){
+      console.log("-----------------discordOauthURL not connected-----------------",err);
+    }
+    // if (discordOAuthUrl) {
+    //   window.location.href = discordOAuthUrl; 
+    // } else {
+    //   console.error('Discord OAuth URL not found in environment variables.');
+    // }
   };
 
    const handleRedditRedirect = () => {

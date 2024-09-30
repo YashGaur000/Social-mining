@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
   CardContainer, 
   InviteWrapper 
@@ -35,8 +35,13 @@ import Bigtenex from "../../../assets/bigtenexbg.svg";
 import { MiddleLogo } from "../../DashBoard/styles/DashBoard.styles";
 import tenexbglogo from "../../../assets/tenexbglogo.svg";
 import tenexbglogo2 from "../../../assets/tenexbglogo2.svg";
+import axios from "axios";
+// import axios from "axios";
 
 const Invite: React.FC = () => {
+
+  const [isCopied, setIsCopied] = useState(false);
+
   const players = [
     "Tenex",
     "Tenex",
@@ -64,6 +69,38 @@ const Invite: React.FC = () => {
     "34534",
     "64544",
   ];
+  
+  const handleGenerateReferralLink = async() => {
+    try {
+      const discordId = localStorage.getItem("userId");
+
+      const response = await axios.get('http://localhost:3000/api/users/referral',{params: { discordId }});
+      console.log(response.data.email);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    const link = import.meta.env.VITE_REFERRAL;
+    
+    if (!link) {
+      console.error('Referral link is not defined');
+      return;
+    }
+    
+    try {
+      await navigator.clipboard.writeText(link);
+      setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
+  
 
   return (
     <InviteWrapper>
@@ -81,10 +118,14 @@ const Invite: React.FC = () => {
                 When they join, both you and your friend will receive 10 points each!
               </Score>
               <LetsGoButton margin="8px 50px 0px 800px">
-                <GlobalButton>
+                <GlobalButton onClick={handleGenerateReferralLink}>
                   Invite
                 </GlobalButton>
+                {/* <GlobalButton onClick={handleClick}>
+                  connect
+                </GlobalButton> */}
               </LetsGoButton>
+              {isCopied && <Score Margin="10px 0 0 50px" color="green">Link copied to clipboard!</Score>}
             </TitleBox>
           </CardBox>
         </CardWrapper>
