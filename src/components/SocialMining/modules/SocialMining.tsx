@@ -14,6 +14,9 @@ const SocialMining: React.FC<SocialMiningProps> = ({ DashBoardTitle }) => {
      const handleLogoClick  = () =>{
         history('/');
      }
+
+    
+
   return (
     <>
       <Main1container>

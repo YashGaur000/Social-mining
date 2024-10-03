@@ -5,6 +5,7 @@ import { SignUpButtonWallet } from '../SignUp/styles/SignUp.styles';
 import { GlobalButton } from '../common/Buttons/GlobalButton';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { NAVIGATION_TIME } from '../../constants/Delay';
 
 interface ChainProps {
   hasIcon: boolean;
@@ -26,6 +27,7 @@ export const ConnectWallet:React.FC<ConnectWalletProps> = ({text , width , heigh
   const { address } = useAccount();
   const navigate = useNavigate();
 
+  
   return (
     <ConnectButton.Custom>
       {({
@@ -49,7 +51,7 @@ export const ConnectWallet:React.FC<ConnectWalletProps> = ({text , width , heigh
         
         useEffect(() => {
           if (connected) {
-            navigate('/dashboard');
+           setTimeout(()=>  navigate('/dashboard'),NAVIGATION_TIME)
           }
         }, [connected, navigate]);
 

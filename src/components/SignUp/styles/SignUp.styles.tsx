@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
 export const SignUpWrapper = styled.div`
-  width: 100vw;
+  width:100%;
   height: 90vh;
 `;
 
@@ -17,7 +17,7 @@ export const WalletImage = styled.img``;
 
 export const Banner = styled.img`
   width: 40%;
-  height: 100%;
+  height: 98%;
   position: absolute;
   top: 10px;
   right: 1px;
@@ -35,27 +35,52 @@ export const LogoToken = styled.img`
   position: absolute;
   top: 40px;
   left: 60px;
+
+   @media only screen and (max-width: 780px) {
+    top:40px;
+    left:20px;
+  }
 `;
 
 export const SignUpDetailsWrapper = styled.div`
+  gap:6px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 180px;
+
+
+   @media only screen and (max-width:640px) {
+    
+    margin-top:100px;
+  }
+  
 `;
 
 export const SignUpDetails = styled.div`
+ 
   width: 50%;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+
+   @media only screen and (max-width: 780px) {
+    
+    width:100%;
+  }
 `;
 
-export const SignUpTitleAndTextWrapper = styled.div``;
+export const SignUpTitleAndTextWrapper = styled.div` 
+
+@media only screen and (max-width: 780px) {
+    
+  }
+
+`;
 
 export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
   color: ${({ theme }) => theme.colors.whiteBorder};
@@ -70,6 +95,25 @@ export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
   font-family: ${({ theme }) => theme.fonts.main};
   display: flex;
   line-height: 71.76px;
+  
+
+  @media only screen and (max-width: 1280px) {
+    font-size: 2.5rem;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 2rem;
+  }
+
+  @media only screen and (max-width: 768px) {
+   
+    font-size: 1.8rem;
+  }
+
+  @media only screen and (max-width: 640px) {
+    align-items:center;
+    justify-content:center;
+    font-size: 2.5rem;
   }
 
  
@@ -84,12 +128,23 @@ export const SignUpText = styled.p<{ theme: DefaultTheme }>`
   font-weight: 250;
   line-height: 35.88px;
   text-align: center;
+
+   @media only screen and (max-width: 780px) {
+    font-size:1.2rem;
+  }
+
+  @media only screen and (max-width: 780px) {
+    font-size:1.2rem;
+  }
 `;
 
 export const SignUpButtonWrapper = styled.div`
   display: flex;
   gap: 20px;
-  margin-left: 25px;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:center;
+   
 `;
 
 export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
@@ -99,7 +154,7 @@ export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
   height: 56px;
   border-radius: 12px;
   opacity: 0px;
-  border-radius: 12px;
+  
 
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
@@ -112,6 +167,14 @@ export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
   align-items: center;
   gap: 6px;
   justify-content: center;
+  
+
+  @media only screen and (max-width: 640px) {
+    align-items:center;
+    justify-content:center;
+    width: 350px;
+    height: 56px
+  }
 `;
 export const SignUpButtonTwitter = styled.button<{ theme: DefaultTheme }>`
   background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
@@ -120,7 +183,6 @@ export const SignUpButtonTwitter = styled.button<{ theme: DefaultTheme }>`
   height: 56px;
   border-radius: 12px;
   opacity: 0px;
-  border-radius: 12px;
 
   color: ${({ theme }) => theme.colors.whiteBorder};
   border: 1px solid transparent;
@@ -138,14 +200,28 @@ export const SignUpButtonTwitter = styled.button<{ theme: DefaultTheme }>`
   align-items: center;
   gap: 6px;
   justify-content: center;
+
+  @media only screen and (max-width: 640px) {
+    align-items:center;
+    justify-content:center;
+    width: 350px;
+    height: 56px
+  }
 `;
 
 export const SignUpToken = styled.div`
- 
+display:none;
+ @media only screen and (max-width: 640px) {
+   display:block;
+  }
 `;
 
+
 export const SignUpTokens = styled.img`
-  width: 283px;
-  height: 204px;
-  margin: 15px 0px 0px 320px;
+
+ @media only screen and (max-width: 640px) {
+   width:240px;
+   margin-top:20px;
+  }
+
 `;

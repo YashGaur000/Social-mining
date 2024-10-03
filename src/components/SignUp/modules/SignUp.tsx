@@ -3,6 +3,7 @@ import twitter from "../../../assets/twitter.svg";
 import image from "../../../assets/banner.svg";
 import tokenTitle from "../../../assets/logo.svg";
 import { ConnectWallet } from "../../ConnectWallet"
+import walletimg from '../../../assets/walletIcon.svg';
 
 import {
   ImageContainer,
@@ -10,8 +11,6 @@ import {
   SignUpDetails,
   SignUpTitle,
   SignUpText,
-  SignUpToken,
-  SignUpTokens,
   LogoToken,
   SignUpWrapper,
   SignUpDetailsWrapper,
@@ -19,11 +18,17 @@ import {
   SignUpButtonWrapper,
   SignUpTitleAndTextWrapper,
   SignUpButtonTwitter,
+  SignUpToken,
+  SignUpTokens,
 } from "../styles/SignUp.styles";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   
-
+  const handleTwitter = () =>{
+    navigate('/#/dashboard')
+  }
  
 
   return (
@@ -31,6 +36,7 @@ const SignUp = () => {
       <LogoToken src={tokenTitle}></LogoToken>
 
       <SignUpWrapper>
+
         <SignUpDetails>
           <SignUpDetailsWrapper>
             <SignUpTitleAndTextWrapper>
@@ -38,21 +44,22 @@ const SignUp = () => {
               <SignUpText>Join our mission to spread TenEx Message</SignUpText>
             </SignUpTitleAndTextWrapper>
             <SignUpButtonWrapper>
-                <ConnectWallet text={"Sign Up With Wallet"} />
+                <ConnectWallet text={"Sign Up With Wallet"} walletImg={walletimg}/>
               <SignUpButtonTwitter>
-                <TwitterImage src={twitter} />
+                <TwitterImage src={twitter} onClick={handleTwitter} />
                 Sign In Twitter
               </SignUpButtonTwitter>
             </SignUpButtonWrapper>
-            <SignUpToken>
+          </SignUpDetailsWrapper>
+          <SignUpToken>
               <SignUpTokens src={token} alt="" />
             </SignUpToken>
-          </SignUpDetailsWrapper>
         </SignUpDetails>
 
         <ImageContainer>
           <Banner src={image} alt="" />
         </ImageContainer>
+
       </SignUpWrapper>
     </>
   );

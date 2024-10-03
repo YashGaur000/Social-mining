@@ -4,11 +4,12 @@ import { DefaultTheme } from "../../../styles/Theme";
 export const DashBoardConnectionCards = styled.div`
   width: 100%;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  gap:10px;
 
-  @media only screen and (max-width: 580px) {
-    flex-wrap:wrap;
+  @media only screen and (max-width: 780px) {
+  flex-direction:column;
+    
     
     
   }
@@ -25,6 +26,18 @@ export const DashBoardConnectionCard = styled.div`
 height: 102px;
 border-radius: 16px;
 opacity: 0.4px;
+ 
+
+ @media only screen and (max-width: 780px) {
+  flex-direction:row;
+  width:50%;
+  margin:auto;
+  justify-content:space-between;
+  gap:8px;
+    
+    
+    
+  }
 
 `;
 
@@ -46,7 +59,7 @@ export const DashBoardConnectionButton = styled.button<{theme:DefaultTheme}>`
   font-size: 14px;
   font-weight: 350;
   line-height: 20.93px;
- display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 8px;

@@ -143,17 +143,8 @@ const DashBoard: React.FC = () => {
         />
 
         <DashBoardCardsWrapper>
-          <DashBoardCard>
-            <SideImageWrapper>
-              <SideImage src={sideborder} alt="sideImage" />
-            </SideImageWrapper>
-            <DashBoardWrapper>
-              <DashBoardText>
-                Browse the task list, complete challenges, and earn points!
-              </DashBoardText>
-              <DashBoardButton onClick={handleTasksClick}>View Tasks</DashBoardButton>
-            </DashBoardWrapper>
-          </DashBoardCard>
+
+         
 
           <DashBoardCard>
             <SideImageWrapper>
@@ -170,8 +161,19 @@ const DashBoard: React.FC = () => {
               <SideImage src={sideborder} alt="sideImage" />
             </SideImageWrapper>
             <DashBoardWrapper>
+              <DashBoardText>
+                Browse the task list, complete challenges, and earn points!
+              </DashBoardText>
+              <DashBoardButton onClick={handleTasksClick}>View Tasks</DashBoardButton>
+            </DashBoardWrapper>
+          </DashBoardCard>
+          <DashBoardCard>
+            <SideImageWrapper>
+              <SideImage src={sideborder} alt="sideImage" />
+            </SideImageWrapper>
+            <DashBoardWrapper>
               <DashBoardText>Connect your wallet to claim $TENEX</DashBoardText>
-              <DashBoardButton><ConnectWallet text={address ? "Connected" : "Connect"} height={"40px"} width={"129px"}/></DashBoardButton>
+              <DashBoardButton><ConnectWallet text={address ? "Disconnected" : "Connect"} height={"40px"} width={"129px"}/></DashBoardButton>
             </DashBoardWrapper>
           </DashBoardCard>
 
