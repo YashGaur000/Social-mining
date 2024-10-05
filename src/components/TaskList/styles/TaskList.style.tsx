@@ -7,7 +7,7 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
   padding: 20px;
   width: 90%;
   margin-top: 40px;
-  border:1px solid red;
+
   @media (max-width: 1200px) {
     padding: 15px;
     
@@ -26,7 +26,7 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
 export const TaskBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   flex-direction: column;
-  border:1px solid green;
+  
 
   gap: 40px;
   margin-top: -40px;

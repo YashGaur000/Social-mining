@@ -5,12 +5,23 @@ export const BoardWrapper = styled.div<{ theme: DefaultTheme }>`
   position: relative;
   z-index: 1;
   margin-top: 40px;
-
-  @media (max-width: 768px) {
+  border:1px solid green;
+  width:60%;
+   @media (max-width: 1000px) {
     padding: 10px;
+    width:80%;
   }
-     @media (max-width: 600px) {
+     @media (max-width: 768px) {
+    padding: 10px;
+    width:90%;
+  }
+  @media (max-width: 600px) {
     padding: 0px;
+    width:100%;
+  }
+     @media (max-width: 500px) {
+    padding: 0px;
+    width:100%;
   }
 `;
 

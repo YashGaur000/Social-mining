@@ -38,7 +38,7 @@ export const Card = styled.div<{
 
    @media (max-width: 750px) {
      width:100%;
-   padding:30px;
+   padding:25px;
   }
  @media (max-width: 600px) {
    
