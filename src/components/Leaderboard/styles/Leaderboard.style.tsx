@@ -1,11 +1,12 @@
 import styled from "styled-components";
 import { DefaultTheme } from "../../../styles/Theme";
 
-export const BoardWrapper = styled.div<{ theme: DefaultTheme }>`
+export const BoardWrapper = styled.div<{ theme: DefaultTheme;margin?:string }>`
   position: relative;
   z-index: 1;
-  margin-top: 40px;
-  border:1px solid green;
+  margin:auto;
+  margin:${({margin})=>margin} ?? "40px 0px 0px 0px";
+ 
   width:60%;
    @media (max-width: 1000px) {
     padding: 10px;
@@ -151,7 +152,7 @@ export const RankandPointBoxWrapper = styled.div<{ theme: DefaultTheme
   display: flex;
   flex-direction: column;
   justify-content: space-between;
- 
+
   align-items: ${({ alignitems }) => alignitems };
   padding: ${({ padding }) => padding ? padding : '20px'};
   margin: ${({ margin }) => margin };
@@ -166,7 +167,8 @@ export const RankandPointBox = styled.div<{ theme: DefaultTheme}>`
   display: flex;
   justify-content: space-between;
   margin-bottom: 30px;
-
+ padding:0px 30px;
+ 
   @media (max-width: 768px) {
     font-size:24px;
   }

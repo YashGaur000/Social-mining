@@ -73,7 +73,7 @@ const Leaderboard: React.FC = () => {
   ];
 
   return (
-    <BoardWrapper>
+    <BoardWrapper margin="40px 0px 0px 0px">
       {/* <SocialLogo src={tenexbglogo} Position='absolute' margin='370px 0px 0px -600px'/>
             <SocialLogo src={tenexbglogo2} Position='absolute' margin='480px 0px 0px 400px'/> */}
       <SocialLogo

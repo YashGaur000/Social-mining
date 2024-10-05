@@ -48,12 +48,21 @@ export const TaskBox = styled.div<{ theme: DefaultTheme }>`
 
 export const TitleBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
-  align-items: center;
+  height:100%;
+  align-items:center;
   justify-content: space-between;
-
+  padding:0px 30px;
+  gap:20px;
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
 
+@media (max-width: 768px){
+padding:0px 20px;
+}
+
+@media (max-width: 500px){
+padding:0px 10px;
+}
 
 `;
 
@@ -88,25 +97,14 @@ export const SocialLogo = styled.img<{
 }>`
   z-index: ${({ Zindex }) => Zindex};
   position: ${({ Position }) => Position}; 
-  width: ${({ width }) => width || 'auto'};
-  height: ${({ height }) => height || 'auto'};
+  // width: ${({ width }) => width || 'auto'};
+  // height: ${({ height }) => height || 'auto'};
   margin: ${({ margin }) => margin || '0px'};
+  width:fit-content;
+  height:fit-content;
 
 
-
-    @media (max-width: 1024px) {
-    height:30px;
-    width:30px;
-  }
-
-    @media (max-width: 768px) {
-   height:24px;
-    width:24px;
-  }
-       @media (max-width: 500px) {
-   height:16px;
-    width:16px;
-  }
+   
 `;
 
 export const LetsGoButton = styled.div<{ 
