@@ -4,6 +4,7 @@ import { DefaultTheme } from "../../../styles/Theme";
 export const InviteWrapper = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   flex-direction: column;
+
 `;
 
 export const CardContainer = styled.div<{ theme: DefaultTheme
@@ -13,3 +14,7 @@ export const CardContainer = styled.div<{ theme: DefaultTheme
   justify-content: center;
   margin: ${({ margin }) => margin };
 `;
+
+export const InviteTitle=styled.p<{ theme: DefaultTheme }>`
+  font-size:24px;
+`

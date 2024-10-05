@@ -33,26 +33,24 @@ export const Card = styled.div<{
   // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
   box-shadow: ${({ Boxshadow }) => Boxshadow};
   opacity: ${({ Opacity }) => Opacity};
-
+  width:100%;
   border: ${({ Border }) => Border ?? '2px solid transparent'};
-  
-  
 
-  @media (max-width: 1024px) {
-    width: 350px;
+   @media (max-width: 750px) {
+     width:100%;
+   padding:30px;
+  }
+ @media (max-width: 600px) {
+   
+    padding: 15px;
+
+  }
+@media (max-width: 500px) {
+   
+    padding: 15px;
+    
   }
 
-  @media (max-width: 900px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
-  }
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
-  }
 `;
 
 export const CardBox = styled.div<{
@@ -81,20 +79,19 @@ export const CardBox = styled.div<{
   box-shadow: ${({ Boxshadow }) => Boxshadow};
   
 
-  @media (max-width: 1024px) {
-    width: 350px;
+   @media (max-width: 750px) {
+     width:100%;
+   padding:30px;
   }
+ @media (max-width: 600px) {
+   
+    padding: 15px;
 
-  @media (max-width: 900px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
   }
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
+@media (max-width: 500px) {
+   
+    padding: 15px;
+    
   }
 `;
 

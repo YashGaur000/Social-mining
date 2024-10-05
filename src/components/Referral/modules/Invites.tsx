@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { 
   CardContainer, 
-  InviteWrapper 
+  InviteWrapper ,
+  InviteTitle
 } from "../styles/Invites.style";
 import { 
   Card, 
@@ -103,21 +104,20 @@ const Invite: React.FC = () => {
   
 
   return (
+    <>
+    
     <InviteWrapper>
-       
-  <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
-  <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
-      <CardContainer margin="100px 0px 100px 0px">
+    <CardContainer margin="30px 0px">
         <CardWrapper>
           <SocialLogoBox>
             <SocialLogo margin="0px -30px 0px 0px" height="100px" src={ReferralSideDesign} alt="Side Design" Zindex="2" />
           </SocialLogoBox>
           <CardBox>
             <TitleBox>
-              <Score Fontsize="24px" Lineheight="35.88px" Margin="0px 0px 0px 50px">
+              <InviteTitle>
                 When they join, both you and your friend will receive 10 points each!
-              </Score>
-              <LetsGoButton margin="8px 50px 0px 800px">
+                </InviteTitle>
+              <LetsGoButton >
                 <GlobalButton onClick={handleGenerateReferralLink}>
                   Invite
                 </GlobalButton>
@@ -130,6 +130,9 @@ const Invite: React.FC = () => {
           </CardBox>
         </CardWrapper>
       </CardContainer>
+  <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
+  <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
+      
       <CardContainer margin="0px 0px 0px 0px">
         {/* <RankandPointFullBoxWrapper> */}
         <SocialLogo
@@ -178,6 +181,7 @@ const Invite: React.FC = () => {
         accrued points
       </Score>
     </InviteWrapper>
+    </>
   );
 };
 

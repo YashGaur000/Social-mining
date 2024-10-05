@@ -7,9 +7,10 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
   padding: 20px;
   width: 90%;
   margin-top: 40px;
-
+  border:1px solid red;
   @media (max-width: 1200px) {
     padding: 15px;
+    
   }
 
   @media (max-width: 1030px) {
@@ -25,6 +26,8 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
 export const TaskBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   flex-direction: column;
+  border:1px solid green;
+
   gap: 40px;
   margin-top: -40px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -47,22 +50,11 @@ export const TitleBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
 
-  @media (max-width: 1200px) {
-    font-size: 22px;
-  }
 
-  @media (max-width: 1030px) {
-    font-size: 20px;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 18px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
 `;
 
 export const TitleMiniBox = styled.div<{ theme: DefaultTheme }>`
@@ -100,16 +92,20 @@ export const SocialLogo = styled.img<{
   height: ${({ height }) => height || 'auto'};
   margin: ${({ margin }) => margin || '0px'};
 
-  @media (max-width: 1200px) {
-    
-  }
+
 
     @media (max-width: 1024px) {
-
+    height:30px;
+    width:30px;
   }
 
     @media (max-width: 768px) {
-  
+   height:24px;
+    width:24px;
+  }
+       @media (max-width: 500px) {
+   height:16px;
+    width:16px;
   }
 `;
 
@@ -121,11 +117,7 @@ export const LetsGoButton = styled.div<{
   margin: ${({ margin }) => margin || '0px'};  
   width: 130px;
 
-  @media (max-width: 768px) {
-    margin: 0px;
-    align-self: flex-end;
-    margin: -70px 0px 0px 0px;
-  }
+ 
 `;
 
 export const ListBox = styled.div<{ theme: DefaultTheme }>`
@@ -203,23 +195,34 @@ export const Score = styled.p<{
   line-height: ${({ Lineheight }) => Lineheight};
   font-size: ${({ Fontsize }) => Fontsize};
   margin: ${({ Margin }) => Margin || '0px'};
+  
   text-align: ${({ textalign }) => textalign || 'center'};
   color: ${({ theme }) => theme.colors.whiteBorder};
-  
-  @media (max-width: 1030px) {
-    font-size: 16px;
-    margin-top: 0px;
+   @media (max-width: 720px){
+   font-size:16px;
+ 
   }
-
-   @media (max-width: 1024px) {
-    font-size: 16px;
-    margin-top: 0px;
+  @media (max-width: 600px){
+   font-size:14px;
+ 
   }
-
-  @media (max-width: 768px) {
-    margin: 0px 0px 0px 0px;
-    font-size: 12px;
-    margin-top: 0px;
-    text-align: left;
+    @media (max-width: 400px){
+   font-size:12px;
+ 
   }
+ 
 `;
+export const CardIndexwrapper=styled.label`
+width:36px;
+text-align:center;
+display:flex;
+justify-content:center;
+@media (max-width: 700px){
+    width:24px;
+ 
+  }
+   @media (max-width: 600px){
+   width:16px;
+ 
+  }
+`
