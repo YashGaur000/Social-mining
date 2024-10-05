@@ -36,6 +36,7 @@ import axios from "axios";
 
 const Invite: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
+  console.log(setIsCopied);
   
   const players = [
     "Tenex",
