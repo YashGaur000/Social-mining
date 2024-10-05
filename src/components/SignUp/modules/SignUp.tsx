@@ -21,15 +21,41 @@ import {
   SignUpToken,
   SignUpTokens,
 } from "../styles/SignUp.styles";
-import { useNavigate } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+import axios from "axios";
+import { useEffect } from "react";
 
-const SignUp = () => {
-  const navigate = useNavigate();
+// interface SignUpprops{
+//   code: string;
+// }
+
+const SignUp: React.FC = () => {
+
+
+  useEffect(() => {
+
+    const params = new URLSearchParams(location.search);
+    const authCode = params.get('code');
+    console.log(location.search,authCode); 
+    if (authCode) {
+      sendCodeToBackend(authCode);
+    }
+
+  },[])
+
+  const sendCodeToBackend = async (code: string) => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/users/register', { code });
+      
+      console.log("DiscordResponseData****",response.data); // Handle response from the backend
+      localStorage.setItem("userId",response.data.data);
+    } catch (error) {
+      console.error('Error sending code to backend:', error);
+    }
+  };
+
+
   
-  const handleTwitter = () =>{
-    navigate('/#/dashboard')
-  }
- 
 
   return (
     <>
@@ -46,7 +72,7 @@ const SignUp = () => {
             <SignUpButtonWrapper>
                 <ConnectWallet text={"Sign Up With Wallet"} walletImg={walletimg}/>
               <SignUpButtonTwitter>
-                <TwitterImage src={twitter} onClick={handleTwitter} />
+                <TwitterImage src={twitter}  />
                 Sign In Twitter
               </SignUpButtonTwitter>
             </SignUpButtonWrapper>
