@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
-import { CardContainer, InviteWrapper } from '../styles/Invites.style';
+import {
+  CardContainer,
+  InviteWrapper,
+  InviteTitle,
+} from '../styles/Invites.style';
 import { Card, CardBox, CardWrapper } from '../../common/Card';
 import {
   LetsGoButton,
@@ -10,6 +14,7 @@ import {
 } from '../../TaskList/styles/TaskList.style';
 import { GlobalButton } from '../../common/Buttons/GlobalButton';
 import {
+  BoardWrapper,
   EarnedPoints,
   Name,
   ParticipantBox,
@@ -96,9 +101,9 @@ const Invite: React.FC = () => {
 
   return (
     <InviteWrapper>
-      <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
+      <MiddleLogo src={tenexbglogo} Top="80vh" Left="40vh" />
       <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
-      <CardContainer margin="100px 0px 100px 0px">
+      <CardContainer margin="40px 0px ">
         <CardWrapper>
           <SocialLogoBox>
             <SocialLogo
@@ -111,15 +116,11 @@ const Invite: React.FC = () => {
           </SocialLogoBox>
           <CardBox>
             <TitleBox>
-              <Score
-                Fontsize="24px"
-                Lineheight="35.88px"
-                Margin="0px 0px 0px 50px"
-              >
+              <InviteTitle>
                 When they join, both you and your friend will receive 10 points
                 each!
-              </Score>
-              <LetsGoButton margin="8px 50px 0px 800px">
+              </InviteTitle>
+              <LetsGoButton>
                 <GlobalButton onClick={handleGenerateReferralLink}>
                   Invite
                 </GlobalButton>
@@ -136,49 +137,51 @@ const Invite: React.FC = () => {
           </CardBox>
         </CardWrapper>
       </CardContainer>
-      <CardContainer margin="0px 0px 0px 0px">
-        {/* <RankandPointFullBoxWrapper> */}
-        <SocialLogo
-          src={Bigtenex}
-          Position="absolute"
-          margin="15px 0px 0px -10px"
-          Zindex="1"
-        />
-        <Card
-          width="40%"
-          background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
-          Borderradius="24px"
-          Padding="30px 50px 40px 50px"
-        >
-          <RankandPointBoxWrapper>
-            <RankandPointBox>
-              <RankBox>
-                <Rankers Fontsize="24px">List of your friends (20)</Rankers>
-              </RankBox>
-              <PointBox>
-                <Points Fontsize="24px">Earned Points</Points>
-              </PointBox>
-            </RankandPointBox>
+      <BoardWrapper margin="0px">
+        <CardContainer margin="0px 0px 0px 0px">
+          {/* <RankandPointFullBoxWrapper> */}
+          <SocialLogo
+            src={Bigtenex}
+            Position="absolute"
+            margin="15px 0px 0px -10px"
+            Zindex="1"
+          />
+          <Card
+            width="40%"
+            background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
+            Borderradius="24px"
+            Padding="30px 50px 40px 50px"
+          >
+            <RankandPointBoxWrapper>
+              <RankandPointBox>
+                <RankBox>
+                  <Rankers Fontsize="24px">List of your friends (20)</Rankers>
+                </RankBox>
+                <PointBox>
+                  <Points Fontsize="24px">Earned Points</Points>
+                </PointBox>
+              </RankandPointBox>
 
-            <RankandPointValueBox>
-              {players.map((player, index) => (
-                <ParticipantBox key={index}>
-                  <RankBox>
-                    <Score>{index + 1}</Score>
-                  </RankBox>
-                  <Name>
-                    <Score>{player}</Score>
-                  </Name>
-                  <EarnedPoints>
-                    <Score>{playersPoints[index]}</Score>
-                  </EarnedPoints>
-                </ParticipantBox>
-              ))}
-            </RankandPointValueBox>
-          </RankandPointBoxWrapper>
-        </Card>
-        {/* </RankandPointFullBoxWrapper> */}
-      </CardContainer>
+              <RankandPointValueBox>
+                {players.map((player, index) => (
+                  <ParticipantBox key={index}>
+                    <RankBox>
+                      <Score>{index + 1}</Score>
+                    </RankBox>
+                    <Name>
+                      <Score>{player}</Score>
+                    </Name>
+                    <EarnedPoints>
+                      <Score>{playersPoints[index]}</Score>
+                    </EarnedPoints>
+                  </ParticipantBox>
+                ))}
+              </RankandPointValueBox>
+            </RankandPointBoxWrapper>
+          </Card>
+          {/* </RankandPointFullBoxWrapper> */}
+        </CardContainer>
+      </BoardWrapper>
       <Score Margin="20px 0px 0px 0px" textalign="center">
         Rewards are paid at the end of each month based on each user&apos;s
         accrued points

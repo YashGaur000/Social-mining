@@ -10,6 +10,7 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
 
   @media (max-width: 1200px) {
     padding: 15px;
+    
   }
 
   @media (max-width: 1030px) {
@@ -25,6 +26,8 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
 export const TaskBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
   flex-direction: column;
+  
+
   gap: 40px;
   margin-top: -40px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -45,24 +48,22 @@ export const TaskBox = styled.div<{ theme: DefaultTheme }>`
 
 export const TitleBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
-  align-items: center;
+  height:100%;
+  align-items:center;
   justify-content: space-between;
+  padding:0px 30px;
+  gap:20px;
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
 
-  @media (max-width: 1200px) {
-    font-size: 22px;
-  }
+@media (max-width: 768px){
+padding:0px 20px;
+}
 
-  @media (max-width: 1030px) {
-    font-size: 20px;
-  }
+@media (max-width: 500px){
+padding:0px 10px;
+}
 
-  @media (max-width: 768px) {
-    font-size: 18px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
 `;
 
 export const TitleMiniBox = styled.div<{ theme: DefaultTheme }>`
@@ -96,21 +97,14 @@ export const SocialLogo = styled.img<{
 }>`
   z-index: ${({ Zindex }) => Zindex};
   position: ${({ Position }) => Position}; 
-  width: ${({ width }) => width || 'auto'};
-  height: ${({ height }) => height || 'auto'};
+  // width: ${({ width }) => width || 'auto'};
+  // height: ${({ height }) => height || 'auto'};
   margin: ${({ margin }) => margin || '0px'};
+  width:fit-content;
+  height:fit-content;
 
-  @media (max-width: 1200px) {
-    
-  }
 
-    @media (max-width: 1024px) {
-
-  }
-
-    @media (max-width: 768px) {
-  
-  }
+   
 `;
 
 export const LetsGoButton = styled.div<{ 
@@ -121,11 +115,7 @@ export const LetsGoButton = styled.div<{
   margin: ${({ margin }) => margin || '0px'};  
   width: 130px;
 
-  @media (max-width: 768px) {
-    margin: 0px;
-    align-self: flex-end;
-    margin: -70px 0px 0px 0px;
-  }
+ 
 `;
 
 export const ListBox = styled.div<{ theme: DefaultTheme }>`
@@ -203,23 +193,34 @@ export const Score = styled.p<{
   line-height: ${({ Lineheight }) => Lineheight};
   font-size: ${({ Fontsize }) => Fontsize};
   margin: ${({ Margin }) => Margin || '0px'};
+  
   text-align: ${({ textalign }) => textalign || 'center'};
   color: ${({ theme }) => theme.colors.whiteBorder};
-  
-  @media (max-width: 1030px) {
-    font-size: 16px;
-    margin-top: 0px;
+   @media (max-width: 720px){
+   font-size:16px;
+ 
   }
-
-   @media (max-width: 1024px) {
-    font-size: 16px;
-    margin-top: 0px;
+  @media (max-width: 600px){
+   font-size:14px;
+ 
   }
-
-  @media (max-width: 768px) {
-    margin: 0px 0px 0px 0px;
-    font-size: 12px;
-    margin-top: 0px;
-    text-align: left;
+    @media (max-width: 400px){
+   font-size:12px;
+ 
   }
+ 
 `;
+export const CardIndexwrapper=styled.label`
+width:36px;
+text-align:center;
+display:flex;
+justify-content:center;
+@media (max-width: 700px){
+    width:24px;
+ 
+  }
+   @media (max-width: 600px){
+   width:16px;
+ 
+  }
+`
