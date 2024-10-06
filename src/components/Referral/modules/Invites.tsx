@@ -19,6 +19,7 @@ import {
   Name,
   ParticipantBox,
   PointBox,
+  
   Points,
   RankandPointBox,
   RankandPointBoxWrapper,
