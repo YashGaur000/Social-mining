@@ -9,6 +9,7 @@ import {
   LetsGoButton,
   Score,
   SocialLogo,
+  SocialLogoBox,
   TitleBox,
 } from '../../TaskList/styles/TaskList.style';
 import { GlobalButton } from '../../common/Buttons/GlobalButton';
@@ -99,10 +100,12 @@ const Invite: React.FC = () => {
   // };
 
   return (
-    <>
-      <InviteWrapper>
-        <CardContainer margin="30px 0px" padding="0px ">
-          <CardWrapper>
+    <InviteWrapper>
+      <MiddleLogo src={tenexbglogo} Top="80vh" Left="40vh" />
+      <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
+      <CardContainer margin="40px 0px ">
+        <CardWrapper>
+          <SocialLogoBox>
             <SocialLogo
               margin="0px -30px 0px 0px"
               height="100px"
@@ -110,83 +113,80 @@ const Invite: React.FC = () => {
               alt="Side Design"
               Zindex="2"
             />
-
-            <CardBox>
-              <TitleBox>
-                <InviteTitle>
-                  When they join, both you and your friend will receive 10
-                  points each!
-                </InviteTitle>
-                <LetsGoButton>
-                  <GlobalButton onClick={handleGenerateReferralLink}>
-                    Invite
-                  </GlobalButton>
-                  {/* <GlobalButton onClick={handleClick}>
+          </SocialLogoBox>
+          <CardBox>
+            <TitleBox>
+              <InviteTitle>
+                When they join, both you and your friend will receive 10 points
+                each!
+              </InviteTitle>
+              <LetsGoButton>
+                <GlobalButton onClick={handleGenerateReferralLink}>
+                  Invite
+                </GlobalButton>
+                {/* <GlobalButton onClick={handleClick}>
                   connect
                 </GlobalButton> */}
-                </LetsGoButton>
-                {isCopied && (
-                  <Score Margin="10px 0 0 50px" color="green">
-                    Link copied to clipboard!
-                  </Score>
-                )}
-              </TitleBox>
-            </CardBox>
-          </CardWrapper>
-        </CardContainer>
-        <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
-        <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
-        <BoardWrapper margin="0px">
-          <CardContainer margin="0px 0px 0px 0px">
-            {/* <RankandPointFullBoxWrapper> */}
-            <SocialLogo
-              src={Bigtenex}
-              Position="absolute"
-              margin="15px 0px 0px -10px"
-              Zindex="1"
-            />
-            <Card
-              width="40%"
-              background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
-              Borderradius="24px"
-              Padding="30px 50px 40px 50px"
-            >
-              <RankandPointBoxWrapper>
-                <RankandPointBox>
-                  <RankBox>
-                    <Rankers Fontsize="24px">List of your friends (20)</Rankers>
-                  </RankBox>
-                  <PointBox>
-                    <Points Fontsize="24px">Earned Points</Points>
-                  </PointBox>
-                </RankandPointBox>
+              </LetsGoButton>
+              {isCopied && (
+                <Score Margin="10px 0 0 50px" color="green">
+                  Link copied to clipboard!
+                </Score>
+              )}
+            </TitleBox>
+          </CardBox>
+        </CardWrapper>
+      </CardContainer>
+      <BoardWrapper margin="0px">
+        <CardContainer margin="0px 0px 0px 0px">
+          {/* <RankandPointFullBoxWrapper> */}
+          <SocialLogo
+            src={Bigtenex}
+            Position="absolute"
+            margin="15px 0px 0px -10px"
+            Zindex="1"
+          />
+          <Card
+            width="40%"
+            background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
+            Borderradius="24px"
+            Padding="30px 50px 40px 50px"
+          >
+            <RankandPointBoxWrapper>
+              <RankandPointBox>
+                <RankBox>
+                  <Rankers Fontsize="24px">List of your friends (20)</Rankers>
+                </RankBox>
+                <PointBox>
+                  <Points Fontsize="24px">Earned Points</Points>
+                </PointBox>
+              </RankandPointBox>
 
-                <RankandPointValueBox>
-                  {players.map((player, index) => (
-                    <ParticipantBox key={index}>
-                      <RankBox>
-                        <Score>{index + 1}</Score>
-                      </RankBox>
-                      <Name>
-                        <Score>{player}</Score>
-                      </Name>
-                      <EarnedPoints>
-                        <Score>{playersPoints[index]}</Score>
-                      </EarnedPoints>
-                    </ParticipantBox>
-                  ))}
-                </RankandPointValueBox>
-              </RankandPointBoxWrapper>
-            </Card>
-            {/* </RankandPointFullBoxWrapper> */}
-          </CardContainer>
-        </BoardWrapper>
-        <Score Margin="20px 0px 0px 0px" textalign="center">
-          Rewards are paid at the end of each month based on each user&apos;s
-          accrued points
-        </Score>
-      </InviteWrapper>
-    </>
+              <RankandPointValueBox>
+                {players.map((player, index) => (
+                  <ParticipantBox key={index}>
+                    <RankBox>
+                      <Score>{index + 1}</Score>
+                    </RankBox>
+                    <Name>
+                      <Score>{player}</Score>
+                    </Name>
+                    <EarnedPoints>
+                      <Score>{playersPoints[index]}</Score>
+                    </EarnedPoints>
+                  </ParticipantBox>
+                ))}
+              </RankandPointValueBox>
+            </RankandPointBoxWrapper>
+          </Card>
+          {/* </RankandPointFullBoxWrapper> */}
+        </CardContainer>
+      </BoardWrapper>
+      <Score Margin="20px 0px 0px 0px" textalign="center">
+        Rewards are paid at the end of each month based on each user&apos;s
+        accrued points
+      </Score>
+    </InviteWrapper>
   );
 };
 
