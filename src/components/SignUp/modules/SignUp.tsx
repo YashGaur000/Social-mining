@@ -3,6 +3,7 @@ import twitter from "../../../assets/twitter.svg";
 import image from "../../../assets/banner.svg";
 import tokenTitle from "../../../assets/logo.svg";
 import { ConnectWallet } from "../../ConnectWallet"
+import walletimg from '../../../assets/walletIcon.svg';
 
 import {
   ImageContainer,
@@ -10,8 +11,6 @@ import {
   SignUpDetails,
   SignUpTitle,
   SignUpText,
-  SignUpToken,
-  SignUpTokens,
   LogoToken,
   SignUpWrapper,
   SignUpDetailsWrapper,
@@ -19,6 +18,8 @@ import {
   SignUpButtonWrapper,
   SignUpTitleAndTextWrapper,
   SignUpButtonTwitter,
+  SignUpToken,
+  SignUpTokens,
 } from "../styles/SignUp.styles";
 // import { useLocation } from "react-router-dom";
 import axios from "axios";
@@ -61,6 +62,7 @@ const SignUp: React.FC = () => {
       <LogoToken src={tokenTitle}></LogoToken>
 
       <SignUpWrapper>
+
         <SignUpDetails>
           <SignUpDetailsWrapper>
             <SignUpTitleAndTextWrapper>
@@ -68,21 +70,22 @@ const SignUp: React.FC = () => {
               <SignUpText>Join our mission to spread TenEx Message</SignUpText>
             </SignUpTitleAndTextWrapper>
             <SignUpButtonWrapper>
-                <ConnectWallet text={"Sign Up With Wallet"} />
+                <ConnectWallet text={"Sign Up With Wallet"} walletImg={walletimg}/>
               <SignUpButtonTwitter>
-                <TwitterImage src={twitter} />
+                <TwitterImage src={twitter}  />
                 Sign In Twitter
               </SignUpButtonTwitter>
             </SignUpButtonWrapper>
-            <SignUpToken>
+          </SignUpDetailsWrapper>
+          <SignUpToken>
               <SignUpTokens src={token} alt="" />
             </SignUpToken>
-          </SignUpDetailsWrapper>
         </SignUpDetails>
 
         <ImageContainer>
           <Banner src={image} alt="" />
         </ImageContainer>
+
       </SignUpWrapper>
     </>
   );
