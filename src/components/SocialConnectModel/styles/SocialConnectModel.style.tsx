@@ -1,20 +1,17 @@
-import styled from "styled-components";
-import { DefaultTheme } from "../../../styles/Theme";
+import styled from 'styled-components';
+import { DefaultTheme } from '../../../styles/Theme';
 
-
-
-export const DashBoardConnectionCards = styled.div<{display?:string}>`
+export const DashBoardConnectionCards = styled.div<{ display?: string }>`
   width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 10px;
-   display:flex;
-  
+  display: flex;
 
   @media only screen and (max-width: 780px) {
-    width:100%;
+    width: 100%;
     flex-direction: column;
-    display:${({display})=>display ?? "flex"};
+    display: ${({ display }) => display ?? 'flex'};
   }
 `;
 
@@ -27,14 +24,12 @@ export const DashBoardConnectionCard = styled.div`
   width: 20%;
   height: 102px;
   border-radius: 16px;
-  
 
   @media only screen and (max-width: 780px) {
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
     gap: 8px;
-    
   }
 `;
 

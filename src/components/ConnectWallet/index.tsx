@@ -3,9 +3,11 @@ import { useAccount } from '../../hooks/useAccount';
 import { Container, FlexContainer } from './style';
 import { SignUpButtonWallet } from '../SignUp/styles/SignUp.styles';
 import { GlobalButton } from '../common/Buttons/GlobalButton';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-import { NAVIGATION_TIME } from '../../constants/Delay';
+
+// import { useEffect, useState } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { AppDispatch, RootState } from '../../store/store';
+// import { connectWallet } from '../../store/slices/ConnectWalletSlice';
 
 interface ChainProps {
   hasIcon: boolean;
@@ -16,18 +18,20 @@ interface ChainProps {
 }
 
 interface ConnectWalletProps {
-  text?: string
-  width?:string | number
-  height?: string | number
-  walletImg?:string
+  text?: string;
+  width?: string | number;
+  height?: string | number;
+  walletImg?: string;
 }
 
-export const ConnectWallet:React.FC<ConnectWalletProps> = ({text , width , height , walletImg }) => {
-  
+export const ConnectWallet: React.FC<ConnectWalletProps> = ({
+  text,
+  width,
+  height,
+  walletImg,
+}) => {
   const { address } = useAccount();
-  const navigate = useNavigate();
 
-  
   return (
     <ConnectButton.Custom>
       {({
@@ -38,6 +42,8 @@ export const ConnectWallet:React.FC<ConnectWalletProps> = ({text , width , heigh
         authenticationStatus,
         mounted,
       }) => {
+        // const walletAddress = useSelector((state:RootState) => state.wallet.walletAddress);
+        // const dispatch:AppDispatch = useDispatch();
         const ready = mounted && authenticationStatus !== 'loading';
         const connected =
           ready &&
@@ -45,25 +51,17 @@ export const ConnectWallet:React.FC<ConnectWalletProps> = ({text , width , heigh
           chain &&
           (!authenticationStatus || authenticationStatus === 'authenticated');
 
-        
-        
-
-        
-        useEffect(() => {
-          if (connected) {
-           setTimeout(()=>  navigate('/dashboard'),NAVIGATION_TIME)
-          }
-        }, [connected, navigate]);
-
-
         return (
           <Container ready={ready.toString()}>
             {(() => {
               if (!connected) {
                 return (
-                  <SignUpButtonWallet onClick={openConnectModal} style={{ height: height, width: width }}>
+                  <SignUpButtonWallet
+                    onClick={openConnectModal}
+                    style={{ height: height, width: width }}
+                  >
                     <img src={walletImg} alt="" />
-                    {text} 
+                    {text}
                   </SignUpButtonWallet>
                 );
               }
@@ -78,7 +76,10 @@ export const ConnectWallet:React.FC<ConnectWalletProps> = ({text , width , heigh
 
               return (
                 <FlexContainer>
-                  <SignUpButtonWallet onClick={openAccountModal} style={{ height: height, width: width }}>
+                  <SignUpButtonWallet
+                    onClick={openAccountModal}
+                    style={{ height: height, width: width }}
+                  >
                     <img src={walletImg} alt="" />
                     Connected
                   </SignUpButtonWallet>
@@ -87,7 +88,7 @@ export const ConnectWallet:React.FC<ConnectWalletProps> = ({text , width , heigh
             })()}
           </Container>
         );
-      }} 
+      }}
     </ConnectButton.Custom>
   );
 };

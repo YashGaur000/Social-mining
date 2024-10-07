@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { DefaultTheme } from "../../../styles/Theme";
+import styled from 'styled-components';
+import { DefaultTheme } from '../../../styles/Theme';
 
 export const MainContaier = styled.div<{ theme: DefaultTheme }>`
   width: 100vw;
@@ -8,7 +8,6 @@ export const MainContaier = styled.div<{ theme: DefaultTheme }>`
   justify-content: center;
 
   @media only screen and (max-width: 780px) {
-  
   }
 `;
 
@@ -19,11 +18,11 @@ export const Heading = styled.p<{ theme: DefaultTheme }>`
   line-height: 53.82px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   margin-right: 7%;
-  position:relative;
+  position: relative;
 
   @media only screen and (max-width: 780px) {
-    display:none;
-    top:50px;
+    display: none;
+    top: 50px;
   }
 `;
 
@@ -35,7 +34,7 @@ export const SideImage = styled.img`
   height: 80px;
 
   @media only screen and (max-width: 780px) {
-  height:100px;
+    height: 100px;
   }
 `;
 
@@ -50,7 +49,6 @@ export const DashBoardWrapper = styled.div`
     width: 100%;
     height: 74px;
     justify-content: space-between;
-  
   }
 `;
 
@@ -74,8 +72,8 @@ export const DashBoardCard = styled.div`
   align-items: center;
 
   @media only screen and (max-width: 780px) {
-    width:100%;
-    height:99px;
+    width: 100%;
+    height: 99px;
     justify-content: space-between;
   }
 `;
@@ -98,15 +96,14 @@ export const MiddleLogo = styled.img<{
   opacity: ${({ opacity }) => opacity};
   z-index: ${({ Zindex }) => Zindex};
 
-@media only screen and (max-width: 780px) {
-  margin:10px;
-  width:300px;
-  height:400px;
+  @media only screen and (max-width: 780px) {
+    margin: 10px;
+    width: 300px;
+    height: 400px;
   }
 `;
 
 export const DashBoardCards = styled.div`
- 
   width: 100%;
   height: 90vh;
   display: flex;
@@ -115,7 +112,7 @@ export const DashBoardCards = styled.div`
   margin: 40px 100px 1px 100px;
 
   @media only screen and (max-width: 780px) {
-  margin:10px;
+    margin: 10px;
   }
 `;
 

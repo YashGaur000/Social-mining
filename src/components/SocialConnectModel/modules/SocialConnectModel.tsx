@@ -6,23 +6,23 @@ import {
   DashBoardButtonsWrapper,
   DashBoardConnectionImage,
   LoginTickImage,
-} from "../styles/SocialConnectModel.style";
-import twitter from "../../../assets/twitter.svg";
-import discord from "../../../assets/discord.svg";
-import telegram from "../../../assets/telegram.svg";
-import reddit from "../../../assets/reddit.svg";
-import logintick from "../../../assets/logintick.svg";
+} from '../styles/SocialConnectModel.style';
+import twitter from '../../../assets/twitter.svg';
+import discord from '../../../assets/discord.svg';
+import telegram from '../../../assets/telegram.svg';
+import reddit from '../../../assets/reddit.svg';
+import logintick from '../../../assets/logintick.svg';
 
-interface SocialConnectModelProps{
-  display?:string;
+interface SocialConnectModelProps {
+  display?: string;
 }
-const SocialConnectModel:React.FC<SocialConnectModelProps> = ({display}) => {
+const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
   const handleDiscordRedirect = () => {
     const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH;
     if (discordOAuthUrl) {
       window.location.href = discordOAuthUrl;
     } else {
-      console.error("Discord OAuth URL not found in environment variables.");
+      console.error('Discord OAuth URL not found in environment variables.');
     }
   };
 
@@ -31,22 +31,22 @@ const SocialConnectModel:React.FC<SocialConnectModelProps> = ({display}) => {
     if (redditOAuthUrl) {
       window.location.href = redditOAuthUrl;
     } else {
-      console.error("Reddit OAuth URL not found in environment variables.");
+      console.error('Reddit OAuth URL not found in environment variables.');
     }
   };
 
   const handleTelegramConnect = () => {
     const telegramOAuthUrl = import.meta.env.VITE_TELEGRAM_OAUTH;
     if (telegramOAuthUrl) {
-      window.open(telegramOAuthUrl, "_blank");
+      window.open(telegramOAuthUrl, '_blank');
     } else {
-      console.error("URL not found");
+      console.error('URL not found');
     }
   };
 
   return (
     <>
-      <DashBoardConnectionCards display = {display}>
+      <DashBoardConnectionCards display={display}>
         <DashBoardConnectionCard>
           <DashBoardConnectionText>
             Connect with Twitter

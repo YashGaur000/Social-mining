@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { DefaultTheme } from "../../../styles/Theme";
+import styled from 'styled-components';
+import { DefaultTheme } from '../../../styles/Theme';
 
 export const SignUpWrapper = styled.div`
-  width:100%;
+  width: 100%;
   height: 90vh;
 `;
 
@@ -36,30 +36,26 @@ export const LogoToken = styled.img`
   top: 40px;
   left: 60px;
 
-   @media only screen and (max-width: 780px) {
-    top:40px;
-    left:20px;
+  @media only screen and (max-width: 780px) {
+    top: 40px;
+    left: 20px;
   }
 `;
 
 export const SignUpDetailsWrapper = styled.div`
-  gap:6px;
+  gap: 6px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-
-   @media only screen and (max-width:640px) {
-    
-    margin-top:100px;
+  @media only screen and (max-width: 640px) {
+    margin-top: 100px;
   }
-  
 `;
 
 export const SignUpDetails = styled.div`
- 
   width: 50%;
   height: 100%;
   display: flex;
@@ -67,19 +63,14 @@ export const SignUpDetails = styled.div`
   align-items: center;
   justify-content: center;
 
-
-   @media only screen and (max-width: 780px) {
-    
-    width:100%;
+  @media only screen and (max-width: 780px) {
+    width: 100%;
   }
 `;
 
-export const SignUpTitleAndTextWrapper = styled.div` 
-
-@media only screen and (max-width: 780px) {
-    
+export const SignUpTitleAndTextWrapper = styled.div`
+  @media only screen and (max-width: 780px) {
   }
-
 `;
 
 export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
@@ -95,7 +86,6 @@ export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
   font-family: ${({ theme }) => theme.fonts.main};
   display: flex;
   line-height: 71.76px;
-  
 
   @media only screen and (max-width: 1280px) {
     font-size: 2.5rem;
@@ -106,17 +96,14 @@ export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
   }
 
   @media only screen and (max-width: 768px) {
-   
     font-size: 1.8rem;
   }
 
   @media only screen and (max-width: 640px) {
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     font-size: 2.5rem;
   }
-
- 
 `;
 
 export const SignUpText = styled.p<{ theme: DefaultTheme }>`
@@ -129,22 +116,21 @@ export const SignUpText = styled.p<{ theme: DefaultTheme }>`
   line-height: 35.88px;
   text-align: center;
 
-   @media only screen and (max-width: 780px) {
-    font-size:1.2rem;
+  @media only screen and (max-width: 780px) {
+    font-size: 1.2rem;
   }
 
   @media only screen and (max-width: 780px) {
-    font-size:1.2rem;
+    font-size: 1.2rem;
   }
 `;
 
 export const SignUpButtonWrapper = styled.div`
   display: flex;
   gap: 20px;
-  flex-wrap:wrap;
-  justify-content:center;
-  align-items:center;
-   
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
@@ -154,7 +140,6 @@ export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
   height: 56px;
   border-radius: 12px;
   opacity: 0px;
-  
 
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
@@ -167,13 +152,12 @@ export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
   align-items: center;
   gap: 6px;
   justify-content: center;
-  
 
   @media only screen and (max-width: 640px) {
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     width: 350px;
-    height: 56px
+    height: 56px;
   }
 `;
 export const SignUpButtonTwitter = styled.button<{ theme: DefaultTheme }>`
@@ -202,26 +186,23 @@ export const SignUpButtonTwitter = styled.button<{ theme: DefaultTheme }>`
   justify-content: center;
 
   @media only screen and (max-width: 640px) {
-    align-items:center;
-    justify-content:center;
+    align-items: center;
+    justify-content: center;
     width: 350px;
-    height: 56px
+    height: 56px;
   }
 `;
 
 export const SignUpToken = styled.div`
-display:none;
- @media only screen and (max-width: 640px) {
-   display:block;
+  display: none;
+  @media only screen and (max-width: 640px) {
+    display: block;
   }
 `;
 
-
 export const SignUpTokens = styled.img`
-
- @media only screen and (max-width: 640px) {
-   width:240px;
-   margin-top:20px;
+  @media only screen and (max-width: 640px) {
+    width: 240px;
+    margin-top: 20px;
   }
-
 `;
