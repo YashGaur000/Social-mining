@@ -3,6 +3,7 @@ import twitter from '../../../assets/twitter.svg';
 import image from '../../../assets/banner.svg';
 import tokenTitle from '../../../assets/logo.svg';
 import { ConnectWallet } from '../../ConnectWallet';
+import walletimg from '../../../assets/walletIcon.svg';
 
 import {
   ImageContainer,
@@ -10,8 +11,6 @@ import {
   SignUpDetails,
   SignUpTitle,
   SignUpText,
-  SignUpToken,
-  SignUpTokens,
   LogoToken,
   SignUpWrapper,
   SignUpDetailsWrapper,
@@ -19,6 +18,8 @@ import {
   SignUpButtonWrapper,
   SignUpTitleAndTextWrapper,
   SignUpButtonTwitter,
+  SignUpToken,
+  SignUpTokens,
 } from '../styles/SignUp.styles';
 import { useAccount } from '../../../hooks/useAccount';
 import { useDispatch, useSelector } from 'react-redux';
@@ -104,16 +105,19 @@ const SignUp: React.FC = () => {
               <SignUpText>Join our mission to spread TenEx Message</SignUpText>
             </SignUpTitleAndTextWrapper>
             <SignUpButtonWrapper>
-              <ConnectWallet text={'Sign Up With Wallet'} />
+              <ConnectWallet
+                text={'Sign Up With Wallet'}
+                walletImg={walletimg}
+              />
               <SignUpButtonTwitter>
                 <TwitterImage src={twitter} />
                 Sign In Twitter
               </SignUpButtonTwitter>
             </SignUpButtonWrapper>
-            <SignUpToken>
-              <SignUpTokens src={token} alt="" />
-            </SignUpToken>
           </SignUpDetailsWrapper>
+          <SignUpToken>
+            <SignUpTokens src={token} alt="" />
+          </SignUpToken>
         </SignUpDetails>
 
         <ImageContainer>
