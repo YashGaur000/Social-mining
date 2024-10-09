@@ -108,6 +108,7 @@ const SignUp: React.FC = () => {
               <ConnectWallet
                 text={'Sign Up With Wallet'}
                 walletImg={walletimg}
+                page={'signup'}
               />
               <SignUpButtonTwitter>
                 <TwitterImage src={twitter} />

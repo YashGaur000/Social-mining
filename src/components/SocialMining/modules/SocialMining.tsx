@@ -34,7 +34,6 @@ const SocialMining: React.FC<SocialMiningProps> = ({ DashBoardTitle }) => {
         <LogoWrapper>
           <LogoImage src={TenexLogo} onClick={handleLogoClick} />
         </LogoWrapper>
-
         <MainContaier>
           <Heading>
             {showMenu ? 'Connect your Social accounts' : DashBoardTitle}

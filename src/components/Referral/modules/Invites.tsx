@@ -28,7 +28,10 @@ import {
 } from '../../Leaderboard/styles/Leaderboard.style';
 import ReferralSideDesign from '../../../assets/referralsidedesign.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
-import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
+import {
+  MiddleLogo,
+  MobileScreenHeader,
+} from '../../DashBoard/styles/DashBoard.styles';
 import tenexbglogo from '../../../assets/tenexbglogo.svg';
 import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
 import axios from 'axios';
@@ -101,6 +104,7 @@ const Invite: React.FC = () => {
 
   return (
     <InviteWrapper>
+      <MobileScreenHeader>Invite Friends</MobileScreenHeader>
       <MiddleLogo src={tenexbglogo} Top="80vh" Left="40vh" />
       <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
       <CardContainer margin="40px 0px ">

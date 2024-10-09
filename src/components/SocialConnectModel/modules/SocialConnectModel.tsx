@@ -6,12 +6,15 @@ import {
   DashBoardButtonsWrapper,
   DashBoardConnectionImage,
   LoginTickImage,
+  SocialConnectModelImage,
 } from '../styles/SocialConnectModel.style';
 import twitter from '../../../assets/twitter.svg';
 import discord from '../../../assets/discord.svg';
 import telegram from '../../../assets/telegram.svg';
 import reddit from '../../../assets/reddit.svg';
 import logintick from '../../../assets/logintick.svg';
+import sideborder from '../../../assets/sideborder.svg';
+import { MobileScreenHeader } from '../../DashBoard/styles/DashBoard.styles';
 
 interface SocialConnectModelProps {
   display?: string;
@@ -47,7 +50,10 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
   return (
     <>
       <DashBoardConnectionCards display={display}>
+        <MobileScreenHeader>Connect your social accounts</MobileScreenHeader>
+
         <DashBoardConnectionCard>
+          <SocialConnectModelImage src={sideborder} alt="" />
           <DashBoardConnectionText>
             Connect with Twitter
           </DashBoardConnectionText>
@@ -63,6 +69,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
         </DashBoardConnectionCard>
 
         <DashBoardConnectionCard>
+          <SocialConnectModelImage src={sideborder} alt="" />
           <DashBoardConnectionText>
             Connect with Discord
           </DashBoardConnectionText>
@@ -75,6 +82,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
         </DashBoardConnectionCard>
 
         <DashBoardConnectionCard>
+          <SocialConnectModelImage src={sideborder} alt="" />
           <DashBoardConnectionText>
             Connect with Telegram
           </DashBoardConnectionText>
@@ -87,6 +95,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
         </DashBoardConnectionCard>
 
         <DashBoardConnectionCard>
+          <SocialConnectModelImage src={sideborder} alt="" />
           <DashBoardConnectionText>Connect with Reddit</DashBoardConnectionText>
           <DashBoardConnectionButton onClick={handleRedditRedirect}>
             <DashBoardButtonsWrapper>

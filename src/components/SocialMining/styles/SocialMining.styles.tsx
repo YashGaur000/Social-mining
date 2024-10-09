@@ -6,6 +6,9 @@ export const Main1container = styled.section<{
   display: flex;
   align-items: center;
   width: 100%;
+
+  @media only screen and (max-width: 780px) {
+  }
 `;
 
 export const MenuIcon = styled.div`

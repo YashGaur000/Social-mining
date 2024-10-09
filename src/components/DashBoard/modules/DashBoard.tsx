@@ -8,7 +8,7 @@ import {
   DashBoardWrapper,
   MiddleLogo,
   SideImageWrapper,
-  DashBoardCardsWrapper,
+  MobileScreenHeader,
 } from '../styles/DashBoard.styles';
 import { useState } from 'react';
 import AddressPopup from '../../LinkwithRewards/modules/AddressPopup';
@@ -57,60 +57,59 @@ const DashBoard: React.FC = () => {
           alt=""
         />
 
-        <DashBoardCardsWrapper>
-          <DashBoardCard>
-            <SideImageWrapper>
-              <SideImage src={sideborder} alt="sideImage" />
-            </SideImageWrapper>
-            <DashBoardWrapper>
-              <DashBoardText>
-                View Top Contributors in the Community
-              </DashBoardText>
-              <DashBoardButton onClick={handleLeaderboardClick}>
-                View
-              </DashBoardButton>
-            </DashBoardWrapper>
-          </DashBoardCard>
+        <MobileScreenHeader>DashBoard</MobileScreenHeader>
 
-          <DashBoardCard>
-            <SideImageWrapper>
-              <SideImage src={sideborder} alt="sideImage" />
-            </SideImageWrapper>
-            <DashBoardWrapper>
-              <DashBoardText>
-                Browse the task list, complete challenges, and earn points!
-              </DashBoardText>
-              <DashBoardButton onClick={handleTasksClick}>
-                View Tasks
-              </DashBoardButton>
-            </DashBoardWrapper>
-          </DashBoardCard>
-          <DashBoardCard>
-            <SideImageWrapper>
-              <SideImage src={sideborder} alt="sideImage" />
-            </SideImageWrapper>
-            <DashBoardWrapper>
-              <DashBoardText>Connect your wallet to claim $TENEX</DashBoardText>
-              <ConnectWallet
-                text={address ? 'Disconnected' : 'Connect'}
-                height={'40px'}
-                width={'129px'}
-              />
-            </DashBoardWrapper>
-          </DashBoardCard>
+        <DashBoardCard>
+          <SideImageWrapper>
+            <SideImage src={sideborder} alt="sideImage" />
+          </SideImageWrapper>
+          <DashBoardWrapper>
+            <DashBoardText>
+              Browse the task list, complete challenges, and earn points!
+            </DashBoardText>
+            <DashBoardButton onClick={handleTasksClick}>
+              View Tasks
+            </DashBoardButton>
+          </DashBoardWrapper>
+        </DashBoardCard>
+        <DashBoardCard>
+          <SideImageWrapper>
+            <SideImage src={sideborder} alt="sideImage" />
+          </SideImageWrapper>
+          <DashBoardWrapper>
+            <DashBoardText>
+              View Top Contributors in the Community
+            </DashBoardText>
+            <DashBoardButton onClick={handleLeaderboardClick}>
+              View
+            </DashBoardButton>
+          </DashBoardWrapper>
+        </DashBoardCard>
 
-          <DashBoardCard>
-            <SideImageWrapper>
-              <SideImage src={sideborder} alt="sideImage" />
-            </SideImageWrapper>
-            <DashBoardWrapper>
-              <DashBoardText>Invite friends and earn points!</DashBoardText>
-              <DashBoardButton onClick={handleInviteClick}>
-                Invite
-              </DashBoardButton>
-            </DashBoardWrapper>
-          </DashBoardCard>
-        </DashBoardCardsWrapper>
+        <DashBoardCard>
+          <SideImageWrapper>
+            <SideImage src={sideborder} alt="sideImage" />
+          </SideImageWrapper>
+          <DashBoardWrapper>
+            <DashBoardText>Connect your wallet to claim $TENEX</DashBoardText>
+            <ConnectWallet
+              text={address ? 'Disconnected' : 'Connect'}
+              page={'dashboard'}
+            />
+          </DashBoardWrapper>
+        </DashBoardCard>
+
+        <DashBoardCard>
+          <SideImageWrapper>
+            <SideImage src={sideborder} alt="sideImage" />
+          </SideImageWrapper>
+          <DashBoardWrapper>
+            <DashBoardText>Invite friends and earn points!</DashBoardText>
+            <DashBoardButton onClick={handleInviteClick}>
+              Invite
+            </DashBoardButton>
+          </DashBoardWrapper>
+        </DashBoardCard>
 
         <DashBoardFooterText>
           Airdrops will be distributed at the end of each month based on each
