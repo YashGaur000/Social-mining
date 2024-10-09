@@ -12,11 +12,60 @@ import discord from '../../../assets/discord.svg';
 import telegram from '../../../assets/telegram.svg';
 import reddit from '../../../assets/reddit.svg';
 import logintick from '../../../assets/logintick.svg';
+import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { clearAuthState, setAuthState } from '../../../store/slices/AuthSlice';
+import axios from 'axios';
+import { useAccount } from '../../../hooks/useAccount';
+import useCookieValue from '../../../utils/useGetCookie';
 
 interface SocialConnectModelProps {
   display?: string;
 }
 const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { address } = useAccount();
+  const token = useCookieValue('token');
+  const Address: string = address as string;
+  const handleTwitterLogin = async () => {
+    try {
+      console.log('clicked');
+
+      const response = await axios.post(
+        'http://localhost:3000/api/users/login',
+        { Address },
+        { withCredentials: true }
+      );
+      const data = response.data;
+      if (data.authorizationUrl) {
+        window.location.href = data.authorizationUrl;
+      }
+    } catch (error) {
+      console.error('Failed to initiate Twitter login:', error);
+    }
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const status = urlParams.get('status');
+
+    if (status === 'success') {
+      dispatch(
+        setAuthState({
+          isAuthenticated: true,
+          accessToken: token,
+          userInfo: null,
+        })
+      );
+      navigate('/dashboard');
+    } else if (status === 'failure') {
+      dispatch(clearAuthState());
+    }
+  }, [location, dispatch, navigate]);
+
   const handleDiscordRedirect = () => {
     const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH;
     if (discordOAuthUrl) {
@@ -52,7 +101,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             Connect with Twitter
           </DashBoardConnectionText>
           <DashBoardConnectionButton>
-            <DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper onClick={handleTwitterLogin}>
               <DashBoardConnectionImage src={twitter} />
             </DashBoardButtonsWrapper>
             <DashBoardButtonsWrapper>connect</DashBoardButtonsWrapper>
