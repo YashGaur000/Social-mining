@@ -39,6 +39,7 @@ import {
   SocialLogo,
   CardIndexwrapper,
 } from '../../TaskList/styles/TaskList.style';
+import { MobileScreenHeader } from '../../DashBoard/styles/DashBoard.styles';
 // import { MiddleLogo } from "../../DashBoard/styles/DashBoard.styles";
 // import { StyledButton } from "../../common/Buttons/GradientButton";
 
@@ -69,6 +70,7 @@ const Leaderboard: React.FC = () => {
 
   return (
     <BoardWrapper margin="40px 0px 0px 0px">
+      <MobileScreenHeader>Leaderboard</MobileScreenHeader>
       {/* <SocialLogo src={tenexbglogo} Position='absolute' margin='370px 0px 0px -600px'/>
             <SocialLogo src={tenexbglogo2} Position='absolute' margin='480px 0px 0px 400px'/> */}
       <SocialLogo
