@@ -50,8 +50,8 @@ export const SignUpDetailsWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  @media only screen and (max-width: 640px) {
-    margin-top: 100px;
+  @media only screen and (max-width: 580px) {
+    margin-top: 60px;
   }
 `;
 
@@ -99,10 +99,12 @@ export const SignUpTitle = styled.h1<{ theme: DefaultTheme }>`
     font-size: 1.8rem;
   }
 
-  @media only screen and (max-width: 640px) {
+  @media only screen and (max-width: 580px) {
+    width: 352px;
+    height: 52px;
     align-items: center;
     justify-content: center;
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
 `;
 
@@ -117,11 +119,13 @@ export const SignUpText = styled.p<{ theme: DefaultTheme }>`
   text-align: center;
 
   @media only screen and (max-width: 780px) {
+    width: 380px;
     font-size: 1.2rem;
   }
 
-  @media only screen and (max-width: 780px) {
-    font-size: 1.2rem;
+  @media only screen and (max-width: 580px) {
+    width: 380px;
+    font-size: 1.1rem;
   }
 `;
 
@@ -133,14 +137,19 @@ export const SignUpButtonWrapper = styled.div`
   align-items: center;
 `;
 
-export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
+export const SignUpButtonWallet = styled.button<{
+  theme: DefaultTheme;
+  width?: string;
+  height?: string;
+  margin?: string;
+}>`
   background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
   border: none;
-  width: 224px;
-  height: 56px;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
+  margin: ${({ margin }) => margin};
   border-radius: 12px;
   opacity: 0px;
-
   color: ${({ theme }) => theme.colors.whiteBorder};
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 1rem;
@@ -153,10 +162,17 @@ export const SignUpButtonWallet = styled.button<{ theme: DefaultTheme }>`
   gap: 6px;
   justify-content: center;
 
-  @media only screen and (max-width: 640px) {
+  @media only screen and (max-width: 740px) {
     align-items: center;
     justify-content: center;
     width: 350px;
+    height: 56px;
+  }
+
+  @media only screen and (max-width: 580px) {
+    align-items: center;
+    justify-content: center;
+    width: 320px;
     height: 56px;
   }
 `;
@@ -185,10 +201,17 @@ export const SignUpButtonTwitter = styled.button<{ theme: DefaultTheme }>`
   gap: 6px;
   justify-content: center;
 
-  @media only screen and (max-width: 640px) {
+  @media only screen and (max-width: 780px) {
     align-items: center;
     justify-content: center;
     width: 350px;
+    height: 56px;
+  }
+
+  @media only screen and (max-width: 580px) {
+    align-items: center;
+    justify-content: center;
+    width: 320px;
     height: 56px;
   }
 `;
