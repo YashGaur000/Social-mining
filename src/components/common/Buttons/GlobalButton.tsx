@@ -20,14 +20,14 @@ export const GlobalButton = styled.button<{
   font-size: 16px;
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
   margin: 20px 0px;
-  transition: all 0.3s ease; 
+  transition: all 0.3s ease;
 
   &:hover {
-    opacity: 0.9; 
-    transform: scale(1.05); 
+    opacity: 0.9;
+    transform: scale(1.05);
   }
 
-    &:focus {
+  &:focus {
     outline: none;
   }
 
@@ -35,6 +35,10 @@ export const GlobalButton = styled.button<{
     padding: 6px 12px;
     font-size: 16px;
     margin-top: 10px;
+  }
+  @media (max-width: 580px) {
+    font-size: 10px;
+    width: 90px;
   }
 `;
 
