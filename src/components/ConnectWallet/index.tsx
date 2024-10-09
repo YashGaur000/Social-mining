@@ -40,18 +40,14 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
         authenticationStatus,
         mounted,
       }) => {
+        // const walletAddress = useSelector((state:RootState) => state.wallet.walletAddress);
+        // const dispatch:AppDispatch = useDispatch();
         const ready = mounted && authenticationStatus !== 'loading';
         const connected =
           ready &&
           address &&
           chain &&
           (!authenticationStatus || authenticationStatus === 'authenticated');
-
-        // useEffect(() => {
-        //   if (connected) {
-        //     setTimeout(() => navigate('/dashboard'), NAVIGATION_TIME);
-        //   }
-        // }, [connected, navigate]);
 
         return (
           <Container ready={ready.toString()}>

@@ -21,49 +21,82 @@ import {
   SignUpToken,
   SignUpTokens,
 } from '../styles/SignUp.styles';
-// import { useLocation } from "react-router-dom";
-import axios from 'axios';
+import { useAccount } from '../../../hooks/useAccount';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store/store';
 import { useEffect } from 'react';
+import { connectWallet } from '../../../store/slices/ConnectWalletSlice';
+import toast, { Toaster } from 'react-hot-toast';
+import { useDisconnect } from 'wagmi';
 import { useNavigate } from 'react-router-dom';
+
+// import { useLocation } from "react-router-dom";
+// import axios from "axios";
+// import { useEffect } from "react";
 
 // interface SignUpprops{
 //   code: string;
 // }
 
 const SignUp: React.FC = () => {
-  const navigate = useNavigate();
+  const { address } = useAccount();
 
-  const twitterHandle = () => {
-    navigate('/dashboard');
-  };
+  const { disconnect } = useDisconnect();
+  const Navigate = useNavigate();
+
+  const walletAddress = useSelector(
+    (state: RootState) => state.wallet.walletAddress
+  );
+  const dispatch: AppDispatch = useDispatch();
+
+  // useEffect(() => {
+
+  //   const params = new URLSearchParams(location.search);
+  //   const authCode = params.get('code');
+  //   console.log(location.search,authCode);
+  //   if (authCode) {
+  //     sendCodeToBackend(authCode);
+  //   }
+
+  // },[])
+
+  // const sendCodeToBackend = async (code: string) => {
+  //   try {
+  //     const response = await axios.post('http://localhost:3000/api/users/register', { code });
+
+  //     console.log("DiscordResponseData****",response.data); // Handle response from the backend
+  //     localStorage.setItem("userId",response.data.data);
+  //   } catch (error) {
+  //     console.error('Error sending code to backend:', error);
+  //   }
+  // };
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const authCode = params.get('code');
-    console.log(location.search, authCode);
-    if (authCode) {
-      sendCodeToBackend(authCode);
-    }
-  }, []);
+    const wallet = async () => {
+      if (address) {
+        try {
+          if (!walletAddress)
+            await dispatch(connectWallet(address as string)).unwrap();
+          toast.success('Wallet Connected Sucessfully');
+          Navigate('/dashboard');
+        } catch (err) {
+          setTimeout(() => {
+            toast.error('Failed to connect wallet');
+          }, 2000);
 
-  const sendCodeToBackend = async (code: string) => {
-    try {
-      const response = await axios.post(
-        'http://localhost:3000/api/users/register',
-        { code }
-      );
+          console.error('Failed to connect wallet:', err);
+          disconnect();
+        }
+      }
+    };
 
-      console.log('DiscordResponseData****', response.data); // Handle response from the backend
-      localStorage.setItem('userId', response.data.data);
-    } catch (error) {
-      console.error('Error sending code to backend:', error);
-    }
-  };
+    void wallet();
+  }, [address, dispatch]);
 
   return (
     <>
       <LogoToken src={tokenTitle}></LogoToken>
-
+      <Toaster position="top-center" reverseOrder={false} />
       <SignUpWrapper>
         <SignUpDetails>
           <SignUpDetailsWrapper>
@@ -78,7 +111,7 @@ const SignUp: React.FC = () => {
                 page={'signup'}
               />
               <SignUpButtonTwitter>
-                <TwitterImage src={twitter} onClick={twitterHandle} />
+                <TwitterImage src={twitter} />
                 Sign In Twitter
               </SignUpButtonTwitter>
             </SignUpButtonWrapper>

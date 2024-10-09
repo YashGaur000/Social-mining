@@ -91,9 +91,7 @@ const DashBoard: React.FC = () => {
             <SideImage src={sideborder} alt="sideImage" />
           </SideImageWrapper>
           <DashBoardWrapper>
-            <DashBoardText>
-              View Top Contributors in the Community{' '}
-            </DashBoardText>
+            <DashBoardText>Connect your wallet to claim $TENEX</DashBoardText>
             <ConnectWallet
               text={address ? 'Disconnected' : 'Connect'}
               page={'dashboard'}
