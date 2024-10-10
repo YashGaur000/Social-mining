@@ -20,6 +20,9 @@ export const TaskBoxFullWrapper = styled.div<{ theme: DefaultTheme }>`
     padding: 5px;
     width: 100%;
   }
+  @media (max-width: 580px) {
+    width: 100%;
+  }
 `;
 
 export const TaskBox = styled.div<{ theme: DefaultTheme }>`
@@ -42,24 +45,36 @@ export const TaskBox = styled.div<{ theme: DefaultTheme }>`
   @media (max-width: 768px) {
     gap: 15px;
   }
+  @media (max-width: 580px) {
+    //  border:2px solid crimson;
+
+    gap: 15px;
+  }
+`;
+export const TitleBox1 = styled.div`
+  display: flex;
+  align-items: center;
+
+  @media (max-width: 580px) {
+    gap: 8px;
+  }
 `;
 
 export const TitleBox = styled.div<{ theme: DefaultTheme }>`
   display: flex;
-  height: 100%;
-  align-items: center;
+  // margin-top:40px;
   justify-content: space-between;
-  padding: 0px 30px;
-  gap: 20px;
+  // padding: 0px 30px;
+  // gap: 20px;
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
 
   @media (max-width: 768px) {
-    padding: 0px 20px;
   }
 
-  @media (max-width: 500px) {
-    padding: 0px 10px;
+  @media (max-width: 580px) {
+    width: 100%;
+    margin-top: 3px;
   }
 `;
 
@@ -91,14 +106,125 @@ export const SocialLogo = styled.img<{
   width?: string;
   height?: string;
   Zindex?: string;
+  expand?: boolean;
+  cardType?:
+    | 'twitter'
+    | 'discord'
+    | 'telegram'
+    | 'exchange'
+    | 'vedio'
+    | undefined;
 }>`
   z-index: ${({ Zindex }) => Zindex};
   position: ${({ Position }) => Position};
-  // width: ${({ width }) => width || 'auto'};
-  // height: ${({ height }) => height || 'auto'};
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
   margin: ${({ margin }) => margin || '0px'};
-  width: fit-content;
-  height: fit-content;
+
+  @media (max-width: 580px) {
+    position: absolute;
+    left: 2px;
+
+    height: ${({ expand, cardType }) => {
+      switch (cardType) {
+        case 'twitter':
+          return expand ? '250px' : '180px';
+        case 'discord':
+          return expand ? '235px' : '180px';
+        case 'telegram':
+          return expand ? '245px' : '190px';
+        case 'exchange':
+          return expand ? '200px' : '180px';
+        case 'vedio':
+          return expand ? '260px' : '190px';
+        default:
+          return expand ? '228px' : '180px';
+      }
+    }};
+  }
+
+  // width: fit-content;
+  // height: fit-content;
+`;
+
+export const SocialCheckLogo = styled.img<{
+  Position?: string;
+  theme: DefaultTheme;
+  margin?: string;
+  width?: string;
+  height?: string;
+  Zindex?: string;
+}>`
+  z-index: ${({ Zindex }) => Zindex};
+  position: ${({ Position }) => Position};
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
+  margin: ${({ margin }) => margin || '0px'};
+
+  @media (max-width: 1200px) {
+  }
+
+  @media (max-width: 1024px) {
+  }
+
+  @media (max-width: 580px) {
+    width: 12px;
+  }
+`;
+
+export const SocialLogoHeading = styled.img<{
+  Position?: string;
+  theme: DefaultTheme;
+  margin?: string;
+  width?: string;
+  height?: string;
+  Zindex?: string;
+  mobileMargin?: string;
+}>`
+  z-index: ${({ Zindex }) => Zindex};
+  position: ${({ Position }) => Position};
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
+  margin: ${({ margin }) => margin || '0px'};
+
+  @media (max-width: 1200px) {
+  }
+
+  @media (max-width: 1024px) {
+  }
+
+  @media (max-width: 580px) {
+    margin: ${({ mobileMargin }) => mobileMargin || '0px'};
+    width: 16px;
+  }
+`;
+
+export const ScoreHeading = styled.p<{
+  theme: DefaultTheme;
+  Margin?: string;
+  textalign?: string;
+  Fontsize?: string;
+  Lineheight?: string;
+  smlineheight?: string;
+  isMargin?: string;
+}>`
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
+  line-height: ${({ Lineheight }) => Lineheight};
+  font-size: ${({ Fontsize }) => Fontsize};
+  margin: ${({ Margin }) => Margin || '0px'};
+  display: flex;
+  text-align: ${({ textalign }) => textalign || 'center'};
+  color: ${({ theme }) => theme.colors.whiteBorder};
+  @media (max-width: 720px) {
+    font-size: 16px;
+  }
+  @media (max-width: 580px) {
+    line-height: ${({ smlineheight }) => smlineheight || '20.93px'};
+    text-align: ${({ textalign }) => textalign || 'start'};
+    margin: ${({ isMargin }) => isMargin || '0px'};
+    font-size: 12px;
+  }
 `;
 
 export const LetsGoButton = styled.div<{
@@ -108,10 +234,15 @@ export const LetsGoButton = styled.div<{
   display: flex;
   margin: ${({ margin }) => margin || '0px'};
   width: 130px;
+
+  @media (max-width: 580px) {
+    margin-right: -1px;
+    width: 80px;
+  }
 `;
 
 export const ListBox = styled.div<{ theme: DefaultTheme }>`
-  display: flex;
+  // display: flex;
   font-size: 20px;
   line-height: 30px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -131,6 +262,10 @@ export const ListBox = styled.div<{ theme: DefaultTheme }>`
     font-size: 14px;
     line-height: 24px;
   }
+  @media (max-width: 580px) {
+    font-size: 14px;
+    line-height: 24px;
+  }
 `;
 
 export const List = styled.ul`
@@ -142,14 +277,16 @@ export const List = styled.ul`
   //   margin-bottom: 15px;
   // }
 
-  @media (max-width: 768px) {
+  @media (max-width: 580px) {
     margin-bottom: 15px;
+    padding-left: 2px;
   }
 `;
 
 export const ListItem = styled.li<{
   theme: DefaultTheme;
   alignitems?: string;
+  hideOnMobile?: boolean;
 }>`
   display: flex;
   align-items: ${({ alignitems }) => alignitems || 'center'};
@@ -157,18 +294,23 @@ export const ListItem = styled.li<{
   margin-bottom: 10px;
 
   @media (max-width: 1200px) {
-    gap: 8px;
     margin-bottom: 8px;
   }
 
   @media (max-width: 1030px) {
-    gap: 6px;
     margin-bottom: 6px;
   }
 
-  @media (max-width: 768px) {
-    gap: 5px;
-    margin-bottom: 5px;
+  @media (max-width: 580px) {
+    text-align: start;
+  }
+
+  @media (max-width: 580px) {
+    ${({ hideOnMobile }) =>
+      hideOnMobile &&
+      `
+      display: none;
+    `}
   }
 `;
 
@@ -178,6 +320,8 @@ export const Score = styled.p<{
   textalign?: string;
   Fontsize?: string;
   Lineheight?: string;
+  smfontsize?: string;
+  smlineheight?: string;
 }>`
   font-family: ${({ theme }) => theme.fonts.main};
   font-weight: ${({ theme }) => theme.fontWeights.regular};
@@ -190,13 +334,48 @@ export const Score = styled.p<{
   @media (max-width: 720px) {
     font-size: 16px;
   }
-  @media (max-width: 600px) {
-    font-size: 14px;
+  @media (max-width: 580px) {
+    font-size: ${({ smfontsize }) => smfontsize || '10px'};
+    line-height: ${({ smlineheight }) => smlineheight || '14.95px'};
+    text-align: ${({ textalign }) => textalign || 'start'};
   }
   @media (max-width: 400px) {
-    font-size: 12px;
+    font-size: ${({ smfontsize }) => smfontsize || '10px'};
+    line-height: ${({ smlineheight }) => smlineheight || '14.95px'};
+    text-align: ${({ textalign }) => textalign || 'start'};
   }
 `;
+
+export const ViewMoreButton = styled.button<{ theme: DefaultTheme }>`
+  display: none;
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-size: 14px;
+  font-weight: 300;
+
+  line-height: 14.95px;
+  float: right;
+  border: none;
+  cursor: pointer;
+
+  background-image: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    outline: none;
+  }
+
+  @media (max-width: 580px) {
+    display: block;
+    font-size: 14px;
+  }
+`;
+
 export const CardIndexwrapper = styled.label`
   width: 36px;
   text-align: center;
