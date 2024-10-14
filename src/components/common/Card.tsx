@@ -63,7 +63,7 @@ export const CardBox = styled.div<{
   display: flex;
   flex-direction: column;
   background: ${({ theme }) => theme.colors.card};
-  border-radius: 30px 10px 10px 30px;
+  border-radius: 20px 10px 10px 20px;
 
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => (margin ? margin : '0px')};
@@ -75,20 +75,16 @@ export const CardBox = styled.div<{
   // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
   box-shadow: ${({ Boxshadow }) => Boxshadow};
 
-  //    @media (max-width: 750px) {
-  //      width:100%;
-  //    padding:30px;
-  //   }
-  //  @media (max-width: 600px) {
-
-  //     padding: 15px;
-
-  //   }
-  // @media (max-width: 500px) {
-
-  //     padding: 15px;
-
-  //   }
+  @media (max-width: 750px) {
+    padding: 30px;
+  }
+  @media (max-width: 600px) {
+    padding: 16px;
+  }
+  @media (max-width: 580px) {
+    margin-left: 3px;
+    gap: 12px;
+  }
 `;
 
 export const CardWrapper = styled.div<{
@@ -104,7 +100,7 @@ export const CardWrapper = styled.div<{
 }>`
   display: flex;
   width: 100%;
-  //  position: relative;
+  position: relative;
   // background-color: ${({ theme }) => theme.colors.background};
   border-radius: 10px 20px 20px 10px;
   padding: 0px;
@@ -136,11 +132,17 @@ export const CardWrapper = styled.div<{
     // border-radius: 10px;
   }
 
-  @media (max-width: 768px) {
-    // margin-top: 10px;
-    // grid-template-columns: none;
+  @media (max-width: 700px) {
+    margin-top: 10px;
+    grid-template-columns: none;
+    justify-content: center;
+    //  border-radius: 10px;
+  }
+  @media (max-width: 580px) {
+    margin-top: 10px;
+    grid-template-columns: none;
     // justify-content: center;
-    // border-radius: 10px;
+    border-radius: 10px;
   }
 `;
 

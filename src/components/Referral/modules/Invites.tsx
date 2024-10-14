@@ -34,7 +34,6 @@ import {
 } from '../../DashBoard/styles/DashBoard.styles';
 import tenexbglogo from '../../../assets/tenexbglogo.svg';
 import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
-import axios from 'axios';
 // import axios from "axios";
 
 const Invite: React.FC = () => {
@@ -71,36 +70,26 @@ const Invite: React.FC = () => {
 
   const handleGenerateReferralLink = async () => {
     try {
-      const discordId = localStorage.getItem('userId');
+      // const discordId = localStorage.getItem('userId');
 
-      const response = await axios.post(
-        'http://localhost:3000/api/users/referral',
-        { discordId }
-      );
-      console.log(response.data.email);
+      // const response = await axios.post(
+      //   'http://localhost:3000/api/users/referral',
+      //   { discordId }
+      // );
+      // console.log(response.data.email);
+
+      const referralLink = localStorage.getItem('referralLink');
+      if (referralLink) {
+        await navigator.clipboard.writeText(referralLink);
+        setIsCopied(true);
+        setTimeout(() => {
+          setIsCopied(false);
+        }, 2000);
+      }
     } catch (error) {
       console.log(error);
     }
   };
-
-  // const copyToClipboard = async () => {
-  //   const link = import.meta.env.VITE_REFERRAL;
-
-  //   if (!link) {
-  //     console.error('Referral link is not defined');
-  //     return;
-  //   }
-
-  //   try {
-  //     await navigator.clipboard.writeText(link);
-  //     setIsCopied(true);
-  //     setTimeout(() => {
-  //       setIsCopied(false);
-  //     }, 2000);
-  //   } catch (err) {
-  //     console.error('Failed to copy: ', err);
-  //   }
-  // };
 
   return (
     <InviteWrapper>
