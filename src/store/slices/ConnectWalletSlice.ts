@@ -22,6 +22,8 @@ export const connectWallet = createAsyncThunk(
       'http://localhost:3000/api/users/connectwallet',
       { address }
     );
+    const { referralLink } = response.data;
+    localStorage.setItem('referralLink', referralLink);
     console.log(response.data);
 
     return response.data;
