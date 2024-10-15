@@ -20,38 +20,33 @@ export const Card = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  background: ${({ theme, background }) => (background ? background : theme.colors.card)};
+  background: ${({ theme, background }) =>
+    background ? background : theme.colors.card};
   // border-radius: 16px;
-  border-radius: ${({ Borderradius }) => (Borderradius ? Borderradius : '16px')};
-  padding: ${({ Padding }) => Padding ?? '20px' };
+  border-radius: ${({ Borderradius }) =>
+    Borderradius ? Borderradius : '16px'};
+  padding: ${({ Padding }) => Padding ?? '20px'};
   margin: ${({ margin }) => (margin ? margin : '0px')};
   radius: ${({ Radius }) => (Radius ? Radius : '0px')};
   width: ${({ width }) => (width ? width : '100%')};
   height: ${({ height }) => (height ? height : '')};
   text-align: center;
-  color: ${({ theme }) => theme.colors.text}; 
+  color: ${({ theme }) => theme.colors.text};
   // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
   box-shadow: ${({ Boxshadow }) => Boxshadow};
   opacity: ${({ Opacity }) => Opacity};
-
+  width: 100%;
   border: ${({ Border }) => Border ?? '2px solid transparent'};
-  
-  
 
-  @media (max-width: 1024px) {
-    width: 350px;
+  @media (max-width: 750px) {
+    width: 100%;
+    padding: 25px;
   }
-
-  @media (max-width: 900px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
+  @media (max-width: 600px) {
+    padding: 15px;
   }
-
-  @media (max-width: 768px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
+  @media (max-width: 500px) {
+    padding: 15px;
   }
 `;
 
@@ -63,14 +58,14 @@ export const CardBox = styled.div<{
   margin?: string;
   Radius?: string;
   Boxshadow?: string;
-  Padding?: string;
+  padding?: string;
 }>`
-  
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.colors.card };
-  border-radius: 10px;
-  padding: 0px;
+  background: ${({ theme }) => theme.colors.card};
+  border-radius: 30px 10px 10px 30px;
+
+  padding: ${({ padding }) => padding};
   margin: ${({ margin }) => (margin ? margin : '0px')};
   radius: ${({ Radius }) => (Radius ? Radius : '0px')};
   width: ${({ width }) => (width ? width : '100%')};
@@ -79,25 +74,22 @@ export const CardBox = styled.div<{
   color: ${({ theme }) => theme.colors.text};
   // box-shadow: -10px 0px 0px rgba(22, 192, 98, 1);
   box-shadow: ${({ Boxshadow }) => Boxshadow};
-  
 
-  @media (max-width: 1024px) {
-    width: 350px;
-  }
+  //    @media (max-width: 750px) {
+  //      width:100%;
+  //    padding:30px;
+  //   }
+  //  @media (max-width: 600px) {
 
-  @media (max-width: 900px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
-  }
+  //     padding: 15px;
 
-  @media (max-width: 768px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
-  }
+  //   }
+  // @media (max-width: 500px) {
+
+  //     padding: 15px;
+
+  //   }
 `;
-
 
 export const CardWrapper = styled.div<{
   theme: DefaultTheme;
@@ -112,12 +104,12 @@ export const CardWrapper = styled.div<{
 }>`
   display: flex;
   width: 100%;
-//  position: relative;
+  //  position: relative;
   // background-color: ${({ theme }) => theme.colors.background};
   border-radius: 10px 20px 20px 10px;
-  padding: 0px 0px 0px 7px;
-  // box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 0px;
 
+  justify-content: space-between;
   &:after {
     content: '';
     position: absolute;
@@ -125,33 +117,35 @@ export const CardWrapper = styled.div<{
     bottom: -10px;
     left: -10px;
     right: -10px;
-    background: linear-gradient(180deg, rgba(15, 27, 59, 1) 0%, rgba(35, 41, 56, 1) 100%);
+    background: linear-gradient(
+      180deg,
+      rgba(15, 27, 59, 1) 0%,
+      rgba(35, 41, 56, 1) 100%
+    );
     border-radius: inherit;
     z-index: -1;
     filter: blur(10px);
   }
-    @media (max-width: 1024px) {
-    width: 350px;
+  @media (max-width: 1024px) {
   }
 
   @media (max-width: 900px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
-    border-radius: 10px;
+    // margin-top: 10px;
+    // grid-template-columns: none;
+    // justify-content: center;
+    // border-radius: 10px;
   }
 
   @media (max-width: 768px) {
-    margin-top: 10px;
-    grid-template-columns: none;
-    justify-content: center;
-    border-radius: 10px;
+    // margin-top: 10px;
+    // grid-template-columns: none;
+    // justify-content: center;
+    // border-radius: 10px;
   }
 `;
 
 export const CardTitle = styled.h3<{ theme: DefaultTheme; tag?: string }>`
-  
-font-size: 24px;
+  font-size: 24px;
   font-weight: ${({ theme }) => theme.fontWeights.regular};
   line-height: 35.88px;
   text-align: ${({ tag }) => (tag === 'top' ? 'center' : 'left')};
@@ -185,4 +179,3 @@ export const CardDescription = styled.p<{
 
 // background: ${({ theme, tag }) =>
 //     tag === 'top' ? theme.colors.cardDark : theme.colors.card};
-

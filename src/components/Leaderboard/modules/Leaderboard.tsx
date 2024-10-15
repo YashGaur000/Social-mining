@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import {
   AirdropBox,
+  AirdropBoxSmallSize,
   AirdropInfo,
   AirdropInfoBox,
   AirdropInfoSub,
+  AirdropTitle,
   BoardWrapper,
   EarnedPoints,
   Name,
   ParticipantBox,
+  ParticipantTitleSmallscreen,
   PointBox,
   Points,
   RankandPointBox,
@@ -16,59 +20,55 @@ import {
   RankandPointValueBox,
   RankBox,
   Rankers,
-} from "../styles/Leaderboard.style";
-import Medal from "../../../assets/medal1.svg";
-import Bigtenex from "../../../assets/bigtenexbg.svg";
-import tenexbglogo from "../../../assets/tenexbglogo.svg";
-import tenexbglogo2 from "../../../assets/tenexbglogo2.svg";
-import { Card } from "../../common/Card";
-import { Score, SocialLogo } from "../../TaskList/styles/TaskList.style";
-import { MiddleLogo } from "../../DashBoard/styles/DashBoard.styles";
-import { StyledButton } from "../../common/Buttons/GradientButton";
+  RankWithNameWrapper,
+  UserRankCard,
+} from '../styles/Leaderboard.style';
+import Medal from '../../../assets/medal1.svg';
+import Bigtenex from '../../../assets/bigtenexbg.svg';
+// import tenexbglogo from "../../../assets/tenexbglogo.svg";
+// import tenexbglogo2 from "../../../assets/tenexbglogo2.svg";
+import { Card } from '../../common/Card';
+
+interface Player {
+  userName: string;
+  points: number;
+}
+
+import {
+  Score,
+  SocialLogo,
+  CardIndexwrapper,
+} from '../../TaskList/styles/TaskList.style';
+// import { MiddleLogo } from "../../DashBoard/styles/DashBoard.styles";
+// import { StyledButton } from "../../common/Buttons/GradientButton";
 
 const Leaderboard: React.FC = () => {
-  // const Runnerups = [
-  //     'Yash',
-  //     'Yash',
-  //     'Yash',
-  // ];
+  const [players, setPlayers] = useState<Player[]>([]);
 
-  const Players = [
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-    "Tenex",
-  ];
+  useEffect(() => {
+    const fetchLeaderboardData = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/api/leaderboard',
+          {
+            withCredentials: true,
+          }
+        );
 
-  // const RunnerupsPoints = [
-  //     '999',
-  //     '888',
-  //     '777',
-  // ];
+        const result = response.data.data;
+        console.log(result);
+        setPlayers(result);
+      } catch (error) {
+        //const errorMessage = error.response?.data || error;
+        console.error('Error fetching leaderboard data' + error);
+      }
+    };
 
-  const PlayersPoints = [
-    "34523",
-    "34543",
-    "23455",
-    "45644",
-    "34534",
-    "34523",
-    "34543",
-    "23455",
-    "45644",
-    "34534",
-    "64544",
-  ];
+    void fetchLeaderboardData();
+  }, []);
 
   return (
-    <BoardWrapper>
+    <BoardWrapper margin="40px 0px 0px 0px">
       {/* <SocialLogo src={tenexbglogo} Position='absolute' margin='370px 0px 0px -600px'/>
             <SocialLogo src={tenexbglogo2} Position='absolute' margin='480px 0px 0px 400px'/> */}
       <SocialLogo
@@ -77,8 +77,8 @@ const Leaderboard: React.FC = () => {
         margin="185px 0px 0px -250px"
         Zindex="-1"
       />
-      <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
-      <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
+      {/* <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
+      <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" /> */}
       {/* <MiddleLogo Opacity='0.12px' src={Bigtenex} Top='34vh' Left='48%' Zindex='-1'/> */}
       <AirdropBox>
         <Card width="260px">
@@ -100,69 +100,81 @@ const Leaderboard: React.FC = () => {
           </AirdropInfoBox>
         </Card>
       </AirdropBox>
+
+      <AirdropBoxSmallSize>
+        <AirdropTitle>Airdrop Amount</AirdropTitle>
+        <AirdropTitle>$1,000,000</AirdropTitle>
+      </AirdropBoxSmallSize>
+      <ParticipantTitleSmallscreen>
+        Total number of Participants (100)
+      </ParticipantTitleSmallscreen>
       <RankandPointFullBoxWrapper>
-      <Card
-        width="90%"
-        background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
-        Borderradius="24px"
-        Padding="30px 50px 40px 50px"
-      >
-        <RankandPointBoxWrapper>
-          <RankandPointBox>
-            <RankBox>
-              <Rankers Fontsize="24px">Ranking</Rankers>
-            </RankBox>
-            <PointBox>
-              <Points Fontsize="24px">Earned Points</Points>
-            </PointBox>
-          </RankandPointBox>
-          <RankandPointValueBox>
-            {Players.map((Player, index) => (
-              <ParticipantBox key={index}>
-                <RankBox><Score>
-                  {index < 3 ? (
-                    <SocialLogo height="36px" width="36px" src={Medal} />
-                  ) : (
-                    `${index + 1}`
-                  )}
-                  </Score>
-                </RankBox>
-                <Name><Score>{Player}</Score></Name>
-                <EarnedPoints><Score>{PlayersPoints[index]}</Score></EarnedPoints>
-              </ParticipantBox>
-            ))}
-          </RankandPointValueBox>
-        </RankandPointBoxWrapper>
-        {/* <RankandPointBoxWrapper padding='0px' alignitems='left'> */}
-        <StyledButton  padding="12px 0px 12px 20px">
+        <Card
+          width="90%"
+          background="linear-gradient(180deg, rgba(24, 38, 76, .2) 0%, rgba(31, 48, 95, .4) 100%)"
+          Borderradius="24px"
+          Padding="30px 50px 40px 50px"
+        >
+          <RankandPointBoxWrapper>
+            <RankandPointBox>
+              <RankBox>
+                <Rankers Fontsize="24px">Ranking</Rankers>
+              </RankBox>
+              <PointBox>
+                <Points Fontsize="24px">Earned Points</Points>
+              </PointBox>
+            </RankandPointBox>
+            <RankandPointValueBox>
+              {players.map((Player, index) => (
+                <ParticipantBox key={index}>
+                  <RankWithNameWrapper>
+                    <RankBox>
+                      <Score>
+                        {index < 3 ? (
+                          <SocialLogo height="36px" width="36px" src={Medal} />
+                        ) : (
+                          // `${index + 1}`
+                          <CardIndexwrapper> {index + 1}</CardIndexwrapper>
+                        )}
+                      </Score>
+                    </RankBox>
+
+                    <Name>
+                      <Score>{Player.userName}</Score>
+                    </Name>
+                  </RankWithNameWrapper>
+                  <EarnedPoints>
+                    <Score>{Player.points}</Score>
+                  </EarnedPoints>
+                </ParticipantBox>
+              ))}
+            </RankandPointValueBox>
+          </RankandPointBoxWrapper>
+          {/* <RankandPointBoxWrapper padding='0px' alignitems='left'> */}
+
           {/* <UserRankandPointValueBox> */}
-            <ParticipantBox  >
-              <RankBox display="flex">
-                <Score>
-                99
-                </Score>
+          <UserRankCard>
+            <ParticipantBox padding="0px">
+              <RankWithNameWrapper>
+                <RankBox display="flex">
+                  <Score>99</Score>
                 </RankBox>
-              <Name display="flex" margin="0px 0px 0px 0px">
-                <Score Fontsize="20px">
-                Bonker
-                </Score>
+                <Name display="flex" margin="0px 0px 0px 0px">
+                  <Score Fontsize="20px">Bonker</Score>
                 </Name>
-              <EarnedPoints display="flex" margin="0px 0px 0px 67%" >
-                <Score>
-                340
-                </Score>
-                </EarnedPoints>
+              </RankWithNameWrapper>
+
+              <Score Margin="0px 20px 0px 0px ">340</Score>
             </ParticipantBox>
+          </UserRankCard>
           {/* </UserRankandPointValueBox> */}
-        </StyledButton>
-        {/* </RankandPointBoxWrapper> */}
-      </Card>
+
+          {/* </RankandPointBoxWrapper> */}
+        </Card>
       </RankandPointFullBoxWrapper>
-      <Score Margin="80px 0px 0px -50px" textalign="center">
-        Rewards are paid at the end of each month based on each user&apos;s
-        accrued points
+      <Score Margin="30px" textalign="center">
+        Rewards are paid at 01/09/2024 based on each user’s accrued points
       </Score>
-      
     </BoardWrapper>
   );
 };
