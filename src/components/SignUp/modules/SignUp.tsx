@@ -97,8 +97,10 @@ const SignUp: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const referralCode = params.get('code');
+
     if (referralCode) {
       sendReferralCodeToBackend(referralCode);
+      console.log('referral code', referralCode);
     }
   }, [address, dispatch]);
 

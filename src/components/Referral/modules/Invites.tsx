@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
   CardContainer,
-  InviteWrapper,
   InviteTitle,
+  InviteWrapper,
 } from '../styles/Invites.style';
 import { Card, CardBox, CardWrapper } from '../../common/Card';
 import {
