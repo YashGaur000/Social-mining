@@ -107,12 +107,16 @@ export const SocialLogo = styled.img<{
   height?: string;
   Zindex?: string;
   expand?: boolean;
+  platform?: string;
   cardType?:
+    | string
     | 'twitter'
     | 'discord'
     | 'telegram'
-    | 'exchange'
-    | 'vedio'
+    | 'reddit'
+    | 'exchange-activity:'
+    | 'article'
+    | 'video'
     | undefined;
 }>`
   z-index: ${({ Zindex }) => Zindex};
@@ -121,6 +125,34 @@ export const SocialLogo = styled.img<{
   height: ${({ height }) => height || 'auto'};
   margin: ${({ margin }) => margin || '0px'};
 
+  @media (min-width: 1080px) {
+    height: ${({ platform }) => {
+      if (platform === 'twitter') return '260px';
+      if (platform === 'discord') return '224px';
+      if (platform === 'telegram') return '224px';
+      if (platform === 'reddit') return '224px';
+      if (platform === 'exchange-activity:') return '182px';
+      if (platform === 'article') return '192px';
+      if (platform === 'video') return '22px';
+
+      return '300px';
+    }};
+  }
+
+  @media (min-width: 780px) {
+    height: ${({ platform }) => {
+      if (platform === 'twitter') return '250px';
+      if (platform === 'discord') return '215px';
+      if (platform === 'telegram') return '215px';
+      if (platform === 'reddit') return '215px';
+      if (platform === 'exchange-activity:') return '180px';
+      if (platform === 'article') return '185px';
+      if (platform === 'video') return '305px';
+
+      return '300px';
+    }};
+  }
+
   @media (max-width: 580px) {
     position: absolute;
     left: 2px;
@@ -128,23 +160,25 @@ export const SocialLogo = styled.img<{
     height: ${({ expand, cardType }) => {
       switch (cardType) {
         case 'twitter':
-          return expand ? '250px' : '180px';
+          return expand ? '272px' : '190px';
         case 'discord':
-          return expand ? '235px' : '180px';
+          return expand ? '246.8px' : '190px';
         case 'telegram':
-          return expand ? '245px' : '190px';
-        case 'exchange':
-          return expand ? '200px' : '180px';
-        case 'vedio':
-          return expand ? '260px' : '190px';
+          return expand ? '246.8px' : '190px';
+        case 'reddit':
+          return expand ? '236px' : '180px';
+        case 'exchange-activity:':
+          return expand ? '201px' : '180px';
+        case 'article':
+          return expand ? '222px' : '180px';
+
+        case 'video':
+          return expand ? '263.12px' : '190px';
         default:
-          return expand ? '228px' : '180px';
+          return expand ? '264px' : '185px';
       }
     }};
   }
-
-  // width: fit-content;
-  // height: fit-content;
 `;
 
 export const SocialCheckLogo = styled.img<{
@@ -311,6 +345,34 @@ export const ListItem = styled.li<{
       `
       display: none;
     `}
+  }
+`;
+
+export const ListTitleHeading = styled.p<{
+  theme: DefaultTheme;
+  Margin?: string;
+  textalign?: string;
+  Fontsize?: string;
+  Lineheight?: string;
+}>`
+  font-family: ${({ theme }) => theme.fonts.main};
+  font-weight: ${({ theme }) => theme.fontWeights.regular};
+  line-height: ${({ Lineheight }) => Lineheight};
+  font-size: ${({ Fontsize }) => Fontsize};
+  margin: ${({ Margin }) => Margin || '0px'};
+
+  text-align: ${({ textalign }) => textalign || 'center'};
+  color: ${({ theme }) => theme.colors.whiteBorder};
+  @media (max-width: 720px) {
+    font-size: 16px;
+  }
+  @media (max-width: 580px) {
+    text-align: ${({ textalign }) => textalign || 'start'};
+    display: none;
+  }
+  @media (max-width: 400px) {
+    text-align: ${({ textalign }) => textalign || 'start'};
+    display: none;
   }
 `;
 

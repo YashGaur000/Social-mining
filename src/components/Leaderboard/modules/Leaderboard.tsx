@@ -78,6 +78,7 @@ const Leaderboard: React.FC = () => {
         Position="absolute"
         margin="185px 0px 0px -250px"
         Zindex="-1"
+        platform="bigtenex"
       />
       {/* <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
       <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" /> */}
@@ -133,7 +134,12 @@ const Leaderboard: React.FC = () => {
                     <RankBox>
                       <Score>
                         {index < 3 ? (
-                          <SocialLogo height="36px" width="36px" src={Medal} />
+                          <SocialLogo
+                            height="36px"
+                            width="36px"
+                            src={Medal}
+                            platform="medal"
+                          />
                         ) : (
                           // `${index + 1}`
                           <CardIndexwrapper> {index + 1}</CardIndexwrapper>
