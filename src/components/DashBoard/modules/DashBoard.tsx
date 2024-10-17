@@ -10,7 +10,7 @@ import {
   SideImageWrapper,
   MobileScreenHeader,
 } from '../styles/DashBoard.styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddressPopup from '../../LinkwithRewards/modules/AddressPopup';
 import { useNavigate } from 'react-router-dom';
 import sideborder from '../../../assets/sideborder.svg';
@@ -18,6 +18,7 @@ import middleLogo from '../../../assets/middleLogo.svg';
 import { ConnectWallet } from '../../ConnectWallet';
 import { useAccount } from '../../../hooks/useAccount';
 import SocialConnectModel from '../../SocialConnectModel/modules/SocialConnectModel';
+import axios from 'axios';
 
 const DashBoard: React.FC = () => {
   const [isAddressPopupOpen, setAddressPopupOpen] = useState<boolean>(false);
@@ -39,6 +40,30 @@ const DashBoard: React.FC = () => {
 
   const handleLeaderboardClick = () => {
     navigate('/dashboard/Leaderboard');
+  };
+
+  useEffect(() => {
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    const authCode = params.get('code');
+    console.log(authCode);
+    if (authCode) {
+      sendCodeToBackend(authCode);
+    }
+  }, []);
+
+  const sendCodeToBackend = async (code: string) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/users/connect-discord',
+        { code }
+      );
+
+      console.log('DiscordResponseData****', response.data); // Handle response from the backend
+      localStorage.setItem('userId', response.data.data);
+    } catch (error) {
+      console.error('Error sending code to backend:', error);
+    }
   };
 
   return (

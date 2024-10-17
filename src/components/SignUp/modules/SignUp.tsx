@@ -29,6 +29,7 @@ import { connectWallet } from '../../../store/slices/ConnectWalletSlice';
 import toast, { Toaster } from 'react-hot-toast';
 import { useDisconnect } from 'wagmi';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 // import { useLocation } from "react-router-dom";
 // import axios from "axios";
@@ -92,6 +93,35 @@ const SignUp: React.FC = () => {
 
     void wallet();
   }, [address, dispatch]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const referralCode = params.get('code');
+    if (referralCode) {
+      sendReferralCodeToBackend(referralCode);
+    }
+  }, [address, dispatch]);
+
+  const sendReferralCodeToBackend = async (code: string) => {
+    try {
+      const response = await axios.post(
+        'http://localhost:3000/api/users/connectwallet',
+        { code }
+      );
+
+      const { userId, referralCode } = response.data;
+
+      if (userId) {
+        localStorage.setItem('userId', response.data.userId);
+      }
+
+      if (referralCode) {
+        localStorage.setItem('referralCode', response.data.referralCode);
+      }
+    } catch (error) {
+      console.error('Error sending code to backend:', error);
+    }
+  };
 
   return (
     <>
