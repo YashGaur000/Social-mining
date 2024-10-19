@@ -37,6 +37,10 @@ const authSlice = createSlice({
 
       state.refferedBy = action.payload.refferedCode;
     },
+    setAuthState(state) {
+      state.isAuthenticated = true;
+      state.loginType = 'twitter';
+    },
     setTwitterDetails(
       state,
       action: PayloadAction<{ userId: string; userName: string }>
@@ -91,6 +95,7 @@ export const {
   setTwitterDetails,
   setReferedBy,
   clearAuthState,
+  setAuthState,
 } = authSlice.actions;
 
 export default authSlice.reducer;

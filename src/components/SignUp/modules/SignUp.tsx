@@ -22,31 +22,23 @@ import {
   SignUpTokens,
 } from '../styles/SignUp.styles';
 
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../store/store';
-import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store/store';
+import { useEffect, useState } from 'react';
 // import { connectWallet } from '../../../store/slices/ConnectWalletSlice';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 
 // import { useNavigate } from 'react-router-dom';
-import { setReferedBy } from '../../../store/slices/AuthSlice';
-
-// import { useLocation } from "react-router-dom";
-// import axios from "axios";
-// import { useEffect } from "react";
-
-// interface SignUpprops{
-//   code: string;
-// }
+import { setAuthState, setReferedBy } from '../../../store/slices/AuthSlice';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
-  // const Navigate = useNavigate();
+  const Navigate = useNavigate();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
-  // const walletAddress = useSelector(
-  //   (state: RootState) => state.wallet.walletAddress
-  // );
   const dispatch: AppDispatch = useDispatch();
-
+  const { walletAddress } = useSelector((state: RootState) => state.auth);
   // useEffect(() => {
 
   //   const params = new URLSearchParams(location.search);
@@ -72,11 +64,37 @@ const SignUp: React.FC = () => {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const referralCode = params.get('referral');
-    console.log(referralCode);
-    if (referralCode) dispatch(setReferedBy({ refferedCode: referralCode }));
-  }, [dispatch]);
+    const status = params.get('status');
 
-  const handleTwitter = () => {};
+    if (referralCode) dispatch(setReferedBy({ refferedCode: referralCode }));
+
+    if (status === 'success') {
+      dispatch(setAuthState());
+      setLoading(false);
+      Navigate('/dashboard');
+    } else if (status === 'failure') {
+      setLoading(false);
+
+      toast.error('Authentication Failed');
+    }
+  }, [dispatch, Navigate]);
+
+  const handleTwitter = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(
+        'http://localhost:3000/api/users/login',
+        { Address: walletAddress || '' },
+        { withCredentials: true }
+      );
+      const data = response.data;
+      if (data.authorizationUrl) {
+        window.location.href = data.authorizationUrl;
+      }
+    } catch (error) {
+      console.error('Failed to initiate Twitter login:', error);
+    }
+  };
 
   return (
     <>
@@ -97,7 +115,7 @@ const SignUp: React.FC = () => {
               />
               <SignUpButtonTwitter onClick={handleTwitter}>
                 <TwitterImage src={twitter} />
-                Sign In Twitter
+                {isLoading ? 'Loading...' : 'Sign In Twitter'}
               </SignUpButtonTwitter>
             </SignUpButtonWrapper>
           </SignUpDetailsWrapper>

@@ -65,7 +65,6 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
 
         try {
           const res = await dispatch(connectWallet(data)).unwrap();
-          console.log('Wallet connected', res);
 
           if (res.User) {
             navigate('/dashboard');
@@ -74,7 +73,9 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
           const Error = error as customError;
           console.error('Failed to connect wallet:', error);
           toast.error(Error.message);
+
           disconnect();
+          navigate('/');
         }
       }
     };
