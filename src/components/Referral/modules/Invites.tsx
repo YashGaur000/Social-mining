@@ -34,51 +34,24 @@ import {
 } from '../../DashBoard/styles/DashBoard.styles';
 import tenexbglogo from '../../../assets/tenexbglogo.svg';
 import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
-// import axios from "axios";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 const Invite: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
-  console.log(setIsCopied);
 
-  const players = [
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-  ];
+  const refralcode = useSelector((state: RootState) => state.auth.refralcode);
+  console.log(refralcode);
 
-  const playersPoints = [
-    '34523',
-    '34543',
-    '23455',
-    '45644',
-    '34534',
-    '34523',
-    '34543',
-    '23455',
-    '45644',
-    '34534',
-    '64544',
-  ];
+  const players = ['Tenex', 'Tenex'];
+
+  const playersPoints = ['34523', '34543'];
 
   const handleGenerateReferralLink = async () => {
     try {
-      // const discordId = localStorage.getItem('userId');
+      const referralLink = `${'http://localhost:5173/'}?referral=${refralcode}`;
+      console.log(referralLink);
 
-      // const response = await axios.post(
-      //   'http://localhost:3000/api/users/referral',
-      //   { discordId }
-      // );
-      // console.log(response.data.email);
-
-      const referralLink = localStorage.getItem('referralLink');
       if (referralLink) {
         await navigator.clipboard.writeText(referralLink);
         setIsCopied(true);

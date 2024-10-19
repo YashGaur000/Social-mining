@@ -7,6 +7,19 @@ import { GlobalButton } from '../common/Buttons/GlobalButton';
 // import { useEffect } from 'react';
 // import { NAVIGATION_TIME } from '../../constants/Delay';
 import { DashBoardButton } from '../DashBoard/styles/DashBoard.styles';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { useEffect } from 'react';
+import {
+  connectWallet,
+  ConnectWalletArgs,
+} from '../../store/actions/ConnectWalletAction';
+import { useDisconnect } from 'wagmi';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+interface customError extends Error {
+  message: string;
+}
 
 interface ChainProps {
   hasIcon: boolean;
@@ -28,7 +41,47 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
   page,
 }) => {
   const { address } = useAccount();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { disconnect } = useDisconnect();
+  const dispatch = useDispatch<AppDispatch>();
+  const { loginType, refferedBy, userId } = useSelector(
+    (state: RootState) => state.auth
+  );
+
+  const handleConnectWallet = async (openConnectModal: () => void) => {
+    openConnectModal();
+  };
+
+  useEffect(() => {
+    const connectWalletAndNavigate = async () => {
+      if (address) {
+        console.log(address);
+
+        const data: ConnectWalletArgs = {
+          userId: userId || '',
+          walletAddress: address,
+          refralCode: refferedBy || '',
+        };
+
+        try {
+          const res = await dispatch(connectWallet(data)).unwrap();
+
+          if (res.User) {
+            navigate('/dashboard');
+          }
+        } catch (error) {
+          const Error = error as customError;
+          console.error('Failed to connect wallet:', error);
+          toast.error(Error.message);
+
+          disconnect();
+          navigate('/');
+        }
+      }
+    };
+
+    connectWalletAndNavigate();
+  }, [address, loginType]);
 
   return (
     <ConnectButton.Custom>
@@ -42,6 +95,7 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
       }) => {
         // const walletAddress = useSelector((state:RootState) => state.wallet.walletAddress);
         // const dispatch:AppDispatch = useDispatch();
+
         const ready = mounted && authenticationStatus !== 'loading';
         const connected =
           ready &&
@@ -56,7 +110,9 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
                 return (
                   <>
                     {page === 'signup' && (
-                      <SignUpButtonWallet onClick={openConnectModal}>
+                      <SignUpButtonWallet
+                        onClick={() => handleConnectWallet(openConnectModal)}
+                      >
                         <img src={walletImg} alt="" />
                         {text}
                       </SignUpButtonWallet>

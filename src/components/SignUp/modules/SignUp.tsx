@@ -21,35 +21,24 @@ import {
   SignUpToken,
   SignUpTokens,
 } from '../styles/SignUp.styles';
-import { useAccount } from '../../../hooks/useAccount';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../store/store';
-import { useEffect } from 'react';
-import { connectWallet } from '../../../store/slices/ConnectWalletSlice';
+import { useEffect, useState } from 'react';
+// import { connectWallet } from '../../../store/slices/ConnectWalletSlice';
 import toast, { Toaster } from 'react-hot-toast';
-import { useDisconnect } from 'wagmi';
-import { useNavigate } from 'react-router-dom';
+
+// import { useNavigate } from 'react-router-dom';
+import { setAuthState, setReferedBy } from '../../../store/slices/AuthSlice';
 import axios from 'axios';
-
-// import { useLocation } from "react-router-dom";
-// import axios from "axios";
-// import { useEffect } from "react";
-
-// interface SignUpprops{
-//   code: string;
-// }
+import { useNavigate } from 'react-router-dom';
 
 const SignUp: React.FC = () => {
-  const { address } = useAccount();
-
-  const { disconnect } = useDisconnect();
   const Navigate = useNavigate();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
-  const walletAddress = useSelector(
-    (state: RootState) => state.wallet.walletAddress
-  );
   const dispatch: AppDispatch = useDispatch();
-
+  const { walletAddress } = useSelector((state: RootState) => state.auth);
   // useEffect(() => {
 
   //   const params = new URLSearchParams(location.search);
@@ -73,53 +62,37 @@ const SignUp: React.FC = () => {
   // };
 
   useEffect(() => {
-    const wallet = async () => {
-      if (address) {
-        try {
-          if (!walletAddress)
-            await dispatch(connectWallet(address as string)).unwrap();
-          toast.success('Wallet Connected Sucessfully');
-          Navigate('/dashboard');
-        } catch (err) {
-          setTimeout(() => {
-            toast.error('Failed to connect wallet');
-          }, 2000);
-
-          console.error('Failed to connect wallet:', err);
-          disconnect();
-        }
-      }
-    };
-
-    void wallet();
-  }, [address, dispatch]);
-
-  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const referralCode = params.get('code');
-    if (referralCode) {
-      sendReferralCodeToBackend(referralCode);
+    const referralCode = params.get('referral');
+    const status = params.get('status');
+
+    if (referralCode) dispatch(setReferedBy({ refferedCode: referralCode }));
+
+    if (status === 'success') {
+      dispatch(setAuthState());
+      setLoading(false);
+      Navigate('/dashboard');
+    } else if (status === 'failure') {
+      setLoading(false);
+
+      toast.error('Authentication Failed');
     }
-  }, [address, dispatch]);
+  }, [dispatch, Navigate]);
 
-  const sendReferralCodeToBackend = async (code: string) => {
+  const handleTwitter = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
-        'http://localhost:3000/api/users/connectwallet',
-        { code }
+        'http://localhost:3000/api/users/login',
+        { Address: walletAddress || '' },
+        { withCredentials: true }
       );
-
-      const { userId, referralCode } = response.data;
-
-      if (userId) {
-        localStorage.setItem('userId', response.data.userId);
-      }
-
-      if (referralCode) {
-        localStorage.setItem('referralCode', response.data.referralCode);
+      const data = response.data;
+      if (data.authorizationUrl) {
+        window.location.href = data.authorizationUrl;
       }
     } catch (error) {
-      console.error('Error sending code to backend:', error);
+      console.error('Failed to initiate Twitter login:', error);
     }
   };
 
@@ -140,9 +113,9 @@ const SignUp: React.FC = () => {
                 walletImg={walletimg}
                 page={'signup'}
               />
-              <SignUpButtonTwitter>
+              <SignUpButtonTwitter onClick={handleTwitter}>
                 <TwitterImage src={twitter} />
-                Sign In Twitter
+                {isLoading ? 'Loading...' : 'Sign In Twitter'}
               </SignUpButtonTwitter>
             </SignUpButtonWrapper>
           </SignUpDetailsWrapper>
