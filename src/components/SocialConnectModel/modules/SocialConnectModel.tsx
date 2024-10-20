@@ -16,45 +16,18 @@ import logintick from '../../../assets/logintick.svg';
 
 import sideborder from '../../../assets/sideborder.svg';
 import { MobileScreenHeader } from '../../DashBoard/styles/DashBoard.styles';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 interface SocialConnectModelProps {
   display?: string;
 }
 const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
+  const { loginType } = useSelector((state: RootState) => state.auth);
+
   const handleTwitterLogin = async () => {
-    // try {
-    //   console.log('clicked');
-    //   const response = await axios.post(
-    //     'http://localhost:3000/api/users/login',
-    //     { Address },
-    //     { withCredentials: true }
-    //   );
-    //   const data = response.data;
-    //   if (data.authorizationUrl) {
-    //     window.location.href = data.authorizationUrl;
-    //   }
-    // } catch (error) {
-    //   console.error('Failed to initiate Twitter login:', error);
-    // }
+    // if(isAuthenticated && loginType==="twitter")
   };
-
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(location.search);
-  //   const status = urlParams.get('status');
-
-  //   if (status === 'success') {
-  //     dispatch(
-  //       setAuthState({
-  //         isAuthenticated: true,
-  //         accessToken: token,
-  //         userInfo: null,
-  //       })
-  //     );
-  //     navigate('/dashboard');
-  //   } else if (status === 'failure') {
-  //     dispatch(clearAuthState());
-  //   }
-  // }, [location, dispatch, navigate]);
 
   const handleDiscordRedirect = () => {
     const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH;
@@ -97,7 +70,9 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             <DashBoardButtonsWrapper onClick={handleTwitterLogin}>
               <DashBoardConnectionImage src={twitter} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>connect</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>
+              {loginType === 'twitter' ? 'Connected' : 'connect'}
+            </DashBoardButtonsWrapper>
             <DashBoardButtonsWrapper>
               <LoginTickImage src={logintick} />
             </DashBoardButtonsWrapper>
@@ -113,7 +88,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             <DashBoardButtonsWrapper>
               <DashBoardConnectionImage src={discord} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>Participate</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>Connect</DashBoardButtonsWrapper>
           </DashBoardConnectionButton>
         </DashBoardConnectionCard>
 
@@ -126,7 +101,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             <DashBoardButtonsWrapper>
               <DashBoardConnectionImage src={telegram} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>Contribute</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>Connect</DashBoardButtonsWrapper>
           </DashBoardConnectionButton>
         </DashBoardConnectionCard>
 
@@ -137,7 +112,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             <DashBoardButtonsWrapper>
               <DashBoardConnectionImage src={reddit} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>Contribute</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>Connect</DashBoardButtonsWrapper>
           </DashBoardConnectionButton>
         </DashBoardConnectionCard>
       </DashBoardConnectionCards>

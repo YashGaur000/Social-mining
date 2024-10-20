@@ -19,6 +19,7 @@ import { ConnectWallet } from '../../ConnectWallet';
 import { useAccount } from '../../../hooks/useAccount';
 import SocialConnectModel from '../../SocialConnectModel/modules/SocialConnectModel';
 import axios from 'axios';
+import { Toaster } from 'react-hot-toast';
 
 const DashBoard: React.FC = () => {
   const [isAddressPopupOpen, setAddressPopupOpen] = useState<boolean>(false);
@@ -69,7 +70,7 @@ const DashBoard: React.FC = () => {
   return (
     <>
       <AddressPopup isOpen={isAddressPopupOpen} onClose={toggleAddressPopup} />
-
+      <Toaster position="top-center" reverseOrder={false} />
       <DashBoardCards>
         <SocialConnectModel display="none" />
         <MiddleLogo

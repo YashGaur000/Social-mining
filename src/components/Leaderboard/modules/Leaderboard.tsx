@@ -21,6 +21,7 @@ import {
   RankBox,
   Rankers,
   RankWithNameWrapper,
+  SocialLogoMedal,
   UserRankCard,
 } from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
@@ -134,11 +135,10 @@ const Leaderboard: React.FC = () => {
                     <RankBox>
                       <Score>
                         {index < 3 ? (
-                          <SocialLogo
+                          <SocialLogoMedal
                             height="36px"
                             width="36px"
                             src={Medal}
-                            platform="medal"
                           />
                         ) : (
                           // `${index + 1}`

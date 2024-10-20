@@ -5,6 +5,7 @@ export interface ConnectWalletArgs {
   userId: string;
   walletAddress: string;
   refralCode: string;
+  loginType: string;
 }
 
 export const connectWallet = createAsyncThunk(
