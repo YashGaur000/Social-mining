@@ -33,7 +33,7 @@ import toast, { Toaster } from 'react-hot-toast';
 import { setAuthState, setReferedBy } from '../../../store/slices/AuthSlice';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-interface DecodedToken {
+export interface DecodedToken {
   userId: string;
   userName: string;
 }

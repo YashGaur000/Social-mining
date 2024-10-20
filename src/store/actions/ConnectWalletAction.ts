@@ -12,6 +12,8 @@ export const connectWallet = createAsyncThunk(
   'auth/connectWallet',
   async (data: ConnectWalletArgs, { rejectWithValue }) => {
     try {
+      console.log('thunk', data);
+
       const payloadData = {
         address: data.walletAddress,
         referralCode: data.refralCode,
