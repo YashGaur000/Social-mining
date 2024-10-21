@@ -9,6 +9,7 @@ import {
   AirdropTitle,
   BoardWrapper,
   EarnedPoints,
+  MedalLogo,
   Name,
   ParticipantBox,
   ParticipantTitleSmallscreen,
@@ -134,12 +135,7 @@ const Leaderboard: React.FC = () => {
                     <RankBox>
                       <Score>
                         {index < 3 ? (
-                          <SocialLogo
-                            height="36px"
-                            width="36px"
-                            src={Medal}
-                            platform="medal"
-                          />
+                          <MedalLogo height="36px" width="36px" src={Medal} />
                         ) : (
                           // `${index + 1}`
                           <CardIndexwrapper> {index + 1}</CardIndexwrapper>

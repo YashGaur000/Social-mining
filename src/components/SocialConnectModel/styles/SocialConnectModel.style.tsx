@@ -110,7 +110,11 @@ export const DashBoardButtonsWrapper = styled.label`
   line-height: 12px;
 `;
 
-export const LoginTickImage = styled.img`
+export const LoginTickImage = styled.img<{
+  theme: DefaultTheme;
+  height: string;
+  width: string;
+}>`
   width: 12px;
   height: 12px;
   margin-left: 4px;
