@@ -4,6 +4,7 @@ import image from '../../../assets/banner.svg';
 import tokenTitle from '../../../assets/logo.svg';
 import { ConnectWallet } from '../../ConnectWallet';
 import walletimg from '../../../assets/walletIcon.svg';
+import * as JWT from 'jwt-decode';
 
 import {
   ImageContainer,
@@ -32,9 +33,12 @@ import toast, { Toaster } from 'react-hot-toast';
 import { setAuthState, setReferedBy } from '../../../store/slices/AuthSlice';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+export interface DecodedToken {
+  userId: string;
+  userName: string;
+}
 const SignUp: React.FC = () => {
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
   const [isLoading, setLoading] = useState<boolean>(false);
 
   const dispatch: AppDispatch = useDispatch();
@@ -65,19 +69,33 @@ const SignUp: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     const referralCode = params.get('referral');
     const status = params.get('status');
+    const token = params.get('token');
 
     if (referralCode) dispatch(setReferedBy({ refferedCode: referralCode }));
 
     if (status === 'success') {
-      dispatch(setAuthState());
+      if (token) {
+        try {
+          const decoded = JWT.jwtDecode<DecodedToken>(token);
+          console.log(decoded);
+
+          const userId: string = decoded.userId;
+          const userName: string = decoded.userName;
+
+          dispatch(setAuthState({ userId: userId, userName: userName }));
+        } catch (error) {
+          console.error('Invalid token', error);
+          toast.error('Invalid token');
+        }
+      }
+
       setLoading(false);
-      Navigate('/dashboard');
+      navigate('/dashboard');
     } else if (status === 'failure') {
       setLoading(false);
-
       toast.error('Authentication Failed');
     }
-  }, [dispatch, Navigate]);
+  }, [dispatch, navigate]);
 
   const handleTwitter = async () => {
     try {

@@ -44,7 +44,7 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
   const navigate = useNavigate();
   const { disconnect } = useDisconnect();
   const dispatch = useDispatch<AppDispatch>();
-  const { loginType, refferedBy, userId } = useSelector(
+  const { loginType, refferedBy, userId, isAuthenticated } = useSelector(
     (state: RootState) => state.auth
   );
 
@@ -61,21 +61,22 @@ export const ConnectWallet: React.FC<ConnectWalletProps> = ({
           userId: userId || '',
           walletAddress: address,
           refralCode: refferedBy || '',
+          loginType: loginType || '',
         };
 
         try {
           const res = await dispatch(connectWallet(data)).unwrap();
+          console.log(res);
 
-          if (res.User) {
-            navigate('/dashboard');
-          }
+          navigate('/dashboard');
         } catch (error) {
           const Error = error as customError;
           console.error('Failed to connect wallet:', error);
           toast.error(Error.message);
-
           disconnect();
-          navigate('/');
+          if (isAuthenticated) {
+            navigate('/dashboard');
+          } else navigate('/');
         }
       }
     };

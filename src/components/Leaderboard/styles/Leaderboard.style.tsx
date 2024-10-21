@@ -218,6 +218,15 @@ export const UserRankandPointValueBox = styled.div<{ theme: DefaultTheme }>`
   }
 `;
 
+export const SocialLogoMedal = styled.img<{
+  theme: DefaultTheme;
+  width: string;
+  height: string;
+}>`
+  width: ${({ width }) => width || 'auto'};
+  height: ${({ height }) => height || 'auto'};
+`;
+
 export const Medal = styled.div<{ theme: DefaultTheme }>`
   @media (max-width: 768px) {
     // Add responsive styles for smaller screens

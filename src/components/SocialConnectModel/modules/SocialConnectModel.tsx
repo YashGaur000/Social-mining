@@ -16,45 +16,79 @@ import logintick from '../../../assets/logintick.svg';
 
 import sideborder from '../../../assets/sideborder.svg';
 import { MobileScreenHeader } from '../../DashBoard/styles/DashBoard.styles';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../store/store';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import { setAuthState } from '../../../store/slices/AuthSlice';
+import { DecodedToken } from '../../SignUp/modules/SignUp';
+import * as JWT from 'jwt-decode';
 interface SocialConnectModelProps {
   display?: string;
 }
 const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
+  const [isLoading, setLoading] = useState<boolean>(false);
+  const [isConnect, setConnect] = useState<boolean>(false);
+  const [flag, setflag] = useState<boolean>(false);
+  const { loginType, isAuthenticated, walletAddress, userName, userId } =
+    useSelector((state: RootState) => state.auth);
+  const dispatch: AppDispatch = useDispatch();
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    const status = params.get('status');
+    const token = params.get('token');
+
+    if (status === 'success') {
+      if (token) {
+        try {
+          const decoded = JWT.jwtDecode<DecodedToken>(token);
+          console.log(decoded);
+
+          const userId: string = decoded.userId;
+          const userName: string = decoded.userName;
+
+          dispatch(setAuthState({ userId: userId, userName: userName }));
+        } catch (error) {
+          console.error('Invalid token', error);
+          toast.error('Invalid token');
+        }
+      }
+
+      setLoading(false);
+    } else if (status === 'failure') {
+      setLoading(false);
+      toast.error('Authentication Failed');
+    }
+  }, [flag]);
+
+  useEffect(() => {
+    if (userName && userId) {
+      const abc = userName.includes(userId);
+      setConnect(!abc);
+    }
+  }, []);
   const handleTwitterLogin = async () => {
-    // try {
-    //   console.log('clicked');
-    //   const response = await axios.post(
-    //     'http://localhost:3000/api/users/login',
-    //     { Address },
-    //     { withCredentials: true }
-    //   );
-    //   const data = response.data;
-    //   if (data.authorizationUrl) {
-    //     window.location.href = data.authorizationUrl;
-    //   }
-    // } catch (error) {
-    //   console.error('Failed to initiate Twitter login:', error);
-    // }
+    if (isAuthenticated && loginType !== 'twitter' && !isConnect) {
+      try {
+        setLoading(true);
+        const response = await axios.post(
+          'http://localhost:3000/api/users/login',
+          { Address: walletAddress },
+          { withCredentials: true }
+        );
+        const data = response.data;
+        if (data.authorizationUrl) {
+          window.location.href = data.authorizationUrl;
+          setflag(true);
+        }
+      } catch (error) {
+        console.error('Failed to initiate Twitter login:', error);
+      }
+    }
   };
-
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(location.search);
-  //   const status = urlParams.get('status');
-
-  //   if (status === 'success') {
-  //     dispatch(
-  //       setAuthState({
-  //         isAuthenticated: true,
-  //         accessToken: token,
-  //         userInfo: null,
-  //       })
-  //     );
-  //     navigate('/dashboard');
-  //   } else if (status === 'failure') {
-  //     dispatch(clearAuthState());
-  //   }
-  // }, [location, dispatch, navigate]);
 
   const handleDiscordRedirect = () => {
     const discordOAuthUrl = import.meta.env.VITE_DISCORD_OAUTH;
@@ -74,13 +108,16 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
     }
   };
 
-  const handleTelegramConnect = () => {
-    const telegramOAuthUrl = import.meta.env.VITE_TELEGRAM_OAUTH;
-    if (telegramOAuthUrl) {
-      window.open(telegramOAuthUrl, '_blank');
-    } else {
-      console.error('URL not found');
-    }
+  const handleTelegramConnect = async () => {
+    setLoading(true);
+    const botUsername = 'socialmining13_bot';
+    const redirectUrl = 'http://localhost:3000/auth/users/telegram/redirect';
+
+    // Telegram deep link format
+    const telegramUrl = `https://t.me/${botUsername}?start=auth_${encodeURIComponent(redirectUrl)}`;
+
+    // Redirect the user to Telegram to authenticate
+    window.location.href = telegramUrl;
   };
 
   return (
@@ -93,11 +130,17 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
           <DashBoardConnectionText>
             Connect with Twitter
           </DashBoardConnectionText>
-          <DashBoardConnectionButton>
-            <DashBoardButtonsWrapper onClick={handleTwitterLogin}>
+          <DashBoardConnectionButton onClick={handleTwitterLogin}>
+            <DashBoardButtonsWrapper>
               <DashBoardConnectionImage src={twitter} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>connect</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>
+              {isLoading
+                ? 'Loading...'
+                : isConnect || loginType == 'twitter'
+                  ? 'Connected'
+                  : 'connect'}
+            </DashBoardButtonsWrapper>
             <DashBoardButtonsWrapper>
               <LoginTickImage src={logintick} />
             </DashBoardButtonsWrapper>
@@ -113,7 +156,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             <DashBoardButtonsWrapper>
               <DashBoardConnectionImage src={discord} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>Participate</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>Connect</DashBoardButtonsWrapper>
           </DashBoardConnectionButton>
         </DashBoardConnectionCard>
 
@@ -126,7 +169,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             <DashBoardButtonsWrapper>
               <DashBoardConnectionImage src={telegram} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>Contribute</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>Connect</DashBoardButtonsWrapper>
           </DashBoardConnectionButton>
         </DashBoardConnectionCard>
 
@@ -137,7 +180,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
             <DashBoardButtonsWrapper>
               <DashBoardConnectionImage src={reddit} />
             </DashBoardButtonsWrapper>
-            <DashBoardButtonsWrapper>Contribute</DashBoardButtonsWrapper>
+            <DashBoardButtonsWrapper>Connect</DashBoardButtonsWrapper>
           </DashBoardConnectionButton>
         </DashBoardConnectionCard>
       </DashBoardConnectionCards>
