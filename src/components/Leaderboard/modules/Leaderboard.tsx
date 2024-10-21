@@ -21,6 +21,7 @@ import {
   RankBox,
   Rankers,
   RankWithNameWrapper,
+  SocialLogoMedal,
   UserRankCard,
 } from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
@@ -32,6 +33,7 @@ import { Card } from '../../common/Card';
 interface Player {
   userName: string;
   points: number;
+  rank: number;
 }
 
 import {
@@ -39,12 +41,15 @@ import {
   SocialLogo,
   CardIndexwrapper,
 } from '../../TaskList/styles/TaskList.style';
+import { MobileScreenHeader } from '../../DashBoard/styles/DashBoard.styles';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 // import { MiddleLogo } from "../../DashBoard/styles/DashBoard.styles";
 // import { StyledButton } from "../../common/Buttons/GradientButton";
 
 const Leaderboard: React.FC = () => {
   const [players, setPlayers] = useState<Player[]>([]);
-
+  const { userName } = useSelector((state: RootState) => state.auth);
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
@@ -69,6 +74,7 @@ const Leaderboard: React.FC = () => {
 
   return (
     <BoardWrapper margin="40px 0px 0px 0px">
+      <MobileScreenHeader>Leaderboard</MobileScreenHeader>
       {/* <SocialLogo src={tenexbglogo} Position='absolute' margin='370px 0px 0px -600px'/>
             <SocialLogo src={tenexbglogo2} Position='absolute' margin='480px 0px 0px 400px'/> */}
       <SocialLogo
@@ -76,6 +82,7 @@ const Leaderboard: React.FC = () => {
         Position="absolute"
         margin="185px 0px 0px -250px"
         Zindex="-1"
+        platform="bigtenex"
       />
       {/* <MiddleLogo src={tenexbglogo} Top="53vh" Left="40vh" />
       <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" /> */}
@@ -95,7 +102,7 @@ const Leaderboard: React.FC = () => {
         </Card>
         <Card width="260px">
           <AirdropInfoBox>
-            <AirdropInfo>100</AirdropInfo>
+            <AirdropInfo>{players.length}</AirdropInfo>
             <AirdropInfoSub>Participants</AirdropInfoSub>
           </AirdropInfoBox>
         </Card>
@@ -106,7 +113,7 @@ const Leaderboard: React.FC = () => {
         <AirdropTitle>$1,000,000</AirdropTitle>
       </AirdropBoxSmallSize>
       <ParticipantTitleSmallscreen>
-        Total number of Participants (100)
+        Total number of Participants ({players.length})
       </ParticipantTitleSmallscreen>
       <RankandPointFullBoxWrapper>
         <Card
@@ -131,7 +138,11 @@ const Leaderboard: React.FC = () => {
                     <RankBox>
                       <Score>
                         {index < 3 ? (
-                          <SocialLogo height="36px" width="36px" src={Medal} />
+                          <SocialLogoMedal
+                            height="36px"
+                            width="36px"
+                            src={Medal}
+                          />
                         ) : (
                           // `${index + 1}`
                           <CardIndexwrapper> {index + 1}</CardIndexwrapper>
@@ -153,20 +164,29 @@ const Leaderboard: React.FC = () => {
           {/* <RankandPointBoxWrapper padding='0px' alignitems='left'> */}
 
           {/* <UserRankandPointValueBox> */}
-          <UserRankCard>
-            <ParticipantBox padding="0px">
-              <RankWithNameWrapper>
-                <RankBox display="flex">
-                  <Score>99</Score>
-                </RankBox>
-                <Name display="flex" margin="0px 0px 0px 0px">
-                  <Score Fontsize="20px">Bonker</Score>
-                </Name>
-              </RankWithNameWrapper>
 
-              <Score Margin="0px 20px 0px 0px ">340</Score>
-            </ParticipantBox>
-          </UserRankCard>
+          {players
+            .filter((player) => player.userName === userName) // Filter by matching userId
+            .map((filteredPlayer, index) => (
+              <UserRankCard key={index}>
+                <ParticipantBox padding="0px">
+                  <RankWithNameWrapper>
+                    <RankBox display="flex">
+                      <Score>{filteredPlayer.rank}</Score> {/* Display rank */}
+                    </RankBox>
+                    <Name display="flex" margin="0px 0px 0px 0px">
+                      <Score Fontsize="20px">{filteredPlayer.userName}</Score>{' '}
+                      {/* Display name */}
+                    </Name>
+                  </RankWithNameWrapper>
+                  <Score Margin="0px 20px 0px 0px ">
+                    {filteredPlayer.points}
+                  </Score>{' '}
+                  {/* Display score */}
+                </ParticipantBox>
+              </UserRankCard>
+            ))}
+
           {/* </UserRankandPointValueBox> */}
 
           {/* </RankandPointBoxWrapper> */}

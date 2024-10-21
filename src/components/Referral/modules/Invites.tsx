@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CardContainer,
   InviteTitle,
@@ -28,54 +28,46 @@ import {
 } from '../../Leaderboard/styles/Leaderboard.style';
 import ReferralSideDesign from '../../../assets/referralsidedesign.svg';
 import Bigtenex from '../../../assets/bigtenexbg.svg';
-import { MiddleLogo } from '../../DashBoard/styles/DashBoard.styles';
+import {
+  MiddleLogo,
+  MobileScreenHeader,
+} from '../../DashBoard/styles/DashBoard.styles';
 import tenexbglogo from '../../../assets/tenexbglogo.svg';
 import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
-// import axios from "axios";
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+import axios from 'axios';
 
 const Invite: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
-  console.log(setIsCopied);
+  const [referredUsers, setReferredUsers] = useState([]);
+  const { userId, refralcode } = useSelector((state: RootState) => state.auth);
+  console.log(refralcode);
 
-  const players = [
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-    'Tenex',
-  ];
+  useEffect(() => {
+    const fetchReferredUsers = async () => {
+      try {
+        const response = await axios.post(
+          'http://localhost:3000/api/users/referrals',
+          {
+            userId,
+          }
+        );
+        const { referredUsers } = response.data;
+        setReferredUsers(referredUsers);
+      } catch (error) {
+        console.error('Error fetching referred users:', error);
+      }
+    };
 
-  const playersPoints = [
-    '34523',
-    '34543',
-    '23455',
-    '45644',
-    '34534',
-    '34523',
-    '34543',
-    '23455',
-    '45644',
-    '34534',
-    '64544',
-  ];
+    fetchReferredUsers();
+  }, [userId]);
 
   const handleGenerateReferralLink = async () => {
     try {
-      // const discordId = localStorage.getItem('userId');
+      const referralLink = `${'http://localhost:5173/'}?referral=${refralcode}`;
+      console.log(referralLink);
 
-      // const response = await axios.post(
-      //   'http://localhost:3000/api/users/referral',
-      //   { discordId }
-      // );
-      // console.log(response.data.email);
-
-      const referralLink = localStorage.getItem('referralLink');
       if (referralLink) {
         await navigator.clipboard.writeText(referralLink);
         setIsCopied(true);
@@ -90,6 +82,7 @@ const Invite: React.FC = () => {
 
   return (
     <InviteWrapper>
+      <MobileScreenHeader>Invite Friends</MobileScreenHeader>
       <MiddleLogo src={tenexbglogo} Top="80vh" Left="40vh" />
       <MiddleLogo src={tenexbglogo2} Top="65vh" Left="150vh" />
       <CardContainer margin="40px 0px ">
@@ -152,7 +145,7 @@ const Invite: React.FC = () => {
               </RankandPointBox>
 
               <RankandPointValueBox>
-                {players.map((player, index) => (
+                {referredUsers.map((player, index) => (
                   <ParticipantBox key={index}>
                     <RankBox>
                       <Score>{index + 1}</Score>
@@ -161,7 +154,7 @@ const Invite: React.FC = () => {
                       <Score>{player}</Score>
                     </Name>
                     <EarnedPoints>
-                      <Score>{playersPoints[index]}</Score>
+                      <Score>{10}</Score>
                     </EarnedPoints>
                   </ParticipantBox>
                 ))}

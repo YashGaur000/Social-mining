@@ -4,14 +4,22 @@ import { DefaultTheme } from '../../../styles/Theme';
 export const DashBoardConnectionCards = styled.div<{ display?: string }>`
   width: 100%;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  display: flex;
+  gap: 70px;
+  margin-left: 24px;
+
+  @media only screen and (max-width: 900px) {
+    gap: 50px;
+    margin-left: 10px;
+  }
 
   @media only screen and (max-width: 780px) {
     width: 100%;
+    height: 100vh;
+    gap: 20px;
     flex-direction: column;
     display: ${({ display }) => display ?? 'flex'};
+    margin-top: 20px;
+    margin-left: 2px;
   }
 `;
 
@@ -24,12 +32,38 @@ export const DashBoardConnectionCard = styled.div`
   width: 20%;
   height: 102px;
   border-radius: 16px;
+  position: relative;
 
   @media only screen and (max-width: 780px) {
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
     gap: 8px;
+  }
+
+  @media only screen and (max-width: 580px) {
+    flex-direction: row;
+    width: 100%;
+    gap: 8px;
+    align-items: center;
+  }
+`;
+
+export const SocialConnectModelImage = styled.img`
+  display: none;
+
+  @media only screen and (max-width: 780px) {
+    display: block;
+    position: absolute;
+    left: -10px;
+    width: 38px;
+  }
+
+  @media only screen and (max-width: 580px) {
+    display: block;
+    position: absolute;
+    left: -10px;
+    width: 38px;
   }
 `;
 
@@ -42,7 +76,10 @@ export const DashBoardConnectionText = styled.p<{ theme: DefaultTheme }>`
   color: ${({ theme }) => theme.colors.whiteBorder};
 `;
 
-export const DashBoardConnectionButton = styled.button<{ theme: DefaultTheme }>`
+export const DashBoardConnectionButton = styled.button<{
+  theme: DefaultTheme;
+  isSelected?: boolean;
+}>`
   width: 130px;
   height: 30px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -55,15 +92,21 @@ export const DashBoardConnectionButton = styled.button<{ theme: DefaultTheme }>`
   border-radius: 8px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   border: 1px solid transparent;
-  background: ${({ theme }) => theme.colors.swapIconBackground},
-    ${({ theme }) => theme.colors.buttonBackground};
+  background: ${({ theme, isSelected }) =>
+      isSelected
+        ? 'linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%)'
+        : theme.colors.swapIconBackground},
+    ${({ theme, isSelected }) => !isSelected && theme.colors.buttonBackground};
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   gap: 5px;
 
-  &:focus,
   active {
     background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
+  }
+
+  @media only screen and (max-width: 580px) {
+    width: 100px;
   }
 `;
 

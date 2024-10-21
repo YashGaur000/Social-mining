@@ -12,20 +12,23 @@ import menuIcon from '../../../assets/menuIcon.svg';
 import closeIcon from '../../../assets/closeIcon.svg';
 import { useState } from 'react';
 import SocialConnectModel from '../../SocialConnectModel/modules/SocialConnectModel';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 interface SocialMiningProps {
   DashBoardTitle: string;
 }
 
 const SocialMining: React.FC<SocialMiningProps> = ({ DashBoardTitle }) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-  const history = useNavigate();
-
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
   const handleLogoClick = () => {
-    history('/');
+    if (isAuthenticated) navigate('/dashboard');
+    else navigate('/');
   };
 
   return (
@@ -34,7 +37,6 @@ const SocialMining: React.FC<SocialMiningProps> = ({ DashBoardTitle }) => {
         <LogoWrapper>
           <LogoImage src={TenexLogo} onClick={handleLogoClick} />
         </LogoWrapper>
-
         <MainContaier>
           <Heading>
             {showMenu ? 'Connect your Social accounts' : DashBoardTitle}
