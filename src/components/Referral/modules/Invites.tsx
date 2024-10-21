@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   CardContainer,
   InviteWrapper,
@@ -39,16 +39,32 @@ import logintick from '../../../assets/logintick.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { LoginTickImage } from '../../SocialConnectModel/styles/SocialConnectModel.style';
+import axios from 'axios';
 
 const Invite: React.FC = () => {
   const [isCopied, setIsCopied] = useState(false);
-
-  const refralcode = useSelector((state: RootState) => state.auth.refralcode);
+  const [referredUsers, setReferredUsers] = useState([]);
+  const { userId, refralcode } = useSelector((state: RootState) => state.auth);
   console.log(refralcode);
 
-  const players = ['Tenex', 'Tenex'];
+  useEffect(() => {
+    const fetchReferredUsers = async () => {
+      try {
+        const response = await axios.post(
+          'http://localhost:3000/api/users/referrals',
+          {
+            userId,
+          }
+        );
+        const { referredUsers } = response.data;
+        setReferredUsers(referredUsers);
+      } catch (error) {
+        console.error('Error fetching referred users:', error);
+      }
+    };
 
-  const playersPoints = ['34523', '34543'];
+    fetchReferredUsers();
+  }, [userId]);
 
   const handleGenerateReferralLink = async () => {
     try {
@@ -133,7 +149,7 @@ const Invite: React.FC = () => {
               </RankandPointBox>
 
               <RankandPointValueBox>
-                {players.map((player, index) => (
+                {referredUsers.map((player, index) => (
                   <ParticipantBox key={index}>
                     <RankBox>
                       <Score>{index + 1}</Score>
@@ -142,7 +158,7 @@ const Invite: React.FC = () => {
                       <Score>{player}</Score>
                     </Name>
                     <EarnedPoints>
-                      <Score>{playersPoints[index]}</Score>
+                      <Score>{10}</Score>
                     </EarnedPoints>
                   </ParticipantBox>
                 ))}

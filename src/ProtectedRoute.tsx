@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation } from 'react-router-dom';
+
 // import { clearAuthState } from './store/slices/AuthSlice';
 // import Cookies from 'js-cookie';
 // import { useDisconnect } from 'wagmi';
@@ -19,6 +20,7 @@ interface RootState {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { isAuthenticated } = useSelector((state: RootState) => state.auth);
   const location = useLocation();
+
   // const dispatch = useDispatch();
 
   // Using wagmi's useDisconnect hook

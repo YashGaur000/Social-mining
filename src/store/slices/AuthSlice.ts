@@ -37,9 +37,14 @@ const authSlice = createSlice({
 
       state.refferedBy = action.payload.refferedCode;
     },
-    setAuthState(state) {
+    setAuthState(
+      state,
+      action: PayloadAction<{ userId: string; userName: string }>
+    ) {
       state.isAuthenticated = true;
       state.loginType = 'twitter';
+      state.userId = action.payload.userId;
+      state.userName = action.payload.userName;
     },
     setTwitterDetails(
       state,
@@ -71,7 +76,7 @@ const authSlice = createSlice({
         state.isAuthenticated = true;
         if (action.payload.User) {
           state.userId = action.payload.User.userId;
-          state.loginType = 'wallet';
+          state.loginType = action.payload.User.userType;
           state.userName = action.payload.User.userName;
           state.walletAddress = action.payload.User.walletAddress;
           if (action.payload.User.referral) {

@@ -76,7 +76,10 @@ export const DashBoardConnectionText = styled.p<{ theme: DefaultTheme }>`
   color: ${({ theme }) => theme.colors.whiteBorder};
 `;
 
-export const DashBoardConnectionButton = styled.button<{ theme: DefaultTheme }>`
+export const DashBoardConnectionButton = styled.button<{
+  theme: DefaultTheme;
+  isSelected?: boolean;
+}>`
   width: 130px;
   height: 30px;
   font-family: ${({ theme }) => theme.fonts.main};
@@ -89,13 +92,15 @@ export const DashBoardConnectionButton = styled.button<{ theme: DefaultTheme }>`
   border-radius: 8px;
   color: ${({ theme }) => theme.colors.whiteBorder};
   border: 1px solid transparent;
-  background: ${({ theme }) => theme.colors.swapIconBackground},
-    ${({ theme }) => theme.colors.buttonBackground};
+  background: ${({ theme, isSelected }) =>
+      isSelected
+        ? 'linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%)'
+        : theme.colors.swapIconBackground},
+    ${({ theme, isSelected }) => !isSelected && theme.colors.buttonBackground};
   background-clip: padding-box, border-box;
   background-origin: padding-box, border-box;
   gap: 5px;
 
-  &:focus,
   active {
     background: linear-gradient(209.3deg, #16c062 7.44%, #3eacfc 86.34%);
   }
