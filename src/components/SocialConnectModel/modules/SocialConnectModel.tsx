@@ -31,9 +31,8 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
   const [isLoading, setLoading] = useState<boolean>(false);
   const [isConnect, setConnect] = useState<boolean>(false);
   const [flag, setflag] = useState<boolean>(false);
-  const { loginType, isAuthenticated, walletAddress } = useSelector(
-    (state: RootState) => state.auth
-  );
+  const { loginType, isAuthenticated, walletAddress, userName, userId } =
+    useSelector((state: RootState) => state.auth);
   const dispatch: AppDispatch = useDispatch();
 
   useEffect(() => {
@@ -52,7 +51,6 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
           const userName: string = decoded.userName;
 
           dispatch(setAuthState({ userId: userId, userName: userName }));
-          setConnect(true);
         } catch (error) {
           console.error('Invalid token', error);
           toast.error('Invalid token');
@@ -66,8 +64,14 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
     }
   }, [flag]);
 
+  useEffect(() => {
+    if (userName && userId) {
+      const abc = userName.includes(userId);
+      setConnect(!abc);
+    }
+  }, []);
   const handleTwitterLogin = async () => {
-    if (isAuthenticated && loginType !== 'twitter') {
+    if (isAuthenticated && loginType !== 'twitter' && !isConnect) {
       try {
         setLoading(true);
         const response = await axios.post(
@@ -104,13 +108,16 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
     }
   };
 
-  const handleTelegramConnect = () => {
-    const telegramOAuthUrl = import.meta.env.VITE_TELEGRAM_OAUTH;
-    if (telegramOAuthUrl) {
-      window.open(telegramOAuthUrl, '_blank');
-    } else {
-      console.error('URL not found');
-    }
+  const handleTelegramConnect = async () => {
+    setLoading(true);
+    const botUsername = 'socialmining13_bot';
+    const redirectUrl = 'http://localhost:3000/auth/users/telegram/redirect';
+
+    // Telegram deep link format
+    const telegramUrl = `https://t.me/${botUsername}?start=auth_${encodeURIComponent(redirectUrl)}`;
+
+    // Redirect the user to Telegram to authenticate
+    window.location.href = telegramUrl;
   };
 
   return (
