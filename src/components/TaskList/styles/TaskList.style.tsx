@@ -68,6 +68,8 @@ export const TitleBox = styled.div<{ theme: DefaultTheme }>`
   // gap: 20px;
   font-family: ${({ theme }) => theme.fonts.main};
   font-size: 24px;
+  align-items: center;
+  padding: 4px 16px;
 
   @media (max-width: 768px) {
   }
@@ -125,31 +127,31 @@ export const SocialLogo = styled.img<{
   height: ${({ height }) => height || 'auto'};
   margin: ${({ margin }) => margin || '0px'};
 
-  @media (min-width: 1080px) {
+  @media (min-width: 1230px) {
     height: ${({ platform }) => {
-      if (platform === 'twitter') return '260px';
-      if (platform === 'discord') return '224px';
-      if (platform === 'telegram') return '224px';
-      if (platform === 'reddit') return '224px';
-      if (platform === 'exchange-activity:') return '182px';
-      if (platform === 'article') return '192px';
-      if (platform === 'video') return '22px';
+      if (platform === 'twitter') return '270px';
+      if (platform === 'discord') return '230px';
+      if (platform === 'telegram') return '230px';
+      if (platform === 'reddit') return '230px';
+      if (platform === 'exchange-activity:') return '191px';
+      if (platform === 'article') return '230px';
+      if (platform === 'video') return '230px';
 
-      return '300px';
+      return '90px';
     }};
   }
 
-  @media (min-width: 780px) {
+  @media (max-width: 780px) {
     height: ${({ platform }) => {
-      if (platform === 'twitter') return '250px';
-      if (platform === 'discord') return '215px';
-      if (platform === 'telegram') return '215px';
-      if (platform === 'reddit') return '215px';
-      if (platform === 'exchange-activity:') return '180px';
-      if (platform === 'article') return '185px';
-      if (platform === 'video') return '305px';
+      if (platform === 'twitter') return '259px';
+      if (platform === 'discord') return '224px';
+      if (platform === 'telegram') return '224px';
+      if (platform === 'reddit') return '222px';
+      if (platform === 'exchange-activity:') return '186px';
+      if (platform === 'article') return '225px';
+      if (platform === 'video') return '312px';
 
-      return '300px';
+      return '90px';
     }};
   }
 

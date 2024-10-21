@@ -9,6 +9,7 @@ import {
   AirdropTitle,
   BoardWrapper,
   EarnedPoints,
+  MedalLogo,
   Name,
   ParticipantBox,
   ParticipantTitleSmallscreen,
@@ -21,7 +22,6 @@ import {
   RankBox,
   Rankers,
   RankWithNameWrapper,
-  SocialLogoMedal,
   UserRankCard,
 } from '../styles/Leaderboard.style';
 import Medal from '../../../assets/medal1.svg';
@@ -138,11 +138,7 @@ const Leaderboard: React.FC = () => {
                     <RankBox>
                       <Score>
                         {index < 3 ? (
-                          <SocialLogoMedal
-                            height="36px"
-                            width="36px"
-                            src={Medal}
-                          />
+                          <MedalLogo height="36px" width="36px" src={Medal} />
                         ) : (
                           // `${index + 1}`
                           <CardIndexwrapper> {index + 1}</CardIndexwrapper>

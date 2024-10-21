@@ -142,7 +142,7 @@ const SocialConnectModel: React.FC<SocialConnectModelProps> = ({ display }) => {
                   : 'connect'}
             </DashBoardButtonsWrapper>
             <DashBoardButtonsWrapper>
-              <LoginTickImage src={logintick} />
+              <LoginTickImage height="12px" width="12px" src={logintick} />
             </DashBoardButtonsWrapper>
           </DashBoardConnectionButton>
         </DashBoardConnectionCard>

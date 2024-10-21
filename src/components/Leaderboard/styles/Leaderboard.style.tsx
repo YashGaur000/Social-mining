@@ -218,10 +218,10 @@ export const UserRankandPointValueBox = styled.div<{ theme: DefaultTheme }>`
   }
 `;
 
-export const SocialLogoMedal = styled.img<{
+export const MedalLogo = styled.img<{
   theme: DefaultTheme;
-  width: string;
   height: string;
+  width: string;
 }>`
   width: ${({ width }) => width || 'auto'};
   height: ${({ height }) => height || 'auto'};
