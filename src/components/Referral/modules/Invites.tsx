@@ -3,6 +3,7 @@ import {
   CardContainer,
   InviteTitle,
   InviteWrapper,
+  CopyPopup,
 } from '../styles/Invites.style';
 import { Card, CardBox, CardWrapper } from '../../common/Card';
 import {
@@ -34,8 +35,10 @@ import {
 } from '../../DashBoard/styles/DashBoard.styles';
 import tenexbglogo from '../../../assets/tenexbglogo.svg';
 import tenexbglogo2 from '../../../assets/tenexbglogo2.svg';
+import logintick from '../../../assets/logintick.svg';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
+import { LoginTickImage } from '../../SocialConnectModel/styles/SocialConnectModel.style';
 import axios from 'axios';
 
 const Invite: React.FC = () => {
@@ -65,7 +68,7 @@ const Invite: React.FC = () => {
 
   const handleGenerateReferralLink = async () => {
     try {
-      const referralLink = `${'http://localhost:5173/'}?referral=${refralcode}`;
+      const referralLink = `${'http://localhost:5174/'}?referral=${refralcode}`;
       console.log(referralLink);
 
       if (referralLink) {
@@ -102,7 +105,7 @@ const Invite: React.FC = () => {
                 When they join, both you and your friend will receive 10 points
                 each!
               </InviteTitle>
-              <LetsGoButton>
+              <LetsGoButton style={{ position: 'relative' }}>
                 <GlobalButton onClick={handleGenerateReferralLink}>
                   Invite
                 </GlobalButton>
@@ -111,9 +114,10 @@ const Invite: React.FC = () => {
                 </GlobalButton> */}
               </LetsGoButton>
               {isCopied && (
-                <Score Margin="10px 0 0 50px" color="green">
-                  Link copied to clipboard!
-                </Score>
+                <CopyPopup>
+                  <LoginTickImage height="12px" width="12px" src={logintick} />
+                  Link copied
+                </CopyPopup>
               )}
             </TitleBox>
           </CardBox>
