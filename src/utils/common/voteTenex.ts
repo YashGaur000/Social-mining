@@ -1,18 +1,43 @@
 import { Metadata, Nft, NftAttribute } from '../../types/VotingEscrow';
 import { ERC20_TEST_TOKEN_LIST } from '../../constants/tokens/testnetTokens';
 import { TokenInfo } from '../../constants/tokens/type';
+import CryptoJS from 'crypto-js';
+import { envConfig } from '../../config';
+
 export const MAX_LOCK_TIME = 4 * 365 * 24 * 60 * 60;
+
+const SECRET_String = envConfig.wallectConnectProjectId;
+
 export const decodeBase64 = (base64: string): Metadata => {
+  if (typeof base64 !== 'string' || !base64.includes(',')) {
+    throw new Error('Invalid base64 string');
+  }
+
   const base64Data = base64.split(',')[1];
+  /* if (base64Data) {
+    console.log(decodeURI(base64Data));
+  } */
+
+  if (!base64Data) {
+    throw new Error('Base64 data is missing');
+  }
+
   const binaryString = window.atob(base64Data);
   const len = binaryString.length;
   const bytes = new Uint8Array(len);
+
   for (let i = 0; i < len; i++) {
     bytes[i] = binaryString.charCodeAt(i);
   }
+
   const decodedString = new TextDecoder().decode(bytes);
-  const decodedStringJson = JSON.parse(decodedString) as Metadata;
-  return decodedStringJson;
+
+  try {
+    const decodedStringJson = JSON.parse(decodedString) as Metadata;
+    return decodedStringJson;
+  } catch (error) {
+    throw new Error('Failed to parse JSON from decoded string');
+  }
 };
 
 export const locktokeninfo = () => {
@@ -57,7 +82,7 @@ export const calculateRemainingDays = (timestamp: number): string => {
     output += `${days} day${days > 1 ? 's' : ''} `;
   }
 
-  return output.trim() || '0 days'; // Return '0 days' if all are 0
+  return output.trim() || '0 days';
 };
 
 export const convertToDecimal = (value: number): number => {
@@ -144,6 +169,7 @@ export const getTimeDifference = (targetDateString: string): string => {
   let years = targetDate.getFullYear() - currentDate.getFullYear();
   let months = targetDate.getMonth() - currentDate.getMonth();
   let days = targetDate.getDate() - currentDate.getDate();
+  const hours = Math.floor(diffTime / (1000 * 60 * 60));
 
   if (days < 0) {
     months -= 1;
@@ -161,20 +187,32 @@ export const getTimeDifference = (targetDateString: string): string => {
 
   let output = '';
 
-  if (years > 0) {
-    output += `${years} years `;
+  if (years > 1) {
+    output += `${years} years, `;
+  } else if (years != 0) {
+    output += `${years} year, `;
   }
 
-  if (months >= 0) {
-    output += `${months} months `;
+  if (months > 1) {
+    output += `${months} months, `;
+  } else if (months != 0) {
+    output += `${months} month, `;
   }
 
-  if (days >= 0) {
+  if (days > 1) {
     output += `${days} days `;
+  } else if (days !== 0) {
+    output += `${days} day `;
+  } else {
+    output += '';
   }
 
-  if (years === 0 && days === 0 && months) {
-    output += `date has passed.`;
+  if (years === 0 && days === 0 && months === 0) {
+    if (hours > 1) {
+      output += `${hours} hours `;
+    } else {
+      output += `${hours} hour `;
+    }
   }
 
   return output.trim();
@@ -251,3 +289,53 @@ export const convertWeeksToYearsMonthsDays = (weeks: number) => {
 
   return { years, months, days };
 };
+
+export const encryptData = (data: string) => {
+  const ciphertext = CryptoJS.AES.encrypt(data, SECRET_String).toString();
+  const again = ciphertext
+    .replace('+', 'tNl78k')
+    .replace(/\//g, 'Noid34')
+    .replace('=', 'TENEX2345');
+
+  return again
+    .replace('+', 'tNl78k')
+    .replace('/', 'Noid34')
+    .replace('=', 'TENEX2345');
+};
+
+export const decryptData = (encryptedData: string) => {
+  const byteCode = encryptedData
+    .toString()
+    .replace('tNl78k', '+')
+    .replace(/Noid34/g, '/')
+    .replace('TENEX2345', '=');
+  const bytes = CryptoJS.AES.decrypt(byteCode, SECRET_String);
+  if (!bytes) {
+    throw new Error('Failed to decrypt data or invalid key');
+  }
+  const decryptdata = bytes.toString(CryptoJS.enc.Utf8);
+  if (!decryptdata) throw new Error('Failed to decrypt data ' + decryptdata);
+  return decryptdata;
+};
+
+export function calculateTimeLeft(epochEnd: number): {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+} {
+  const currentTime = Math.floor(Date.now() / 1000);
+  const remainingTime = epochEnd - currentTime;
+
+  if (remainingTime > 0) {
+    const days = Math.floor(remainingTime / (24 * 60 * 60));
+    const hours = Math.floor((remainingTime % (24 * 60 * 60)) / (60 * 60));
+    const minutes = Math.floor((remainingTime % (60 * 60)) / 60);
+    const seconds = remainingTime % 60;
+
+    return { days, hours, minutes, seconds };
+  }
+
+  // Return 0 for all units if the remaining time is 0 or negative
+  return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+}

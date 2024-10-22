@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import tenxLogo from '../../../../assets/Tenex.png';
 import { DashboardNavigation } from '../styles/DashBoard.styled';
+
 import {
   DashBoardLockMainContainer,
   LockContainer,
@@ -20,13 +21,35 @@ import useNftData from '../../../../hooks/useUserNFTs';
 import { Nft } from '../../../../types/VotingEscrow';
 import Pagination from '../../../common/Pagination';
 import { getTimeDifference } from '../../../../utils/common/voteTenex';
+import {
+  TRANSACTION_DELAY,
+  TransactionStatus,
+} from '../../../../types/Transaction';
+import { useRootStore } from '../../../../store/root';
+import { useVotingEscrowContract } from '../../../../hooks/useVotingEscrowContract';
+import { useVoterContract } from '../../../../hooks/useVoterContract';
+import contractAddress from '../../../../constants/contract-address/address';
+import {
+  showErrorToast,
+  showSuccessToast,
+} from '../../../../utils/common/toastUtils';
+import { LoadingSpinner } from '../../../common/Loader';
+import { ToastContainer } from 'react-toastify';
 
 const DashBoardLocks = () => {
   const Navigate = useNavigate();
   const [lockData, setLockData] = useState<Nft[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const itemsPerPage = 1;
+  const [resetTknId, setResetTknId] = useState<bigint>(0n);
+  const escrowAddress = contractAddress.VotingEscrow;
+  const { withdraw } = useVotingEscrowContract(escrowAddress);
+  const [isWithdrawing, setIsWithdrawing] = useState<bigint | null>(null);
+  const { reset, poke, epochStart } = useVoterContract();
+  const itemsPerPage = 4;
   const nftData = useNftData();
+  const { setTransactionStatus } = useRootStore();
+  const [isPoking, setIsPoking] = useState<bigint | null>(null);
+  const [epochStartTime, setEpochStartTime] = useState<number | null>(null);
 
   useEffect(() => {
     if (nftData.length > 0) {
@@ -46,23 +69,116 @@ const DashBoardLocks = () => {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
+  useEffect(() => {
+    const fetchEpochStartTime = async () => {
+      try {
+        const timestamp = Math.floor(Date.now() / 1000);
+        const epochStartTime = await epochStart(timestamp);
+        setEpochStartTime(Number(epochStartTime));
+      } catch (error) {
+        console.error('Error fetching epoch start time:', error);
+      }
+    };
 
+    void fetchEpochStartTime();
+  }, [epochStart]);
   const handlePrevPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
-  const handleLockButton = (option: string, tokenId: bigint) => {
+  /*  const handleLockButton = (option: string, tokenId: bigint) => {
     if (option) {
       Navigate(`/governance/managevetenex/${option}/${tokenId}`);
     } else {
       console.log('Route is undefined');
     }
+  }; */
+
+  const handleLockButton = (
+    option: string,
+    tokenId: bigint,
+    votingStatus: boolean | undefined
+  ) => {
+    if (option) {
+      const encryptedTokenId = tokenId;
+      const voteStatus = votingStatus ? votingStatus : false;
+      const encryptedVotingStatus = voteStatus;
+      Navigate(
+        `/governance/managevetenex/${option}/${encryptedTokenId}/${encryptedVotingStatus}`
+      );
+    } else {
+      console.warn('Undefined route');
+    }
+  };
+
+  const handleReset = useCallback(
+    async (tokenId: bigint) => {
+      try {
+        if (!tokenId) return;
+        setTransactionStatus(TransactionStatus.IN_PROGRESS);
+        setResetTknId(tokenId);
+
+        await reset(tokenId);
+
+        setTransactionStatus(TransactionStatus.DONE);
+        setTimeout(() => {
+          setResetTknId(0n);
+          void showSuccessToast('Successfully reset lock #' + tokenId);
+          setTransactionStatus(TransactionStatus.IDEAL);
+        }, TRANSACTION_DELAY);
+      } catch (error) {
+        setResetTknId(0n);
+        setTransactionStatus(TransactionStatus.FAILED);
+        void showErrorToast('Failed to reset lock. Please try again.');
+      }
+    },
+    [reset, setTransactionStatus]
+  );
+  const handleWithdraw = useCallback(
+    async (tokenId: bigint) => {
+      try {
+        if (!tokenId) return;
+        setTransactionStatus(TransactionStatus.IN_PROGRESS);
+        setIsWithdrawing(tokenId);
+        await withdraw(tokenId);
+        setTimeout(() => {
+          void showSuccessToast('Withdraw lock successfully.');
+        }, TRANSACTION_DELAY);
+        setTransactionStatus(TransactionStatus.IDEAL);
+      } catch (error) {
+        setTransactionStatus(TransactionStatus.FAILED);
+        void showErrorToast('Failed to withdraw lock. Please try again.');
+      } finally {
+        setIsWithdrawing(null);
+      }
+    },
+    [withdraw, setTransactionStatus]
+  );
+  const handlePoke = async (tokenId: bigint) => {
+    try {
+      setTransactionStatus(TransactionStatus.IN_PROGRESS);
+      setIsPoking(tokenId);
+      await poke(tokenId);
+      setTransactionStatus(TransactionStatus.DONE);
+      setTimeout(() => {
+        setIsPoking(0n);
+        setTransactionStatus(TransactionStatus.IDEAL);
+      }, TRANSACTION_DELAY);
+    } catch (error) {
+      setIsPoking(0n);
+      setTransactionStatus(TransactionStatus.FAILED);
+      console.error('Error during poke action:', error);
+      void showErrorToast('Failed to poke the voting weight.');
+    } finally {
+      setIsPoking(0n);
+    }
   };
 
   return (
     <>
+      <ToastContainer />
       {currentItems.length > 0 ? (
         currentItems.map((lock, index) => {
           if (!lock.metadata) {
@@ -103,58 +219,126 @@ const DashBoardLocks = () => {
                     TENEX locked for {formatUnlockData}
                   </Paragraph>
                   <LockStyleText>
-                    {formatUnlockData !== 'Expired' && !lock.votingStatus ? (
+                    {formatUnlockData !== 'Expired' && (
                       <>
                         <DashboardNavigation
                           onClick={() =>
-                            handleLockButton('increase', lock.tokenId)
+                            handleLockButton(
+                              'increase',
+                              lock.tokenId,
+                              lock.votingStatus
+                            )
                           }
                         >
                           Increase
                         </DashboardNavigation>
                         <DashboardNavigation
                           onClick={() =>
-                            handleLockButton('extend', lock.tokenId)
+                            handleLockButton(
+                              'extend',
+                              lock.tokenId,
+                              lock.votingStatus
+                            )
                           }
                         >
                           Extend
                         </DashboardNavigation>
                         <DashboardNavigation
                           onClick={() =>
-                            handleLockButton('merge', lock.tokenId)
+                            handleLockButton(
+                              'merge',
+                              lock.tokenId,
+                              lock.votingStatus
+                            )
                           }
                         >
                           Merge
                         </DashboardNavigation>
                         <DashboardNavigation
                           onClick={() =>
-                            handleLockButton('transfer', lock.tokenId)
+                            handleLockButton(
+                              'transfer',
+                              lock.tokenId,
+                              lock.votingStatus
+                            )
                           }
                         >
                           Transfer
                         </DashboardNavigation>
+                        {lock.votingStatus &&
+                          (resetTknId === lock.tokenId ? (
+                            <DashboardNavigation disabled>
+                              <span
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <LoadingSpinner width="10px" height="10px" />
+                                <span style={{ marginLeft: '5px' }}>
+                                  Resetting
+                                </span>
+                              </span>
+                            </DashboardNavigation>
+                          ) : (
+                            <DashboardNavigation
+                              disabled={
+                                (epochStartTime ?? 0) <= (lock?.lastVoted ?? 0)
+                              }
+                              onClick={() => handleReset(lock?.tokenId ?? 0n)}
+                            >
+                              Reset
+                            </DashboardNavigation>
+                          ))}
+
+                        {lock.votingStatus &&
+                          (isPoking === lock.tokenId ? (
+                            <DashboardNavigation disabled>
+                              <span
+                                style={{
+                                  display: 'flex',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <LoadingSpinner width="10px" height="10px" />
+                                <span style={{ marginLeft: '5px' }}>
+                                  Poke...
+                                </span>
+                              </span>
+                            </DashboardNavigation>
+                          ) : (
+                            <DashboardNavigation
+                              onClick={() => handlePoke(lock.tokenId)}
+                            >
+                              Poke
+                            </DashboardNavigation>
+                          ))}
                       </>
-                    ) : (
-                      <>
-                        {!lock.votingStatus ? (
-                          <DashboardNavigation
-                            onClick={() =>
-                              handleLockButton('transfer', lock.tokenId)
-                            }
-                          >
-                            Transfer
+                    )}
+                    <>
+                      {formatUnlockData === 'Expired' &&
+                        (isWithdrawing === lock.tokenId ? (
+                          <DashboardNavigation disabled>
+                            <span
+                              style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                              }}
+                            >
+                              <LoadingSpinner width="10px" height="10px" />
+                              <span style={{ marginLeft: '5px' }}>
+                                Withdrawing
+                              </span>
+                            </span>
                           </DashboardNavigation>
                         ) : (
                           <DashboardNavigation
-                            onClick={() =>
-                              handleLockButton('reset', lock.tokenId)
-                            }
+                            onClick={() => handleWithdraw(lock.tokenId)}
                           >
-                            Reset
+                            Withdraw
                           </DashboardNavigation>
-                        )}
-                      </>
-                    )}
+                        ))}
+                    </>
                   </LockStyleText>
                 </LockData>
               </LockContainer>

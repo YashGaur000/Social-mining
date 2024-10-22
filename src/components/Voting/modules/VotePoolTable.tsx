@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import TableContains, {
   TableWrapper,
   TableHeader,
@@ -13,93 +13,57 @@ import { ImageContainer } from '../../ManageVeTenex/Styles/ManageVetenex.style';
 
 import VoteSelectedCard from './VoteSelectedCard';
 import { LiquidityTableWrapper } from '../../Liquidity/LiquidityHomePage/styles/LiquidityTable.style';
-import { LiquidityPoolNewType } from '../../../graphql/types/LiquidityPoolNew';
-import useNftData from '../../../hooks/useUserNFTs';
 
-import useVoterData from '../../../hooks/useVoterData';
-import PageLoader from '../../common/PageLoader';
 import SuccessPopup from '../../common/SucessPopup';
 import ErrorPopup from '../../common/Error/ErrorPopup';
 import { Nft } from '../../../types/VotingEscrow';
-type SortField = 'totalFeesUSD' | 'totalBribesUSD';
-type SortOrder = 'asc' | 'desc';
-const VotePoolTable: React.FC = () => {
+import Pagination from '../../common/Pagination';
+import { VoteDataType } from '../../../types/VoteData';
+type SortField = 'totalFeesUSD' | 'totalBribesUSD' | 'totalValueLocked';
+
+interface VotePoolTableProps {
+  islockPresent: boolean;
+  sortedData: VoteDataType[];
+  UserNft: Nft[];
+  handleSort: (field: SortField) => void;
+  handleNextPage: () => void;
+  handlePrevpage: () => void;
+  currentPage: number;
+  totalPages: number;
+}
+const VotePoolTable: React.FC<VotePoolTableProps> = ({
+  islockPresent,
+  sortedData,
+  UserNft,
+  handleSort,
+  handleNextPage,
+  handlePrevpage,
+  totalPages,
+  currentPage,
+}) => {
   const [selectedPoolsCount, setSelectedPoolsCount] = useState<number>(0);
-  const [VoteSelectPool, setVoteSelectPool] = useState<LiquidityPoolNewType[]>(
-    []
-  );
-  const [sortField, setSortField] = useState<SortField | null>(null);
-  const [sortOrder, setSortOrder] = useState<SortOrder>('asc');
-  const [sortedData, setSortedData] = useState<LiquidityPoolNewType[]>([]);
-  const [UserNft, setUserNft] = useState<Nft[]>([]);
-  const [islockPresent, setLockPresent] = useState<boolean>(false);
+  const [VoteSelectPool, setVoteSelectPool] = useState<VoteDataType[]>([]);
+  const [explorerLink, setExplorerlink] = useState<string>('');
   const [isSucess, setSucess] = useState(false);
-  const nftData = useNftData();
 
-  const { voteData, Loading, error } = useVoterData();
+  const handleSelectButton = (pool: VoteDataType) => {
+    const isSelected = VoteSelectPool.some(
+      (selectedPool) => selectedPool.id === pool.id
+    );
 
-  useEffect(() => {
-    if (nftData.length > 0 && !islockPresent) {
-      setLockPresent(true);
-    } else if (nftData.length === 0 && islockPresent) {
-      setLockPresent(false);
-    }
-  }, [nftData, islockPresent]);
-
-  useEffect(() => {
-    const filterNFT = nftData.filter((item) => {
-      return !item.votingStatus;
-    });
-    setUserNft(filterNFT);
-  }, [nftData]);
-
-  useEffect(() => {
-    if (voteData) {
-      setSortedData(voteData);
-    }
-  }, [voteData]);
-
-  const handleSelectPool = (
-    isSelected: boolean,
-    pool: LiquidityPoolNewType
-  ) => {
-    if (selectedPoolsCount < 30 && VoteSelectPool.length < 30)
+    if (islockPresent) {
       if (isSelected) {
-        setSelectedPoolsCount((Count) => Count + 1);
-        setVoteSelectPool((prevPools) => [...prevPools, pool]);
-      } else {
         setVoteSelectPool((prevPools) =>
           prevPools.filter((selectedPool) => selectedPool.id !== pool.id)
         );
         setSelectedPoolsCount((Count) => Count - 1);
+      } else if (selectedPoolsCount < 30 && VoteSelectPool.length < 30) {
+        setVoteSelectPool((prevPools) => [...prevPools, pool]);
+        setSelectedPoolsCount((Count) => Count + 1);
       }
+    }
   };
 
-  const handleSort = (field: SortField) => {
-    const isAsc = sortField === field && sortOrder === 'asc';
-    setSortField(field);
-    setSortOrder(isAsc ? 'desc' : 'asc');
-
-    const sorted = [...sortedData].sort((a, b) => {
-      if (a[field] < b[field]) return isAsc ? 1 : -1;
-      if (a[field] > b[field]) return isAsc ? -1 : 1;
-      return 0;
-    });
-
-    setSortedData(sorted);
-  };
-
-  if (Loading) {
-    return <PageLoader />;
-  }
-
-  if (!Loading && voteData.length <= 0)
-    return (
-      <LiquidityTableWrapper>
-        You are not Eligible for Vote
-      </LiquidityTableWrapper>
-    );
-  if (error) return 'error! Fetching Data';
   return (
     <>
       <LiquidityTableWrapper>
@@ -171,9 +135,10 @@ const VotePoolTable: React.FC = () => {
                   key={key}
                   data={item}
                   islock={islockPresent}
-                  handleSelectPool={(isSelected) =>
-                    handleSelectPool(isSelected, item)
-                  }
+                  isSelectCardOpen={VoteSelectPool.some(
+                    (pool) => pool.id === item.id
+                  )}
+                  handleSelectButton={handleSelectButton}
                 />
               ))}
             </tbody>
@@ -186,12 +151,21 @@ const VotePoolTable: React.FC = () => {
               setVoteSelectPool={setVoteSelectPool}
               setSelectedPoolsCount={setSelectedPoolsCount}
               setSucess={setSucess}
+              setExplorerlink={setExplorerlink}
             />
           )}
         </TableWrapper>
+        <Pagination
+          handleNextPage={handleNextPage}
+          handlePrevpage={handlePrevpage}
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
       </LiquidityTableWrapper>
 
-      {isSucess && <SuccessPopup message="Vote Sucessfully" />}
+      {isSucess && (
+        <SuccessPopup message="Vote Sucessfully" explorerLink={explorerLink} />
+      )}
       {selectedPoolsCount >= 30 && (
         <ErrorPopup errorMessage="only  30 pool allowed" />
       )}

@@ -35,16 +35,26 @@ import {
 } from '../../../../utils/common/voteTenex';
 import { useEffect, useState } from 'react';
 import { useVotingPowerCalculation } from '../../../../hooks/useVotingNftData';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SuccessPopup from '../../../common/SucessPopup';
+import { useVoterContract } from '../../../../hooks/useVoterContract';
 
 const ExtendLock = () => {
-  const { tokenId } = useParams<{ tokenId: string }>();
+  const { encryptedTokenId } = useParams<{
+    encryptedTokenId: string;
+  }>();
+  const navigate = useNavigate();
+  const tokenId = encryptedTokenId ? encryptedTokenId : '';
+
+  if (!tokenId) {
+    navigate('/governance');
+  }
   const [isMaxLockMode, setIsMaxLockMode] = useState<boolean>(false);
   const [iSuccessLock, setSuccessLock] = useState<boolean>(false);
   const [isExtendDisable, setIsExtendDisable] = useState<boolean>(true);
   const [isSliderDisabled, setIsSliderDisabled] = useState<boolean>(false);
-
+  const [votingStatus, setIsvotingStatus] = useState<boolean>(false);
+  const { lastVote } = useVoterContract();
   const {
     votingPower,
     lockData,
@@ -55,8 +65,29 @@ const ExtendLock = () => {
   } = useVotingPowerCalculation(tokenId);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    const fetchlastVote = async () => {
+      try {
+        //let timestamp = Math.floor(Date.now() / 1000);
+        const checkLastVote = await lastVote(BigInt(tokenId));
+
+        //let epochStartTime = await epochStart(timestamp)
+
+        //if(Number(checkLastVote) > Number(epochStartTime)){
+
+        //}
+        if (Number(checkLastVote)) {
+          setIsvotingStatus(true);
+          console.log('checkLastVote:', Number(checkLastVote));
+        }
+      } catch (error) {
+        console.error('Error during last vote fetch:', error);
+      }
+
+      window.scrollTo(0, 0);
+    };
+
+    void fetchlastVote();
+  }, [tokenId, lastVote]);
 
   const handleToggle = () => {
     if (!isMaxLockMode) {
@@ -194,6 +225,7 @@ const ExtendLock = () => {
           setSuccessLock={setSuccessLock}
           isExtendDisable={isExtendDisable}
           onExtendClick={handleExtendClick}
+          votingStatus={votingStatus}
         />
       </CreateMainContainer>
       {iSuccessLock && <SuccessPopup message="Merge lock confirmed" />}

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useLockStore } from '../../../store/slices/useLockStore'; // Import Zustand store
 import { StepperDataProps } from '../../../types/Stepper';
 import Stepper from '../../common/Stepper';
@@ -37,6 +37,7 @@ const IncreaseStepper: React.FC<LockIncreaseProps> = ({
   setSuccessLock,
   setAdditionalAmount,
   setIsApproveLock,
+  votingStatus,
 }) => {
   const { increaseLockAmount } = useVotingEscrowContract(
     contractAddress.VotingEscrow
@@ -50,7 +51,6 @@ const IncreaseStepper: React.FC<LockIncreaseProps> = ({
   const { poke } = useVoterContract();
   const navigate = useNavigate();
 
-  // Use Zustand state
   const {
     isLoading,
     isTokenAllowed,
@@ -63,6 +63,22 @@ const IncreaseStepper: React.FC<LockIncreaseProps> = ({
     setIsPokeDisplay,
     setIsLocked,
   } = useLockStore();
+  useEffect(() => {
+    setAdditionalAmount('');
+    setIsTokenAllowed(false);
+    setIsPokeDisplay(false);
+    setIsLocked(false);
+    setSuccessLock(false);
+    setTransactionStatus(TransactionStatus.IDEAL);
+  }, [
+    tokenId,
+    setAdditionalAmount,
+    setIsTokenAllowed,
+    setIsPokeDisplay,
+    setIsLocked,
+    setSuccessLock,
+    setTransactionStatus,
+  ]);
 
   const handleAllowToken = async () => {
     try {
@@ -102,10 +118,12 @@ const IncreaseStepper: React.FC<LockIncreaseProps> = ({
       setTimeout(() => {
         setIsLocking(false);
         setSuccessLock(true);
-        setIsPokeDisplay(true); // Show the Poke button after increasing the lock
-        setIsLocked(true); // Mark the lock as confirmed
+        setIsPokeDisplay(true);
+        setIsLocked(true);
         setTransactionStatus(TransactionStatus.IDEAL);
+        void showSuccessToast('Increase Lock successfully');
       }, TRANSACTION_DELAY);
+      navigate('/governance');
     } catch (error) {
       console.error('Error increasing lock:', error);
       setIsLocked(false);
@@ -242,7 +260,7 @@ const IncreaseStepper: React.FC<LockIncreaseProps> = ({
         </GlobalButton>
       )}
 
-      {isPokeDisplay && (
+      {isPokeDisplay && votingStatus && (
         <GlobalButton
           width="30%"
           height="40px"

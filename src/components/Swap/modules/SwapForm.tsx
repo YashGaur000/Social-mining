@@ -46,6 +46,8 @@ import { fetchBestRouteAndUpdateState } from '../../../utils/liquidityRouting/re
 import { ROUTING_DELAY } from '../../../utils/liquidityRouting/chunk';
 import { useNativeBalance } from '../../../hooks/useNativeBalance';
 import { TransactionStatus } from '../../../types/Transaction';
+import { useTokenPrice } from '../../../hooks/useTokenPrice';
+import { findTokenPriceBytokenInfo } from '../../../utils/transaction/getTokenInfo';
 
 const SwapForm: React.FC = () => {
   const { address } = useAccount();
@@ -73,6 +75,8 @@ const SwapForm: React.FC = () => {
 
   const graph = useLiquidityRouting();
 
+  const { data: tokenPriceData } = useTokenPrice();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [tokenSelectTarget, setTokenSelectTarget] = useState<
     'token1' | 'token2'
@@ -93,6 +97,7 @@ const SwapForm: React.FC = () => {
   }, [tokenInput1, selectedToken1, balances, nativeBalance]);
 
   // Helper function to update the URL
+
   const updateUrl = (fromAddress: Address, toAddress: Address) => {
     const queryParams = new URLSearchParams(window.location.search);
     queryParams.set('from', fromAddress);
@@ -411,10 +416,29 @@ const SwapForm: React.FC = () => {
                         ) : balances[selectedToken1.address] > 0 ? (
                           balances[selectedToken1.address].toString()
                         ) : (
-                          ' 0.0'
+                          '0.00'
                         ))}
                     </WalletText>
-                    <WalletText margin={8}>~$0.00</WalletText>
+                    <WalletText margin={8}>
+                      {' '}
+                      {address &&
+                      selectedToken1?.symbol === 'ETH' &&
+                      nativeBalance
+                        ? selectedToken1 &&
+                          nativeBalance?.formatted &&
+                          `~$ ${findTokenPriceBytokenInfo(
+                            tokenPriceData,
+                            selectedToken1,
+                            nativeBalance.formatted.toString()
+                          )}`
+                        : selectedToken1 && balances?.[selectedToken1?.address]
+                          ? `~$ ${findTokenPriceBytokenInfo(
+                              tokenPriceData,
+                              selectedToken1,
+                              balances[selectedToken1.address].toString()
+                            )}`
+                          : 'N/A'}
+                    </WalletText>
                   </WalletInfo>
 
                   <PercentageOptions>
@@ -489,7 +513,25 @@ const SwapForm: React.FC = () => {
                         ))}
                     </WalletText>
                   </WalletInfo>
-                  <WalletText margin={8}>~$0.00</WalletText>
+                  <WalletText margin={8}>
+                    {address &&
+                    selectedToken2?.symbol === 'ETH' &&
+                    nativeBalance
+                      ? selectedToken2 &&
+                        nativeBalance?.formatted &&
+                        `~$ ${findTokenPriceBytokenInfo(
+                          tokenPriceData,
+                          selectedToken2,
+                          nativeBalance.formatted.toString()
+                        )}`
+                      : selectedToken2 && balances?.[selectedToken2?.address]
+                        ? `~$ ${findTokenPriceBytokenInfo(
+                            tokenPriceData,
+                            selectedToken2,
+                            balances[selectedToken2.address].toString()
+                          )}`
+                        : 'N/A'}
+                  </WalletText>
                   <PercentageOptions></PercentageOptions>
                 </PercentageSelectorContainer>
               </InputWrapper>
@@ -501,6 +543,7 @@ const SwapForm: React.FC = () => {
               account={address!}
               excludeToken1={selectedToken1?.address}
               excludeToken2={selectedToken2?.address}
+              tokenPriceData={tokenPriceData}
             />
           </SwapBox>
           {tokenInput1 && (

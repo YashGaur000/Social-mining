@@ -27,6 +27,9 @@ import useQueryParams from '../../hooks/useQueryParams';
 import BalanceDisplay from '../Swap/modules/BalanceDisplay';
 import Copy from '../common/Copy';
 import { ERC20_TEST_TOKEN_LIST } from '../../constants/tokens/testnetTokens';
+import { TokenPriceData } from '../../hooks/useTokenPrice';
+import { findTokenPriceBytokenInfo } from '../../utils/transaction/getTokenInfo';
+import { useNativeBalance } from '../../hooks/useNativeBalance';
 
 interface TokenSelectModalProps {
   isOpen: boolean;
@@ -35,6 +38,7 @@ interface TokenSelectModalProps {
   account: Address;
   excludeToken1?: Address;
   excludeToken2?: Address;
+  tokenPriceData: TokenPriceData[];
 }
 
 const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
@@ -44,6 +48,7 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
   account,
   excludeToken1,
   excludeToken2,
+  tokenPriceData,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const getParam = useQueryParams();
@@ -60,6 +65,8 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
     ERC20_TEST_TOKEN_LIST,
     account
   );
+
+  const { balance: nativeBalance } = useNativeBalance(account);
 
   if (!isOpen || loading || error) {
     return null;
@@ -123,13 +130,28 @@ const TokenSelectModal: React.FC<TokenSelectModalProps> = ({
                     </TokenNameWrapper>
                   </TokenItemWithAdressWrapper>
                   <TokenItemData fontSize={16}>
-                    {account && token.symbol == 'ETH' ? (
-                      <BalanceDisplay address={account} />
-                    ) : balances[token.address] > 0 ? (
-                      balances[token.address].toString()
-                    ) : (
-                      '0.0'
-                    )}
+                    <p>
+                      {account && token.symbol == 'ETH' ? (
+                        <BalanceDisplay address={account} />
+                      ) : balances[token.address] > 0 ? (
+                        balances[token.address].toString()
+                      ) : (
+                        '0.0'
+                      )}
+                    </p>
+                    <p>
+                      {account && token.symbol === 'ETH' && nativeBalance
+                        ? `~$ ${findTokenPriceBytokenInfo(
+                            tokenPriceData,
+                            token,
+                            nativeBalance?.formatted.toString()
+                          )}`
+                        : `~$ ${findTokenPriceBytokenInfo(
+                            tokenPriceData,
+                            token,
+                            balances[token.address].toString()
+                          )}`}
+                    </p>
                   </TokenItemData>
                 </TokenItem>
               ))}

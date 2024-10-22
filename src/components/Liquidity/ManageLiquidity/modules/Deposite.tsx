@@ -218,6 +218,7 @@ const Deposite: React.FC<DepositProps> = ({
 
   const handleDeposit = async () => {
     try {
+      if (transactionStatus === TransactionStatus.IN_PROGRESS) return;
       setTransactionStatus(TransactionStatus.IN_PROGRESS);
       const amount1InWei = parseAmounts(amount1, selectedToken1?.decimals);
       const amount2InWei = parseAmounts(amount2, selectedToken2?.decimals);
@@ -289,8 +290,8 @@ const Deposite: React.FC<DepositProps> = ({
         amount1 && amount2
           ? {
               labels: `Using your quote for new liquidity pool deposits `,
-              token1: `${Number(amount1).toFixed(selectedToken1?.decimals)} ${selectedToken1?.symbol}`,
-              token2: `${Number(amount2).toFixed(selectedToken2?.decimals)} ${selectedToken2?.symbol}`,
+              token1: `${Number(amount1).toFixed(5)} ${selectedToken1?.symbol}`,
+              token2: `${Number(amount2).toFixed(5)} ${selectedToken2?.symbol}`,
             }
           : {
               labels: `Setting  quote for new liquidity pool deposits`,
@@ -390,6 +391,7 @@ const Deposite: React.FC<DepositProps> = ({
           height="48px"
           margin="0px"
           onClick={() => {
+            if (transactionStatus === TransactionStatus.IN_PROGRESS) return;
             handleDeposit()
               .then(() => {
                 <SuccessPopup message="Deposit Successfully" />;
@@ -398,14 +400,16 @@ const Deposite: React.FC<DepositProps> = ({
                 console.error('Error adding liquidity:', error);
               });
           }}
-          disabled={transactionStatus === TransactionStatus.IN_PROGRESS}
+          disabled={
+            transactionStatus === TransactionStatus.IN_PROGRESS ? true : false
+          }
         >
           {transactionStatus === TransactionStatus.IN_PROGRESS ? (
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'center', // Center items horizontally
-                alignItems: 'center', // Center items vertically
+                justifyContent: 'center',
+                alignItems: 'center',
                 gap: '15px',
               }}
             >

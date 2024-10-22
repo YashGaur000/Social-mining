@@ -32,57 +32,45 @@ import {
 import { ImageContainer } from '../../ManageVeTenex/Styles/ManageVetenex.style';
 import { GradientButton } from '../../common';
 import { Title } from '../styles/VotingBanner.style';
-import { LiquidityPoolNewType } from '../../../graphql/types/LiquidityPoolNew';
+
 import { getTokenLogo } from '../../../utils/getTokenLogo';
-import { useEffect, useState } from 'react';
+
 import { SelectedButtonWrapper } from '../styles/VoteSelectedCard.style';
 import SelectedIcon from '../../../assets/Selected.svg';
 
 import VoteButtonHover from './VoteButtonHover';
 
-import { useRootStore } from '../../../store/root';
-import { TransactionStatus } from '../../../types/Transaction';
-
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useLiquidityStore } from '../../../store/slices/liquiditySlice';
+import LiquidityInfo from '../../Liquidity/LiquidityHomePage/Modules/LiquidityInfo';
+import { VoteDataType } from '../../../types/VoteData';
 
 interface VotingPoolCardProps {
-  data: LiquidityPoolNewType;
-  handleSelectPool: (isSelected: boolean) => void;
+  data: VoteDataType;
+
   islock: boolean;
+  handleSelectButton: (data: VoteDataType) => void;
+  isSelectCardOpen: boolean;
 }
 
 const VotingPoolCard: React.FC<VotingPoolCardProps> = ({
   data,
-  handleSelectPool,
+  handleSelectButton,
   islock,
+  isSelectCardOpen,
 }) => {
-  const [isSelectCardOpen, setSelectCardOpen] = useState<boolean>(false);
-  const [isHoverPopUpshow, setHoverPopUpShow] = useState<boolean>(false);
-  const { transactionStatus, setTransactionStatus } = useRootStore();
-  const navigate = useNavigate();
-  const handleVote = () => {
-    if (islock) {
-      const newState = !isSelectCardOpen;
+  const [isHoverPopUpshow, setHoverPopUpShow] = useState(false);
 
-      setSelectCardOpen(newState);
-      handleSelectPool(newState);
-    } else setHoverPopUpShow(true);
-  };
+  const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
+
+  const { getPoolFeeById } = useLiquidityStore();
   const handleIncentive = (poolId: string) => {
     navigate('/incentives?pool=' + poolId);
   };
 
-  useEffect(() => {
-    if (
-      transactionStatus === TransactionStatus.DONE ||
-      transactionStatus === TransactionStatus.FAILED
-    ) {
-      setSelectCardOpen(false);
-    }
-
-    setTransactionStatus(TransactionStatus.IDEAL);
-  }, [transactionStatus]);
-
+  const poolFees = Number(getPoolFeeById(data.id));
   return (
     <>
       <TableRow>
@@ -107,9 +95,19 @@ const VotingPoolCard: React.FC<VotingPoolCardProps> = ({
                     {data.isStable ? 'Stable' : 'Volatile'}
                   </StatsCardtitle>
 
-                  <LiquidityTitle fontSize={12}>{0.01} %</LiquidityTitle>
-                  <SugestImgWrapper>
+                  <LiquidityTitle fontSize={12}>
+                    {poolFees ? poolFees.toString() : ''} %
+                  </LiquidityTitle>
+                  <SugestImgWrapper
+                    onMouseEnter={() => {
+                      setIsHovered(true);
+                    }}
+                    onMouseLeave={() => setIsHovered(false)}
+                  >
                     <SuggestImg src={ImpIcon} />
+                    {isHovered && (
+                      <LiquidityInfo poolId={data.id} gaugeId={data.gauge} />
+                    )}
                   </SugestImgWrapper>
                 </TokenAmountTitle>
                 <TokenAmountTitle>
@@ -129,7 +127,9 @@ const VotingPoolCard: React.FC<VotingPoolCardProps> = ({
                     TVL
                   </StatsCardtitle>{' '}
                   <LiquidityTitle fontSize={12} textalign="right">
-                    {data.totalVolumeUSD.toString()}
+                    {Number(data.totalValueLocked) % 1 === 0
+                      ? Number(data.totalValueLocked).toFixed(2)
+                      : Number(data.totalValueLocked).toFixed(5)}
                   </LiquidityTitle>
                 </TokenAmountTitle>
               </LiquidityTokenWrapper>
@@ -138,13 +138,25 @@ const VotingPoolCard: React.FC<VotingPoolCardProps> = ({
         </TableColumn>
         <TableColumn>
           <TableColumnWrapper height="96px">
-            <Title fontSize={14}> ~$ {data.totalFeesUSD.toString()}</Title>
+            <Title fontSize={14}>
+              {' '}
+              ~${' '}
+              {Number(data.totalFeesUSD) % 1 === 0
+                ? Number(data.totalFeesUSD).toFixed(2)
+                : Number(data.totalFeesUSD).toFixed(5)}
+            </Title>
             <LiquidityTokenWrapper>
               <LiquidityTitle fontSize={12} textalign="right">
-                {data.totalFees0.toString()} {data.token0.symbol}
+                {Number(data.totalFees0) % 1 === 0
+                  ? Number(data.totalFees0).toFixed(2)
+                  : Number(data.totalFees0).toFixed(5)}{' '}
+                {data.token0.symbol}
               </LiquidityTitle>
               <LiquidityTitle fontSize={12} textalign="right">
-                {data.totalFees1.toString()} {data.token1.symbol}
+                {Number(data.totalFees1) % 1 === 0
+                  ? Number(data.totalFees1).toFixed(2)
+                  : Number(data.totalFees1).toFixed(5)}{' '}
+                {data.token1.symbol}
               </LiquidityTitle>
             </LiquidityTokenWrapper>
           </TableColumnWrapper>
@@ -153,18 +165,23 @@ const VotingPoolCard: React.FC<VotingPoolCardProps> = ({
         <TableColumn>
           <TableColumnWrapper height="96px">
             <Title fontSize={14}>
-              {'~$ ' + data.totalBribesUSD.toString()}
+              {'$ '}
+              {Number(data.totalBribesUSD) == 0
+                ? '0.00'
+                : data.totalBribesUSD.toString()}
             </Title>
             <LiquidityTokenWrapper>
-              <LiquidityTitle
-                fontSize={12}
-                textalign="right"
-                pointer="pointer"
-                textDecoration="underline"
-                onClick={() => handleIncentive(data.id)}
-              >
-                {'Add incentives'}
-              </LiquidityTitle>
+              {Number(data.totalBribesUSD) <= 0 && (
+                <LiquidityTitle
+                  fontSize={12}
+                  textalign="right"
+                  pointer="pointer"
+                  textDecoration="underline"
+                  onClick={() => handleIncentive(data.id)}
+                >
+                  {'Add incentives'}
+                </LiquidityTitle>
+              )}
             </LiquidityTokenWrapper>
           </TableColumnWrapper>
         </TableColumn>
@@ -173,8 +190,14 @@ const VotingPoolCard: React.FC<VotingPoolCardProps> = ({
           <TableColumnWrapper height="96px">
             <Title fontSize={14}>
               ~${' '}
-              {Number(data.totalBribesUSD.toString()) +
-                Number(data.totalFeesUSD.toString())}
+              {(Number(data.totalBribesUSD) + Number(data.totalFeesUSD)) % 1 ===
+              0
+                ? (
+                    Number(data.totalBribesUSD) + Number(data.totalFeesUSD)
+                  ).toFixed(2)
+                : (
+                    Number(data.totalBribesUSD) + Number(data.totalFeesUSD)
+                  ).toFixed(5)}
             </Title>
             <LiquidityTokenWrapper>
               <LiquidityTitle fontSize={12} textalign="right">
@@ -197,7 +220,13 @@ const VotingPoolCard: React.FC<VotingPoolCardProps> = ({
 
         <TableColumn padding="5px">
           <TableColumnWrapper height="95px">
-            <SelectedButtonWrapper onClick={handleVote}>
+            <SelectedButtonWrapper
+              onClick={
+                islock
+                  ? () => handleSelectButton(data)
+                  : () => setHoverPopUpShow(!isHoverPopUpshow)
+              }
+            >
               <GradientButton
                 color="#ffffff"
                 padding="4px 10px"

@@ -19,7 +19,7 @@ import { DropDownContainer, DropdownTitle } from '../styles/MergeLock.style';
 import { useCallback, useEffect, useState } from 'react';
 import PopupScreen from '../../../common/PopupScreen';
 import LockModel from '../../../modal/LockModel';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useVotingPowerCalculation } from '../../../../hooks/useVotingNftData';
 import {
   calculateRemainingDays,
@@ -30,15 +30,19 @@ import {
   getTimeDifference,
   locktokeninfo,
 } from '../../../../utils/common/voteTenex';
-import SuccessPopup from '../../../common/SucessPopup';
 
 const MergeLock = () => {
-  const { tokenId } = useParams<{ tokenId: string }>();
+  const navigate = useNavigate();
+  const { encryptedTokenId } = useParams<{ encryptedTokenId: string }>();
+  const tokenId = encryptedTokenId ? encryptedTokenId : '';
+
+  if (!tokenId) {
+    navigate('/governance');
+  }
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isFromTokenId, setIsFromTokenId] = useState<number>(0);
   const [isFromVotingPower, setIsFromVotingPower] = useState<number>(0);
   const [isTotalDuration, setIsTotalDuration] = useState<string>('');
-  const [iSuccessLock, setSuccessLock] = useState<boolean>(false);
   const [isVotingStatus, setVotingStatus] = useState<boolean>(false);
   const [IsModalDisabled, setIsModalDisable] = useState<boolean>(false);
   const [selectLockToken, setSelectLockToken] = useState('Your locks...');
@@ -50,6 +54,7 @@ const MergeLock = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   const handleSelectToken = useCallback(
     (
       option: string,
@@ -58,24 +63,24 @@ const MergeLock = () => {
       fromLockDate: string,
       votingStatus: boolean
     ) => {
-      console.log('fromTokenId:', fromTokenId);
       setIsFromVotingPower(fromVotingPower);
       setVotingStatus(votingStatus);
+      //console.log('votingStatus:', votingStatus);
       const fromTillDate = convertDateToTimestamp(fromLockDate);
+
       if (lockData) {
-        const lockdataEnd = lockData.end;
-        const toTillDate = convertDateToTimestamp(lockdataEnd.toString());
-        const Duration = toTillDate > fromTillDate ? toTillDate : fromTillDate;
-        const totalDuration = convertTimestampToDate(Duration);
+        const toTillDate = lockData.end.toString();
+        const greaterTillDate = Math.max(fromTillDate, Number(toTillDate));
+        const totalDuration = convertTimestampToDate(greaterTillDate);
         const formatUnlockData = getTimeDifference(totalDuration);
-        setIsFromVotingPower(fromVotingPower);
         setIsTotalDuration(formatUnlockData);
       }
+
       setIsFromTokenId(fromTokenId);
       setSelectLockToken(option);
       setIsModalOpen(false);
     },
-    [lockData, setIsFromTokenId, setIsFromVotingPower]
+    [lockData]
   );
 
   const handleInputBox = () => {
@@ -142,7 +147,6 @@ const MergeLock = () => {
           votingStatus={isVotingStatus}
           isTotalDuration={isTotalDuration}
           setIsModalDisable={setIsModalDisable}
-          setSuccessLock={setSuccessLock}
         />
       </CreateMainContainer>
       {isModalOpen && (
@@ -162,7 +166,6 @@ const MergeLock = () => {
           />
         </PopupScreen>
       )}
-      {iSuccessLock && <SuccessPopup message="Merge lock confirmed" />}
     </MainContainerStyle>
   );
 };

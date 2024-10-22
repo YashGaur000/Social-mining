@@ -50,22 +50,22 @@ import { ImageContainer } from '../../../ManageVeTenex/Styles/ManageVetenex.styl
 const ITEMS_PER_PAGE = 5;
 
 const VotingRewards = ({ account }: { account: Address }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [rewardToClaim, setRewardToClaim] = useState(-1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [rewardToClaim, setRewardToClaim] = useState('');
 
-  const { userVotedPools, isVoteError, isVoteFetching } =
-    useUserVotingPosition(account);
+  const { userVotedPools, isVoteError } = useUserVotingPosition(account);
 
   const { setTransactionStatus } = useRootStore();
 
   const { claimBribes, claimFees } = useVoterContract();
 
   useEffect(() => {
-    if (isVoteFetching) setIsLoading(true);
-    else {
+    if (isLoading && userVotedPools && userVotedPools.length === 0) {
+      setTimeout(() => setIsLoading(false), 30000);
+    } else {
       setIsLoading(false);
     }
-  }, [isVoteFetching]);
+  }, [isLoading, userVotedPools]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -94,33 +94,31 @@ const VotingRewards = ({ account }: { account: Address }) => {
     fees: Address[],
     rewardTokens: Address[],
     tokenId: bigint,
-    index: number
+    id: string
   ) => {
     if (fees.length === 0 || rewardTokens.length === 0) {
       return;
     }
-    if (index != rewardToClaim) {
+    if (id != rewardToClaim) {
       try {
         setTransactionStatus(TransactionStatus.IN_PROGRESS);
-        setRewardToClaim(index);
+        setRewardToClaim(id);
 
         const feeResult = await claimFees(fees, [rewardTokens], tokenId);
 
         if (feeResult) {
           setTransactionStatus(TransactionStatus.DONE);
-          setRewardToClaim(-1);
+          setRewardToClaim('');
+          setTimeout(() => {
+            setTransactionStatus(TransactionStatus.IDEAL);
+          }, TRANSACTION_DELAY);
         } else {
           throw new Error('One of the transactions failed.');
         }
-
-        setTimeout(() => {
-          setTransactionStatus(TransactionStatus.IDEAL);
-          setRewardToClaim(-1);
-        }, TRANSACTION_DELAY);
       } catch (error) {
         console.error('Error during bribe and fee claim transaction:', error);
         setTransactionStatus(TransactionStatus.FAILED);
-        setRewardToClaim(-1);
+        setRewardToClaim('');
       }
     }
   };
@@ -129,34 +127,33 @@ const VotingRewards = ({ account }: { account: Address }) => {
     bribes: Address[],
     rewardTokens: Address[],
     tokenId: bigint,
-    index: number
+    id: string
   ) => {
     if (bribes.length === 0 || rewardTokens.length === 0) {
       return;
     }
-    if (index != rewardToClaim) {
+    if (id != rewardToClaim) {
       try {
         setTransactionStatus(TransactionStatus.IN_PROGRESS);
-        setRewardToClaim(index);
+        setRewardToClaim(id);
 
         // Execute both transactions (bribes and fees) together in parallel
         const bribeResult = await claimBribes(bribes, [rewardTokens], tokenId);
 
         if (bribeResult) {
           setTransactionStatus(TransactionStatus.DONE);
-          setRewardToClaim(-1);
+          setRewardToClaim('');
+
+          setTimeout(() => {
+            setTransactionStatus(TransactionStatus.IDEAL);
+          }, TRANSACTION_DELAY);
         } else {
           throw new Error('One of the transactions failed.');
         }
-
-        setTimeout(() => {
-          setTransactionStatus(TransactionStatus.IDEAL);
-          setRewardToClaim(-1);
-        }, TRANSACTION_DELAY);
       } catch (error) {
         console.error('Error during bribe and fee claim transaction:', error);
         setTransactionStatus(TransactionStatus.FAILED);
-        setRewardToClaim(-1);
+        setRewardToClaim('');
       }
     }
   };
@@ -166,16 +163,16 @@ const VotingRewards = ({ account }: { account: Address }) => {
     bribes: Address[],
     rewardTokens: Address[],
     tokenId: bigint,
-    index: number
+    id: string
   ) => {
     if (fees.length === 0 || bribes.length === 0 || rewardTokens.length === 0) {
       return;
     }
 
-    if (index != rewardToClaim) {
+    if (id != rewardToClaim) {
       try {
         setTransactionStatus(TransactionStatus.IN_PROGRESS);
-        setRewardToClaim(index);
+        setRewardToClaim(id);
 
         // Execute both transactions (bribes and fees) together in parallel
         const [bribeResult, feeResult] = await Promise.all([
@@ -185,19 +182,17 @@ const VotingRewards = ({ account }: { account: Address }) => {
 
         if (bribeResult && feeResult) {
           setTransactionStatus(TransactionStatus.DONE);
-          setRewardToClaim(-1);
+          setRewardToClaim('');
+          setTimeout(() => {
+            setTransactionStatus(TransactionStatus.IDEAL);
+          }, TRANSACTION_DELAY);
         } else {
           throw new Error('One of the transactions failed.');
         }
-
-        setTimeout(() => {
-          setTransactionStatus(TransactionStatus.IDEAL);
-          setRewardToClaim(-1);
-        }, TRANSACTION_DELAY);
       } catch (error) {
         console.error('Error during bribe and fee claim transaction:', error);
         setTransactionStatus(TransactionStatus.FAILED);
-        setRewardToClaim(-1);
+        setRewardToClaim('');
       }
     }
   };
@@ -234,7 +229,7 @@ const VotingRewards = ({ account }: { account: Address }) => {
       {paginatedData?.map(({ votedPools, tokenId, metadata }, index) => {
         return (
           <React.Fragment key={index}>
-            {votedPools.map((pool: VotedPools, j: number) => {
+            {votedPools.map((pool: VotedPools) => {
               const poolHasReward =
                 pool.rewardAmounts.some(
                   (rewardAmount) => Number(rewardAmount) > 0
@@ -243,7 +238,7 @@ const VotingRewards = ({ account }: { account: Address }) => {
                 Number(pool.fee1) > 0;
 
               return poolHasReward ? (
-                <VotingRewardsMainContainer height="auto" key={j}>
+                <VotingRewardsMainContainer height="auto" key={pool.id}>
                   <PoolContainer>
                     <PoolContainerData>
                       <GroupImgContains>
@@ -364,7 +359,7 @@ const VotingRewards = ({ account }: { account: Address }) => {
                               pool.fees,
                               pool.rewardTokens,
                               tokenId,
-                              j
+                              pool.id
                             );
                             return;
                           }
@@ -374,7 +369,7 @@ const VotingRewards = ({ account }: { account: Address }) => {
                               pool.bribes,
                               pool.rewardTokens,
                               tokenId,
-                              j
+                              pool.id
                             );
                             return;
                           }
@@ -384,11 +379,11 @@ const VotingRewards = ({ account }: { account: Address }) => {
                             pool.bribes,
                             pool.rewardTokens,
                             tokenId,
-                            j
+                            pool.id
                           );
                         }}
                       >
-                        {rewardToClaim === j ? (
+                        {rewardToClaim === pool.id ? (
                           <div
                             style={{
                               display: 'flex',

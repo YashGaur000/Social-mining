@@ -41,6 +41,7 @@ export interface VotingEscrowContract extends Contract {
     operator: Address,
     overrides?: Overrides
   ): Promise<boolean>;
+  balanceOf(owner: Address): Promise<bigint>;
   transferFrom(
     owner: Address,
     address: Address,
@@ -123,6 +124,9 @@ export interface Nft {
   tokenId: bigint;
   metadata: NftMetadata;
   votingStatus?: boolean;
+  poolVoteCheck?: Address | undefined;
+  lastVoted?: number;
+  escrowType?: string;
   setSuccessLock?: (nftData: string[]) => void;
 }
 interface LockIncreaseProps {
@@ -132,6 +136,7 @@ interface LockIncreaseProps {
   totalVotingPower: number;
   setSuccessLock: (input: boolean) => void;
   setIsApproveLock: (input: boolean) => void;
+  votingStatus: string | boolean;
 }
 export interface ExtendStepperProps {
   tokenId: number;
@@ -140,6 +145,7 @@ export interface ExtendStepperProps {
   setSuccessLock: (input: boolean) => void;
   isExtendDisable: boolean;
   onExtendClick: (input: boolean) => void;
+  votingStatus: string | boolean;
 }
 
 export interface LockModelProps {

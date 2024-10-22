@@ -27,17 +27,20 @@ import {
   getTimeDifference,
   locktokeninfo,
 } from '../../utils/common/voteTenex';
+import { useVoterContract } from '../../hooks/useVoterContract';
 
 const LockModel: React.FC<LockModelProps> = ({
   handleSelectToken,
   tokenId,
 }) => {
   const [userLocks, setUserLocks] = useState<Nft[]>([]);
+  const [epochStartTime, setEpochStartTime] = useState<number | null>(null);
   const { address } = useAccount();
   const { fetchUserNFTs } = useVotingEscrowContract(
     contractAddress.VotingEscrow
   );
   const lockTokenInfo = locktokeninfo();
+  const { epochStart } = useVoterContract();
 
   const fetchLocks = useCallback(async () => {
     if (address) {
@@ -46,6 +49,8 @@ const LockModel: React.FC<LockModelProps> = ({
         const formattedNftData = fetchedLocks.map((nft) => ({
           tokenId: nft.tokenId,
           metadata: decodeBase64(nft.metadata),
+          votingStatus: nft.votingStatus,
+          lastVoted: nft.lastVote,
         }));
         setUserLocks(formattedNftData);
       } catch (error) {
@@ -59,6 +64,19 @@ const LockModel: React.FC<LockModelProps> = ({
       void fetchLocks();
     }
   }, [address, fetchLocks]);
+  useEffect(() => {
+    const fetchEpochStartTime = async () => {
+      try {
+        const timestamp = Math.floor(Date.now() / 1000);
+        const epochStartTime = await epochStart(timestamp);
+        setEpochStartTime(Number(epochStartTime));
+      } catch (error) {
+        console.error('Error fetching epoch start time:', error);
+      }
+    };
+
+    void fetchEpochStartTime();
+  }, [epochStart]);
 
   return (
     <LockTokenContainer>
@@ -76,6 +94,11 @@ const LockModel: React.FC<LockModelProps> = ({
               userLocks.map((lock, index) => {
                 if (tokenId === Number(lock.tokenId)) {
                   return null;
+                }
+                if (lock.lastVoted) {
+                  if (Number(epochStartTime) <= lock.lastVoted) {
+                    return;
+                  }
                 }
 
                 if (!lock.metadata) {

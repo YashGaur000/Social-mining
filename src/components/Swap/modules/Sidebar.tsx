@@ -118,6 +118,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   const [isVisibleUnsafe, setVisibleUnsafe] = useState(false);
 
   const [isUnsafe, setIsUnsafe] = useState(false);
+  const [explorerLink, setExplorerlink] = useState('');
 
   const minAmountOutWei = useMemo(() => {
     if (tokenInput2 && selectedTolerance) {
@@ -474,23 +475,24 @@ const Sidebar: React.FC<SidebarProps> = ({
       };
 
       const tx = await getTransaction();
-      console.log('Swap added:', tx);
+
+      setExplorerlink(`https://testnet.blastscan.io/tx/${tx?.hash}`);
 
       setIsSwapped(true);
       setIsDisabled(false);
       setTransactionStatus(TransactionStatus.DONE);
-
-      setTimeout(() => {
-        setTokenInput1('');
-        setTokenInput2('');
-        setTransactionStatus(TransactionStatus.IDEAL);
-        setIsSwapped(false);
-      }, TRANSACTION_DELAY);
     } catch (error) {
       console.error('Error swapping:', error);
       setIsDisabled(false);
       setTransactionStatus(TransactionStatus.IDEAL);
     }
+  };
+
+  const onClose = () => {
+    setTokenInput1('');
+    setTokenInput2('');
+    setTransactionStatus(TransactionStatus.IDEAL);
+    setIsSwapped(false);
   };
 
   return (
@@ -532,7 +534,6 @@ const Sidebar: React.FC<SidebarProps> = ({
                     )}
                   </GlobalButton>
                 )}
-              {isSwapped && <SuccessPopup message="Swapped Successfully" />}
 
               {isVisibleSlippage && (
                 <PopupScreen
@@ -574,6 +575,13 @@ const Sidebar: React.FC<SidebarProps> = ({
             <Stepper data={SwapInstructData} />
           )}
         </SidebarList>
+        {isSwapped && (
+          <SuccessPopup
+            message="Swap completed successfully"
+            explorerLink={explorerLink}
+            onClose={onClose}
+          />
+        )}
       </SidebarInner>
     </>
   );

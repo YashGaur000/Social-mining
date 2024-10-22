@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import TenexIcon from '../../../assets/Tenex.png';
 import { GlobalButton } from '../../common';
 import { useNavigate } from 'react-router-dom';
@@ -38,6 +38,7 @@ import {
   sortNftsByUnlockDateDesc,
 } from '../../../utils/common/voteTenex';
 import { useTotalValues } from '../../../hooks/useTotalNftValues';
+import PageLoader from '../../common/PageLoader';
 
 const Main = () => {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -48,26 +49,34 @@ const Main = () => {
 
   const escrowAddress = contractAddress.VotingEscrow;
   const { fetchUserNFTs } = useVotingEscrowContract(escrowAddress);
-  const { address } = useAccount();
+  const { address: contactAddress } = useAccount();
   const totalLocked = useTotalValues(nftData);
   useEffect(() => {
     void (async function fetchData() {
       try {
         setRelayActive(false);
-        if (address) {
-          const fetchedNftVal = await fetchUserNFTs(address);
+        if (contactAddress) {
+          const fetchedNftVal = await fetchUserNFTs(contactAddress);
           const formattedNftFormateData = fetchedNftVal.map((nft) => ({
             tokenId: nft.tokenId,
             metadata: decodeBase64(nft.metadata),
             votingStatus: nft.votingStatus,
+            poolVoteCheck: nft.poolVoteCheck,
+            lastVoted: nft.lastVote,
           }));
+          //console.log('formattedNftFormateData:', formattedNftFormateData);
+          if (!fetchedNftVal) return;
           /*  const filteredNftVal = filterNftsByUnlockDate(
             formattedNftFormateData
           ); */
           const filteredNftVal = sortNftsByUnlockDateDesc(
             formattedNftFormateData
           );
-          setNftData(filteredNftVal);
+          const sortedNftData =
+            filteredNftVal
+              ?.slice()
+              .sort((a, b) => Number(b.tokenId) - Number(a.tokenId)) || [];
+          setNftData(sortedNftData);
         } else {
           console.warn('Address is undefined');
         }
@@ -75,7 +84,7 @@ const Main = () => {
         console.error('Error fetching NFT data:', error);
       }
     })();
-  }, [address, fetchUserNFTs]);
+  }, [contactAddress, fetchUserNFTs]);
 
   function handleCreateLock() {
     Navigate('/governance/create');
@@ -89,80 +98,71 @@ const Main = () => {
   const closeModal = () => {
     setPopupVisible(false);
   };
-
+  if (!nftData) {
+    return <PageLoader />;
+  }
   return (
     <>
-      <LockHeroSection>
-        <LockHeroSectionContent>
-          <LockHeaderTitle fontSize={36}>Manage veTENEX</LockHeaderTitle>
-          <LockheaderContentStyle>
-            <LockDescriptonTitle fontSize={16}>
-              Maximize your voting power and boost rewards by locking more
-              tokens for longer durations.
-            </LockDescriptonTitle>
-          </LockheaderContentStyle>
-        </LockHeroSectionContent>
+      <Suspense fallback={<PageLoader />}>
+        <LockHeroSection>
+          <LockHeroSectionContent>
+            <LockHeaderTitle fontSize={36}>Manage veTENEX</LockHeaderTitle>
+            <LockheaderContentStyle>
+              <LockDescriptonTitle fontSize={16}>
+                Maximize your voting power and boost rewards by locking more
+                tokens for longer durations.
+              </LockDescriptonTitle>
+            </LockheaderContentStyle>
+          </LockHeroSectionContent>
 
-        <AsideSectionContains>
-          <LockButtonConatainer>
-            <GlobalButton
-              width="150px"
-              height="40px"
-              margin="0px"
-              onClick={handleCreateLock}
-            >
-              Create Lock
-            </GlobalButton>
-          </LockButtonConatainer>
-          <MetricDisplayWrapper>
-            <MetricDisplay>
-              <StatsCardtitle fontSize={16}>Locked TENEX</StatsCardtitle>
-              <AmountWithImg>
-                {totalLocked.totalLockedTENEX.toLocaleString()}{' '}
-                <ImageContainer
-                  width={'15'}
-                  height={'15'}
-                  margin={'0px 10px'}
-                  src={TenexIcon}
-                />
-              </AmountWithImg>
-            </MetricDisplay>
-            <MetricDisplay>
-              <StatsCardtitle fontSize={16}>Total Voting Power</StatsCardtitle>
-              <LockHeaderTitle fontSize={16}>
-                {totalLocked.totalVotingPower.toFixed(5)}
-              </LockHeaderTitle>
-            </MetricDisplay>
-            <MetricDisplay>
-              <StatsCardtitle fontSize={16}>Total Value Locked</StatsCardtitle>
-              <LockHeaderTitle fontSize={16}>
-                {totalLocked.totalValueLocked.toLocaleString()}
-              </LockHeaderTitle>
-            </MetricDisplay>
-          </MetricDisplayWrapper>
-        </AsideSectionContains>
-      </LockHeroSection>
+          <AsideSectionContains>
+            <LockButtonConatainer>
+              <GlobalButton
+                width="150px"
+                height="40px"
+                margin="0px"
+                onClick={handleCreateLock}
+              >
+                Create Lock
+              </GlobalButton>
+            </LockButtonConatainer>
+            <MetricDisplayWrapper>
+              <MetricDisplay>
+                <StatsCardtitle fontSize={16}>Locked TENEX</StatsCardtitle>
+                <AmountWithImg>
+                  {totalLocked.totalLockedTENEX.toLocaleString()}{' '}
+                  <ImageContainer
+                    width={'15'}
+                    height={'15'}
+                    margin={'0px 10px'}
+                    src={TenexIcon}
+                  />
+                </AmountWithImg>
+              </MetricDisplay>
+              <MetricDisplay>
+                <StatsCardtitle fontSize={16}>
+                  Total Voting Power
+                </StatsCardtitle>
+                <LockHeaderTitle fontSize={16}>
+                  {totalLocked.totalVotingPower.toFixed(5)}
+                </LockHeaderTitle>
+              </MetricDisplay>
+              <MetricDisplay>
+                <StatsCardtitle fontSize={16}>
+                  Total Value Locked
+                </StatsCardtitle>
+                <LockHeaderTitle fontSize={16}>
+                  {totalLocked.totalValueLocked.toLocaleString()}
+                </LockHeaderTitle>
+              </MetricDisplay>
+            </MetricDisplayWrapper>
+          </AsideSectionContains>
+        </LockHeroSection>
 
-      <LockContainerWrapper>
-        <LockheaderWrapper>
-          <LockHeaderTitle fontSize={24}>Locks</LockHeaderTitle>
-          <ToolTipsWrapper onMouseEnter={() => handleTooltipShow('lock')}>
-            <ImageContainer
-              width={'16px'}
-              height={'16px'}
-              margin="7px 0px 0px 0px"
-              src={QuestionIcon}
-            ></ImageContainer>
-          </ToolTipsWrapper>
-        </LockheaderWrapper>
-
-        <VeTenexTable nftData={nftData} />
-      </LockContainerWrapper>
-      {isRelayActive && (
         <LockContainerWrapper>
           <LockheaderWrapper>
-            <LockHeaderTitle fontSize={24}>Relay</LockHeaderTitle>
-            <ToolTipsWrapper onMouseEnter={() => handleTooltipShow('relay')}>
+            <LockHeaderTitle fontSize={24}>Locks</LockHeaderTitle>
+            <ToolTipsWrapper onMouseEnter={() => handleTooltipShow('lock')}>
               <ImageContainer
                 width={'16px'}
                 height={'16px'}
@@ -172,22 +172,39 @@ const Main = () => {
             </ToolTipsWrapper>
           </LockheaderWrapper>
 
-          <Relay />
+          <VeTenexTable nftData={nftData} />
         </LockContainerWrapper>
-      )}
+        {isRelayActive && (
+          <LockContainerWrapper>
+            <LockheaderWrapper>
+              <LockHeaderTitle fontSize={24}>Relay</LockHeaderTitle>
+              <ToolTipsWrapper onMouseEnter={() => handleTooltipShow('relay')}>
+                <ImageContainer
+                  width={'16px'}
+                  height={'16px'}
+                  margin="7px 0px 0px 0px"
+                  src={QuestionIcon}
+                ></ImageContainer>
+              </ToolTipsWrapper>
+            </LockheaderWrapper>
 
-      {isPopupVisible && (
-        <PopupScreen
-          isvisible={isPopupVisible}
-          onClose={closeModal}
-          width="500px"
-          height="518px"
-        >
-          <PopupWrapper>
-            {isToolTipActive ? <LockToolTips /> : <RelayToolTips />}
-          </PopupWrapper>
-        </PopupScreen>
-      )}
+            <Relay />
+          </LockContainerWrapper>
+        )}
+
+        {isPopupVisible && (
+          <PopupScreen
+            isvisible={isPopupVisible}
+            onClose={closeModal}
+            width="500px"
+            height="518px"
+          >
+            <PopupWrapper>
+              {isToolTipActive ? <LockToolTips /> : <RelayToolTips />}
+            </PopupWrapper>
+          </PopupScreen>
+        )}
+      </Suspense>
     </>
   );
 };

@@ -19,17 +19,22 @@ import PopupScreen from '../../common/PopupScreen';
 import VoteSelectModel from './VoteSelectModel';
 import { PopupWrapper } from '../../Liquidity/LiquidityHomePage/styles/LiquidityHeroSection.style';
 import VottingPowerModel from './VottingPowerModel';
-import { LiquidityPoolNewType } from '../../../graphql/types/LiquidityPoolNew';
+
 import { Nft } from '../../../types/VotingEscrow';
+import {
+  getTimeDifference,
+  locktokeninfo,
+} from '../../../utils/common/voteTenex';
+import { VoteDataType } from '../../../types/VoteData';
+const lockTokenInfo = locktokeninfo();
 
 interface VoteSelectedCardProps {
   countSelectedItem: number;
-  VoteSelectPoolData: LiquidityPoolNewType[];
+  VoteSelectPoolData: VoteDataType[];
   nftData: Nft[];
-  setVoteSelectPool: React.Dispatch<
-    React.SetStateAction<LiquidityPoolNewType[]>
-  >;
+  setVoteSelectPool: React.Dispatch<React.SetStateAction<VoteDataType[]>>;
   setSelectedPoolsCount: React.Dispatch<React.SetStateAction<number>>;
+  setExplorerlink: (link: string) => void;
   setSucess: (input: boolean) => void;
 }
 const VoteSelectedCard: React.FC<VoteSelectedCardProps> = ({
@@ -38,6 +43,7 @@ const VoteSelectedCard: React.FC<VoteSelectedCardProps> = ({
   setVoteSelectPool,
   setSelectedPoolsCount,
   nftData,
+  setExplorerlink,
   setSucess,
 }) => {
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -58,6 +64,11 @@ const VoteSelectedCard: React.FC<VoteSelectedCardProps> = ({
     setPopupVisible(false);
   };
 
+  const metadata = selectedNftData.metadata;
+  const attributes = metadata.attributes;
+  const unlockDate =
+    attributes.find((attr) => attr.trait_type === 'Unlock Date')?.value ?? '';
+  const formatUnloackData = getTimeDifference(unlockDate);
   return (
     <>
       <SelectCardContainer>
@@ -81,8 +92,8 @@ const VoteSelectedCard: React.FC<VoteSelectedCardProps> = ({
               </DashboardNavigation>
             </SelectedDataWrapper>
             <LockDescriptonTitle fontSize={12}>
-              {selectedNftData?.metadata.attributes[2].value} VELO locked until{' '}
-              {selectedNftData?.metadata.attributes[0].value}
+              {selectedNftData.metadata.attributes[2].value + ' '}
+              {lockTokenInfo.symbol} locked for {formatUnloackData}
             </LockDescriptonTitle>
           </TokenNameWrapper>
         </TokenItemWithAdressWrapper>
@@ -122,6 +133,7 @@ const VoteSelectedCard: React.FC<VoteSelectedCardProps> = ({
             setVoteSelectPool={setVoteSelectPool}
             setSelectedPoolsCount={setSelectedPoolsCount}
             setSucess={setSucess}
+            setExplorerlink={setExplorerlink}
           />
         )}
       </PopupScreen>

@@ -29,6 +29,7 @@ import {
   TransactionStatus,
 } from '../../../../types/Transaction';
 import { useRootStore } from '../../../../store/root';
+import { useNavigate } from 'react-router-dom';
 
 const ExtendStepper: React.FC<ExtendStepperProps> = ({
   tokenId,
@@ -37,6 +38,7 @@ const ExtendStepper: React.FC<ExtendStepperProps> = ({
   setSuccessLock,
   isExtendDisable,
   onExtendClick,
+  votingStatus,
 }) => {
   const escrowAddress = contractAddress.VotingEscrow;
   const { increaseUnlockTime } = useVotingEscrowContract(escrowAddress);
@@ -45,11 +47,12 @@ const ExtendStepper: React.FC<ExtendStepperProps> = ({
   const [isPoke, setIsPoke] = useState(false);
   const { poke } = useVoterContract();
   const { setTransactionStatus, transactionStatus } = useRootStore();
-
+  const navigate = useNavigate();
   const handleExtend = useCallback(
     async (tokenId: number, duration: number): Promise<void> => {
       try {
         if (!tokenId) return;
+
         onExtendClick(true);
         setIsExtending(true);
         const durationInSeconds = duration * 7 * 24 * 60 * 60;
@@ -60,14 +63,18 @@ const ExtendStepper: React.FC<ExtendStepperProps> = ({
           //setSuccessLock(true);
           setIsExtend(true);
           setIsPoke(true);
+          void showSuccessToast(
+            `Lock extended for ${duration} weeks successfully!`
+          );
         }, TRANSACTION_DELAY);
-        await showSuccessToast(
-          `Lock extended for ${duration} weeks successfully!`
-        );
+
+        if (votingStatus != true) {
+          void navigate('/governance');
+        }
       } catch (error) {
         setIsExtend(false);
         setIsPoke(false);
-        await showErrorToast('Failed to extend lock. Please try again.');
+        void showErrorToast('Failed to extend lock. Please try again.');
       } finally {
         setIsExtending(false);
       }
@@ -85,12 +92,13 @@ const ExtendStepper: React.FC<ExtendStepperProps> = ({
       setTimeout(() => {
         setTransactionStatus(TransactionStatus.IDEAL);
         setIsPoke(false);
+        navigate('/governance');
       }, TRANSACTION_DELAY);
     } catch (error) {
       setIsPoke(false);
       setTransactionStatus(TransactionStatus.FAILED);
       console.error('Error during poke action:', error);
-      await showErrorToast('Failed to poke the voting weight.');
+      void showErrorToast('Failed to poke the voting weight.');
     }
   };
 
@@ -117,15 +125,17 @@ const ExtendStepper: React.FC<ExtendStepperProps> = ({
       },
       icon: !isExtend ? WaitingIcon : SucessDepositIcon,
       actionCompleted: !isExtend,
-      buttons: isPoke
-        ? {
-            label: 'Poke',
-            onClick: handlePoke,
-            tooltip: 'Click to Poke Lock #' + tokenId,
-            disabled:
-              !isPoke || transactionStatus === TransactionStatus.IN_PROGRESS,
-          }
-        : undefined,
+
+      buttons:
+        isPoke && votingStatus
+          ? {
+              label: 'Poke',
+              onClick: handlePoke,
+              tooltip: 'Click to Poke Lock #' + tokenId,
+              disabled:
+                !isPoke || transactionStatus === TransactionStatus.IN_PROGRESS,
+            }
+          : undefined,
     },
   ];
 
